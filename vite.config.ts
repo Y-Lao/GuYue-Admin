@@ -3,6 +3,7 @@ import { defineConfig, loadEnv, ConfigEnv, UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import { wrapperEnv } from "./src/utils/getEnv";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 // 按需引入antdV
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
@@ -30,6 +31,13 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 		},
 		plugins: [
 			vue(),
+			// * 使用 svg 图标
+			createSvgIconsPlugin({
+				// 指定需要缓存的图标文件夹
+				iconDirs: [resolve(process.cwd(), "src/assets/icons")],
+				// 指定symbolId格式
+				symbolId: "icon-[dir]-[name]"
+			}),
 			// UI组件库按需引入
 			Components({
 				resolvers: [AntDesignVueResolver()]
