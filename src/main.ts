@@ -10,5 +10,11 @@ import router from "@/routers/index";
 import pinia from "@/stores/index";
 // svg icons
 import "virtual:svg-icons-register";
+import { registerGlobComp } from "@/components/registerGlobComp";
 
-createApp(App).use(router).use(pinia).mount("#app");
+const app = createApp(App);
+
+// 注册全局组件
+registerGlobComp(app);
+
+app.use(router).use(pinia).mount("#app");
