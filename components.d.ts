@@ -17,8 +17,10 @@ declare module "@vue/runtime-core" {
 		AFormItem: typeof import("ant-design-vue/es")["FormItem"];
 		AInput: typeof import("ant-design-vue/es")["Input"];
 		AInputPassword: typeof import("ant-design-vue/es")["InputPassword"];
+		ASwitch: typeof import("ant-design-vue/es")["Switch"];
 		RouterLink: typeof import("vue-router")["RouterLink"];
 		RouterView: typeof import("vue-router")["RouterView"];
 		SvgIcon: typeof import("./src/components/SvgIcon/index.vue")["default"];
+		SwitchDark: typeof import("./src/components/SwitchDark/index.vue")["default"];
 	}
 }
