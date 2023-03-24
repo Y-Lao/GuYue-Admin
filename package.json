@@ -23,6 +23,7 @@
 		"@types/node": "^18.15.3",
 		"ant-design-vue": "^3.2.15",
 		"axios": "^1.2.1",
+		"js-md5": "^0.7.3",
 		"nprogress": "^0.2.0",
 		"pinia": "^2.0.28",
 		"pinia-plugin-persistedstate": "^3.0.1",
