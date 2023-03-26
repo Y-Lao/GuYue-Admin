@@ -16,7 +16,7 @@
 		</a-form-item>
 	</a-form>
 	<div class="login-btn">
-		<a-button shape="round" size="large" class="login-button">
+		<a-button shape="round" size="large" class="login-button" @click="resetForm(loginFormRef)">
 			<template #icon>
 				<close-circle-outlined />
 			</template>
@@ -32,10 +32,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
 import { UserOutlined, LockOutlined, CloseCircleOutlined } from "@ant-design/icons-vue";
+import { notification } from "ant-design-vue";
 import type { FormInstance } from "ant-design-vue";
+import { loginApi } from "@/api/modules/login";
+import { GlobalStore } from "@/stores";
+import { getTimeState } from "@/utils/util";
+import { HOME_URL } from "@/config/config";
+import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
+import md5 from "js-md5";
+
+const router = useRouter();
+const globalStore = GlobalStore();
 
 // 定义 formRef (校验规则)
 const loginFormRef = ref<FormInstance>();
@@ -48,24 +59,50 @@ const loading = ref(false);
 const loginForm = reactive<Login.ReqLoginForm>({ username: "", password: "" });
 const login = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
-	formEl
-		.validate()
-		.then(valid => {
-			if (!valid) return;
-			loading.value = true;
-			try {
-				// 1.执行登录接口
-				console.log("loginForm", loginForm);
-			} catch (error) {}
-			console.log(valid);
-		})
-		.catch(() => {
-			console.log(2);
-		})
-		.finally(() => {
-			console.log(3);
-		});
+	formEl.validate().then(async valid => {
+		if (!valid) return;
+		loading.value = true;
+		try {
+			// 1.执行登录接口
+			const { data } = await loginApi({ ...loginForm, password: md5(loginForm.password) });
+			globalStore.setToken(data.access_token);
+
+			// 2.添加动态路由
+			await initDynamicRouter();
+
+			// 3.清空 tabs、keepAlive 保留的数据
+			// 未完成
+
+			// 4.跳转到首页
+			router.push(HOME_URL);
+			notification["success"]({
+				message: getTimeState(),
+				description: "欢迎登录 GuYue-Admin",
+				style: { borderRadius: "8px" },
+				duration: 3
+			});
+		} finally {
+			loading.value = false;
+		}
+	});
 };
+
+// 清空登录表单
+const resetForm = (formEl: FormInstance | undefined) => {
+	if (!formEl) return;
+	formEl.resetFields();
+};
+
+onMounted(() => {
+	// 监听enter事件（调用登录）
+	document.onkeydown = (e: any) => {
+		e = window.event || e;
+		if (e.code === "Enter" || e.code === "enter" || e.code === "NumpadEnter") {
+			if (loading.value) return;
+			login(loginFormRef.value);
+		}
+	};
+});
 </script>
 
 <style scoped lang="less">
