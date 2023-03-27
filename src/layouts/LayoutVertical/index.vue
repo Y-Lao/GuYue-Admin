@@ -9,16 +9,18 @@
 				</div>
 				<!-- 菜单栏 -->
 				<div class="scrollbar">
-					<a-menu :inline-collapsed="isCollapse">
+					<a-menu :inline-collapsed="isCollapse" mode="inline">
 						<SubMenu :menuList="menuList" />
 					</a-menu>
 				</div>
 			</div>
 		</a-layout-sider>
 		<a-layout>
-			<a-layout-header>Header</a-layout-header>
-			<a-layout-content>Content</a-layout-content>
-			<a-layout-footer>Footer</a-layout-footer>
+			<a-layout-header class="header">
+				<ToolBarLeft />
+				<ToolBarRight />
+			</a-layout-header>
+			<Main />
 		</a-layout>
 	</a-layout>
 </template>
@@ -29,6 +31,9 @@ import { computed } from "vue";
 import { GlobalStore } from "@/stores";
 import { AuthStore } from "@/stores/modules/auth";
 import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
+import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
+import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
+import Main from "@/layouts/components/Main/index.vue";
 
 // const route = useRoute();
 const authStore = AuthStore();
@@ -40,10 +45,12 @@ const menuList = computed(() => authStore.showMenuListGet);
 <style scoped lang="less">
 .layout {
 	width: 100%;
-	min-width: 780px;
+	min-width: 760px;
 	height: 100%;
 	.aside {
-		width: auto;
+		flex: 0 0 auto !important;
+		width: auto !important;
+		min-width: 65px !important;
 		overflow: inherit;
 		background-color: #191a20;
 		border-right: 1px solid #191a20;
@@ -66,6 +73,26 @@ const menuList = computed(() => authStore.showMenuListGet);
 			.scrollbar {
 				height: calc(100% - 55px);
 				background-color: aquamarine;
+			}
+		}
+	}
+	.header {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 55px;
+		padding: 0 15px;
+		background-color: #ffffff;
+		border-bottom: 1px solid #f1f1f1;
+		:global(.tool-bar-If) {
+			color: #ffffff;
+			.a-breadcrumb__inner.is-link {
+				color: #e5eaf3;
+				&:hover {
+					color: #009688;
+					cursor: pointer;
+				}
 			}
 		}
 	}

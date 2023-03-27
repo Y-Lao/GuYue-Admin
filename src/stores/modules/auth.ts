@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { AuthState } from "@/stores/interface";
 import { getAuthMenuListApi } from "@/api/modules/login";
-import { getFlatArr, getShowMenuList } from "@/utils/util";
+import { getFlatArr, getShowMenuList, getAllBreadcrumbList } from "@/utils/util";
 
 // AuthStore
 export const AuthStore = defineStore({
@@ -18,7 +18,9 @@ export const AuthStore = defineStore({
 		// 扁平化之后的一维数组路由，主要用来添加动态路由
 		flatMenuListGet: state => getFlatArr(state.authMenuList),
 		// 后端返回的菜单列表 ==> 左侧菜单栏渲染，需要去除 isHide == true
-		showMenuListGet: state => getShowMenuList(state.authMenuList)
+		showMenuListGet: state => getShowMenuList(state.authMenuList),
+		// 所有面包屑导航列表
+		breadcrumbListGet: state => getAllBreadcrumbList(state.authMenuList)
 	},
 	actions: {
 		// getAuthMenuList

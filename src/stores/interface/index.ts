@@ -8,6 +8,9 @@ export interface GlobalState {
 export interface ThemeConfigProps {
 	layout: LayoutType;
 	isCollapse: boolean;
+	breadcrumb: boolean;
+	breadcrumbIcon: boolean;
+	footer: boolean;
 }
 
 export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
@@ -16,4 +19,9 @@ export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
 export interface AuthState {
 	routeName: string;
 	authMenuList: Menu.MenuOptions[];
+}
+
+/* keepAliveState */
+export interface keepAliveState {
+	keepAliveName: string[];
 }

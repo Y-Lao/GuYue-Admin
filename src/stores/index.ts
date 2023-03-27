@@ -14,7 +14,13 @@ export const GlobalStore = defineStore({
 			// 布局切换 -->  纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns
 			layout: "vertical",
 			// 折叠菜单
-			isCollapse: false
+			isCollapse: false,
+			// 面包屑导航
+			breadcrumb: true,
+			// 面包屑导航图标
+			breadcrumbIcon: true,
+			// 页脚
+			footer: true
 		}
 	}),
 	getters: {},
