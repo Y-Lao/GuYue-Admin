@@ -43,58 +43,5 @@ const menuList = computed(() => authStore.showMenuListGet);
 </script>
 
 <style scoped lang="less">
-.layout {
-	width: 100%;
-	min-width: 760px;
-	height: 100%;
-	.aside {
-		flex: 0 0 auto !important;
-		width: auto !important;
-		min-width: 65px !important;
-		overflow: inherit;
-		background-color: #191a20;
-		border-right: 1px solid #191a20;
-		.menu {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-			transition: all 0.3s ease;
-			.logo {
-				box-sizing: border-box;
-				height: 55px;
-				border-bottom: 1px solid #282a35;
-				span {
-					font-size: 21.5px;
-					font-weight: bold;
-					color: #dadada;
-					white-space: nowrap;
-				}
-			}
-			.scrollbar {
-				height: calc(100% - 55px);
-				background-color: aquamarine;
-			}
-		}
-	}
-	.header {
-		box-sizing: border-box;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		height: 55px;
-		padding: 0 15px;
-		background-color: #ffffff;
-		border-bottom: 1px solid #f1f1f1;
-		:global(.tool-bar-If) {
-			color: #ffffff;
-			.a-breadcrumb__inner.is-link {
-				color: #e5eaf3;
-				&:hover {
-					color: #009688;
-					cursor: pointer;
-				}
-			}
-		}
-	}
-}
+@import url("./index.less");
 </style>

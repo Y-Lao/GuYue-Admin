@@ -73,4 +73,14 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
 		}
 	}
 }
+.no-icon {
+	.breadcrumb {
+		:global(.ant-breadcrumb-link) {
+			top: -2px;
+			:global(.ant-breadcrumb-separator) {
+				top: 2px;
+			}
+		}
+	}
+}
 </style>
