@@ -5,12 +5,12 @@
 			<Language id="language" />
 			<SearchMenu id="search-menu" />
 			<ThemeSetting id="theme-setting" />
-			<!-- <Message id="message" /> -->
-			<!-- <Fullscreen id="fullscreen" /> -->
+			<Message id="message" />
+			<Fullscreen id="fullscreen" />
 		</div>
 		<!-- 使用者 -->
 		<span class="username">GuYue</span>
-		<!-- <Avatar /> -->
+		<Avatar />
 	</div>
 </template>
 
@@ -24,11 +24,11 @@ import SearchMenu from "./components/SearchMenu.vue";
 // 主题
 import ThemeSetting from "./components/ThemeSetting.vue";
 // 通知
-// import Message from "./components/Message.vue";
+import Message from "./components/Message.vue";
 // 全屏幕
-// import Fullscreen from "./components/Fullscreen.vue";
+import Fullscreen from "./components/Fullscreen.vue";
 // 头像
-// import Avatar from "./components/Avatar.vue";
+import Avatar from "./components/Avatar.vue";
 </script>
 
 <style scoped lang="less">
@@ -45,14 +45,23 @@ import ThemeSetting from "./components/ThemeSetting.vue";
 		#assembly-size,
 		#language,
 		#search-menu,
-		#theme-setting {
+		#theme-setting,
+		#message,
+		#fullscreen {
 			height: 100%;
 			margin-left: 21px;
 			line-height: 55px;
 		}
+		#message {
+			padding-top: 3px;
+		}
+		#fullscreen {
+			padding-top: 2px;
+		}
 	}
 	.username {
 		height: 100%;
+		padding-top: 2px;
 		margin: 0 20px;
 		font-size: 15px;
 		line-height: 55px;
