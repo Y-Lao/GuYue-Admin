@@ -1,5 +1,5 @@
 import { defineStore, createPinia } from "pinia";
-import { GlobalState, ThemeConfigProps } from "./interface";
+import { GlobalState, ThemeConfigProps, AssemblySizeType } from "./interface";
 import piniaPersistConfig from "@/config/piniaPersist";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
@@ -9,6 +9,10 @@ export const GlobalStore = defineStore({
 	id: "GlobalState",
 	state: (): GlobalState => ({
 		token: "",
+		// element组件大小
+		assemblySize: "default",
+		// language
+		language: "zh_CN",
 		// themeConfig
 		themeConfig: {
 			// 布局切换 -->  纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns
@@ -28,6 +32,14 @@ export const GlobalStore = defineStore({
 		// setToken
 		setToken(token: string) {
 			this.token = token;
+		},
+		// setAssemblySizeSize
+		setAssemblySizeSize(assemblySize: AssemblySizeType) {
+			this.assemblySize = assemblySize;
+		},
+		// updateLanguage
+		updateLanguage(language: string) {
+			this.language = language;
 		},
 		// setThemeConfig
 		setThemeConfig(themeConfig: ThemeConfigProps) {

@@ -7,10 +7,16 @@ import "ant-design-vue/dist/antd.css";
 import "@/styles/reset.less";
 // CSS common style sheet
 import "@/styles/common.less";
+// iconfont css
+import "@/assets/iconfont/iconfont.less";
+// font css
+import "@/assets/fonts/font.less";
 // antd icons
 import * as Icons from "@ant-design/icons-vue";
 // vue Router
 import router from "@/routers/index";
+// vue i18n
+import I18n from "@/languages/index";
 // pinia store
 import pinia from "@/stores/index";
 // svg icons
@@ -27,4 +33,4 @@ Object.keys(Icons).forEach(key => {
 // 注册全局组件
 registerGlobComp(app);
 
-app.use(router).use(pinia).mount("#app");
+app.use(router).use(I18n).use(pinia).mount("#app");

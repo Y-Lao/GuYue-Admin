@@ -1,6 +1,8 @@
 /* GlobalState */
 export interface GlobalState {
 	token: string;
+	assemblySize: AssemblySizeType;
+	language: string;
 	themeConfig: ThemeConfigProps;
 }
 
@@ -13,6 +15,7 @@ export interface ThemeConfigProps {
 	footer: boolean;
 }
 
+export type AssemblySizeType = "default" | "small" | "large";
 export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
 
 /* AuthState */
