@@ -1,10 +1,10 @@
 <template>
 	<div class="tool-bar-ri">
 		<div class="header-icon">
-			<AssemblySize id="assemblySize" />
+			<AssemblySize id="assembly-size" />
 			<Language id="language" />
-			<!-- <SearchMenu id="searchMenu" /> -->
-			<!-- <ThemeSetting id="themeSetting" /> -->
+			<SearchMenu id="search-menu" />
+			<ThemeSetting id="theme-setting" />
 			<!-- <Message id="message" /> -->
 			<!-- <Fullscreen id="fullscreen" /> -->
 		</div>
@@ -20,9 +20,9 @@ import AssemblySize from "./components/AssemblySize.vue";
 // 语言
 import Language from "./components/Language.vue";
 // 菜单栏搜索
-// import SearchMenu from "./components/SearchMenu.vue";
+import SearchMenu from "./components/SearchMenu.vue";
 // 主题
-// import ThemeSetting from "./components/ThemeSetting.vue";
+import ThemeSetting from "./components/ThemeSetting.vue";
 // 通知
 // import Message from "./components/Message.vue";
 // 全屏幕
@@ -42,9 +42,13 @@ import Language from "./components/Language.vue";
 		display: flex;
 		align-items: center;
 		height: 100%;
-		:global(.toolBar-icon) {
+		#assembly-size,
+		#language,
+		#search-menu,
+		#theme-setting {
 			height: 100%;
 			margin-left: 21px;
+			line-height: 55px;
 		}
 	}
 	.username {

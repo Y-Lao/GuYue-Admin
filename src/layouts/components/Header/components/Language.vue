@@ -1,13 +1,15 @@
 <template>
-	<a-dropdown :trigger="['click']" placement="bottom">
-		<i :class="'iconfont icon-zhongyingwen'" class="toolBar-icon"></i>
-		<template #overlay>
-			<a-menu @click="handleSetLanguage">
-				<a-menu-item key="zh_CN" :disabled="language && language === 'zh_CN'">简体中文</a-menu-item>
-				<a-menu-item key="en" :disabled="language === 'en'">English</a-menu-item>
-			</a-menu>
-		</template>
-	</a-dropdown>
+	<div>
+		<a-dropdown :trigger="['click']" placement="bottom">
+			<i :class="'iconfont icon-zhongyingwen'" class="toolBar-icon"></i>
+			<template #overlay>
+				<a-menu @click="handleSetLanguage">
+					<a-menu-item key="zh_CN" :disabled="language && language === 'zh_CN'">简体中文</a-menu-item>
+					<a-menu-item key="en" :disabled="language === 'en'">English</a-menu-item>
+				</a-menu>
+			</template>
+		</a-dropdown>
+	</div>
 </template>
 
 <script setup lang="ts">

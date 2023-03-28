@@ -1,19 +1,21 @@
 <template>
-	<a-dropdown :trigger="['click']" placement="bottom">
-		<i :class="'iconfont icon-contentright'" class="toolBar-icon"></i>
-		<template #overlay>
-			<a-menu>
-				<a-menu-item
-					v-for="item in assemblySizeList"
-					:key="item"
-					:disabled="assemblySize === item"
-					@click="setAssemblySize(item)"
-				>
-					{{ assemblySizeListCh[item] }}
-				</a-menu-item>
-			</a-menu>
-		</template>
-	</a-dropdown>
+	<div>
+		<a-dropdown :trigger="['click']" placement="bottom">
+			<i :class="'iconfont icon-contentright'" class="toolBar-icon"></i>
+			<template #overlay>
+				<a-menu>
+					<a-menu-item
+						v-for="item in assemblySizeList"
+						:key="item"
+						:disabled="assemblySize === item"
+						@click="setAssemblySize(item)"
+					>
+						{{ assemblySizeListCh[item] }}
+					</a-menu-item>
+				</a-menu>
+			</template>
+		</a-dropdown>
+	</div>
 </template>
 
 <script setup lang="ts">
