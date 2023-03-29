@@ -12,6 +12,7 @@ declare module "@vue/runtime-core" {
 		403: typeof import("./src/components/ErrorMessage/403.vue")["default"];
 		404: typeof import("./src/components/ErrorMessage/404.vue")["default"];
 		500: typeof import("./src/components/ErrorMessage/500.vue")["default"];
+		AAutoComplete: typeof import("ant-design-vue/es")["AutoComplete"];
 		ABadge: typeof import("ant-design-vue/es")["Badge"];
 		ABreadcrumb: typeof import("ant-design-vue/es")["Breadcrumb"];
 		ABreadcrumbItem: typeof import("ant-design-vue/es")["BreadcrumbItem"];
