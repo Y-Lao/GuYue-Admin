@@ -15,3 +15,8 @@ export const loginApi = (params: Login.ReqLoginForm) => {
 export const getAuthMenuListApi = () => {
 	return http.get<Menu.MenuOptions[]>(PORT + `/menu/list`, {}, { headers: { noLoading: true } });
 };
+
+// * 用户退出登录
+export const logoutApi = () => {
+	return http.post(PORT + `/logout`);
+};

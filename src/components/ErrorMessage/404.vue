@@ -15,6 +15,6 @@ import { HOME_URL } from "@/config/config";
 const router = useRouter();
 </script>
 
-<style scoped lang="scss">
-@import "./index.scss";
+<style scoped lang="less">
+@import url("./index.less");
 </style>
