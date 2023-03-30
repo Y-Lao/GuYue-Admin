@@ -8,13 +8,16 @@
 			</transition>
 		</router-view>
 	</a-layout-content>
-	<a-layout-footer v-if="themeConfig.footer">Footer</a-layout-footer>
+	<a-layout-footer v-if="themeConfig.footer">
+		<Footer />
+	</a-layout-footer>
 </template>
 
 <script setup lang="ts">
 import { ref, provide, computed } from "vue";
 import { GlobalStore } from "@/stores";
 import { KeepAliveStore } from "@/stores/modules/keepAlive";
+import Footer from "@/layouts/components/Footer/index.vue";
 
 const globalStore = GlobalStore();
 const keepAliveStore = KeepAliveStore();
@@ -25,3 +28,7 @@ const isRouterShow = ref(true);
 const refreshCurrentPage = (val: boolean) => (isRouterShow.value = val);
 provide("refresh", refreshCurrentPage);
 </script>
+
+<style scoped lang="less">
+@import url("./index.less");
+</style>
