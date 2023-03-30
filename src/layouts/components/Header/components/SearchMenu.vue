@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="layout-search-modal">
 		<i :class="'iconfont icon-sousuo'" class="toolBar-icon" @click="handleOpen"></i>
 		<a-modal
 			v-model:visible="isShowSearch"
@@ -9,20 +9,18 @@
 			:width="550"
 			:cancel="(isOpen = false)"
 		>
-			<a-auto-complete
-				v-model:value="searchMenu"
-				ref="menuInputRef"
-				style="width: 100%"
-				:options="menuList"
-				:open="isOpen"
-				:filterOption="searchMenuList"
-				placeholder="菜单搜索 ： 支持菜单名称、路径"
-			>
+			<a-auto-complete ref="menuInputRef" style="width: 100%" :options="menuList" :open="isOpen" :filterOption="searchMenuList">
+				<template #default>
+					<a-input v-model:value="searchMenu" placeholder="菜单搜索 ： 支持菜单名称、路径">
+						<template #prefix>
+							<i :class="'iconfont icon-sousuo'" class="search-icon"></i>
+						</template>
+					</a-input>
+				</template>
 				<template #option="item">
-					<div style="display: flex; justify-content: space-between">
-						<div class="item" @click="handleClickMenu(item)">
-							<span>{{ item.meta.title }}</span>
-						</div>
+					<div class="search-menu-item" @click="handleClickMenu(item)">
+						<component :is="item.meta.icon"></component>
+						<span class="search-menu-title">{{ item.meta.title }}</span>
 					</div>
 				</template>
 			</a-auto-complete>
@@ -59,7 +57,7 @@ const handleOpen = () => {
 		setTimeout(() => {
 			menuInputRef.value.focus();
 			isOpen.value = true;
-		}, 300);
+		}, 500);
 	});
 };
 
@@ -74,7 +72,26 @@ const handleClickMenu = (menuItem: Menu.MenuOptions) => {
 </script>
 
 <style scoped lang="less">
-.item {
-	width: 100%;
+.layout-search-modal {
+	.search-icon {
+		margin-right: 5px;
+		font-size: 12px;
+	}
+	:global(.search-menu-item) {
+		display: flex;
+		align-items: center;
+		height: 100%;
+		padding: 0 0 0 15px;
+	}
+	:global(.search-menu-item:hover) {
+		background-color: #f5f7fa;
+	}
+	:global(.ant-select-item-option) {
+		padding: 0;
+	}
+	:global(.search-menu-title) {
+		margin: 0 0 0 10px;
+		font-size: 14px;
+	}
 }
 </style>
