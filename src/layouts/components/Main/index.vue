@@ -1,4 +1,5 @@
 <template>
+	<Tabs v-if="themeConfig.tabs" />
 	<a-layout-content>
 		<router-view v-slot="{ Component, route }">
 			<transition appear name="fade-transform" mode="out-in">
@@ -17,6 +18,7 @@
 import { ref, provide, computed } from "vue";
 import { GlobalStore } from "@/stores";
 import { KeepAliveStore } from "@/stores/modules/keepAlive";
+import Tabs from "@/layouts/components/Tabs/index.vue";
 import Footer from "@/layouts/components/Footer/index.vue";
 
 const globalStore = GlobalStore();

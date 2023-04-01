@@ -23,6 +23,10 @@ export const GlobalStore = defineStore({
 			breadcrumb: true,
 			// 面包屑导航图标
 			breadcrumbIcon: true,
+			// 标签页
+			tabs: true,
+			// 标签页图标
+			tabsIcon: true,
 			// 页脚
 			footer: true
 		}
