@@ -30,10 +30,10 @@ export const TabsStore = defineStore({
 			}
 			this.tabsMenuList = tabsMenuList.filter(tab => tab.path !== tabPath);
 		},
-		// Close MultipleTab
+		// Close MultipleTab(关闭其他)
 		async closeMultipleTab(tabsMenuValue?: string) {
 			this.tabsMenuList = this.tabsMenuList.filter(tab => {
-				return tab.path !== tabsMenuValue || !tab.close;
+				return tab.path === tabsMenuValue || !tab.close;
 			});
 		},
 		// Set Tabs

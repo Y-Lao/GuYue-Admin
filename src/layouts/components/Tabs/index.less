@@ -1,7 +1,24 @@
 .tabs-box {
 	background-color: #ffffff;
-	:global(.tabs-menu) {
+	.tabs-menu {
+		position: relative;
 		width: 100%;
 		height: 40px;
+		:global(.ant-btn) {
+			position: absolute;
+			top: 8px;
+			right: 13px;
+		}
+		:global(.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap) {
+			flex: none;
+			width: calc(100% - 100px);
+		}
+		:global(.ant-tabs > .ant-tabs-nav .ant-tabs-nav-list) {
+			align-items: center;
+		}
+		:global(.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab) {
+			height: 80%;
+			border-bottom-color: #f0f0f0 !important;
+		}
 	}
 }

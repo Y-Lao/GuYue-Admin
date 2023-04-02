@@ -15,6 +15,8 @@ export const GlobalStore = defineStore({
 		language: "zh_CN",
 		// themeConfig
 		themeConfig: {
+			// 当前页面是否全屏
+			maximize: false,
 			// 布局切换 -->  纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns
 			layout: "vertical",
 			// 折叠菜单

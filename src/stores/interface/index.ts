@@ -8,6 +8,7 @@ export interface GlobalState {
 
 /* ThemeConfig */
 export interface ThemeConfigProps {
+	maximize: boolean;
 	layout: LayoutType;
 	isCollapse: boolean;
 	breadcrumb: boolean;

@@ -1,7 +1,15 @@
 <template>
 	<div class="tabs-box">
 		<div class="tabs-menu">
-			<a-tabs v-model:activeKey="tabsMenuValue" hide-add type="editable-card" @tab-click="tabClick" @edit="onEdit">
+			<a-tabs
+				v-model:activeKey="tabsMenuValue"
+				hide-add
+				type="editable-card"
+				@tab-click="tabClick"
+				@edit="onEdit"
+				:tabBarStyle="tabBarStyle"
+				:tabBarGutter="5"
+			>
 				<a-tab-pane v-for="item in tabsMenuList" :key="item.path" :tab="item.title" :closable="item.close">
 					<template #tab>
 						<span>
@@ -11,12 +19,13 @@
 					</template>
 				</a-tab-pane>
 			</a-tabs>
+			<MoreButton />
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-// import Sortable from "sortablejs";
+import Sortable from "sortablejs";
 import { ref, computed, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
 // import { GlobalStore } from "@/stores";
@@ -24,8 +33,7 @@ import { TabsStore } from "@/stores/modules/tabs";
 import { AuthStore } from "@/stores/modules/auth";
 import { KeepAliveStore } from "@/stores/modules/keepAlive";
 import router from "@/routers";
-// import { TabsPaneContext } from "element-plus";
-// import MoreButton from "./components/MoreButton.vue";
+import MoreButton from "./components/MoreButton.vue";
 
 const route = useRoute();
 const tabsStore = TabsStore();
@@ -35,10 +43,30 @@ const keepAliveStore = KeepAliveStore();
 
 const tabsMenuValue = ref(route.fullPath);
 const tabsMenuList = computed(() => tabsStore.tabsMenuList);
+const tabBarStyle = {
+	padding: "0 10px",
+	height: "40px",
+	margin: 0
+};
 
 onMounted(() => {
+	tabsDrop();
 	initTabs();
 });
+
+// 标签拖拽排序
+const tabsDrop = () => {
+	Sortable.create(document.querySelector(".ant-tabs-nav-list") as HTMLElement, {
+		draggable: ".ant-tabs-tab",
+		animation: 300,
+		onEnd: ({ newIndex, oldIndex }) => {
+			const tabsList = [...tabsStore.tabsMenuList];
+			const currRow = tabsList.splice(oldIndex as number, 1)[0];
+			tabsList.splice(newIndex as number, 0, currRow);
+			tabsStore.setTabs(tabsList);
+		}
+	});
+};
 
 // 初始化需要固定的标签,比如首页
 const initTabs = () => {
