@@ -1,5 +1,5 @@
 <template>
-	<template v-for="subItem in menuList" :key="subItem.path">
+	<template v-for="subItem in menuList" :key="subItem.name">
 		<a-sub-menu v-if="subItem.children && subItem.children.length > 0" :key="subItem.path">
 			<template #icon>
 				<component :is="subItem.meta.icon"></component>
@@ -9,7 +9,7 @@
 			</template>
 			<SubMenu :menuList="subItem.children" />
 		</a-sub-menu>
-		<a-menu-item v-else :key="subItem.path + ''" @click="handleClickMenu(subItem)">
+		<a-menu-item v-else :key="subItem.path" @click="handleClickMenu(subItem)">
 			<template #icon>
 				<component :is="subItem.meta.icon"></component>
 			</template>
