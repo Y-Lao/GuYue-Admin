@@ -47,15 +47,20 @@ const logout = () => {
 		okText: "确定",
 		okType: "danger",
 		cancelText: "取消",
-		onOk: async () => {
-			// 1.调出退出登录接口
-			await logoutApi();
-			// 2.清除token
-			globalStore.setToken("");
-			// 3.重定向到登录页
-			router.replace(LOGIN_URL);
-			message.success("退出登录成功！");
-		}
+		async onOk() {
+			try {
+				// 1.调出退出登录接口
+				await logoutApi();
+				// 2.清除token
+				globalStore.setToken("");
+				// 3.重定向到登录页
+				router.replace(LOGIN_URL);
+				message.success("退出登录成功！");
+			} catch {
+				message.success("退出登录失败！");
+			}
+		},
+		onCancel() {}
 	});
 };
 

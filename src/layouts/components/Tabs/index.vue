@@ -127,6 +127,6 @@ const tabRemove = (fullPath: string) => {
 };
 </script>
 
-<style scoped lang="less">
+<style module lang="less">
 @import url("./index.less");
 </style>
