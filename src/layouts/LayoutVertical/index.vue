@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts" name="layoutVertical">
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { GlobalStore } from "@/stores";
 import { AuthStore } from "@/stores/modules/auth";
@@ -45,10 +45,6 @@ const activeMenu = computed(() => {
 });
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const menuList = computed(() => authStore.showMenuListGet);
-
-onMounted(() => {
-	console.log("activeMenu", route.meta.activeMenu, route.path, activeMenu);
-});
 </script>
 
 <style scoped lang="less">
