@@ -102,7 +102,6 @@ const closeAllTab = () => {
 .item-choice {
 	display: flex;
 	align-items: center;
-	width: 80px;
 	height: 28px;
 	.title {
 		margin-left: 5px;

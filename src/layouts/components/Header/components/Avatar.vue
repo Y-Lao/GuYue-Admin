@@ -6,14 +6,23 @@
 		<template #overlay>
 			<a-menu>
 				<a-menu-item @click="openPwdOrInfoModal('infoRef')">
-					<div class="item-choice"><user-outlined />{{ $t("header.personalData") }}</div>
+					<div class="item-choice">
+						<user-outlined />
+						<span class="title">{{ $t("header.personalData") }}</span>
+					</div>
 				</a-menu-item>
 				<a-menu-item @click="openPwdOrInfoModal('passwordRef')">
-					<div class="item-choice"><form-outlined />{{ $t("header.changePassword") }}</div>
+					<div class="item-choice">
+						<form-outlined />
+						<span class="title">{{ $t("header.changePassword") }}</span>
+					</div>
 				</a-menu-item>
 				<a-menu-divider />
 				<a-menu-item @click="logout">
-					<div class="item-choice"><poweroff-outlined />{{ $t("header.logout") }}</div>
+					<div class="item-choice">
+						<poweroff-outlined />
+						<span class="title">{{ $t("header.logout") }}</span>
+					</div>
 				</a-menu-item>
 			</a-menu>
 		</template>
@@ -95,8 +104,9 @@ const openPwdOrInfoModal = (refName: string) => {
 .item-choice {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	width: 80px;
 	height: 28px;
+	.title {
+		margin-left: 5px;
+	}
 }
 </style>
