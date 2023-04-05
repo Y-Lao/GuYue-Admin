@@ -20,13 +20,13 @@
 			<template #icon>
 				<close-circle-outlined />
 			</template>
-			重置
+			{{ $t("login.reset") }}
 		</a-button>
 		<a-button shape="round" size="large" type="primary" class="login-button" @click="login(loginFormRef)">
 			<template #icon>
 				<user-outlined />
 			</template>
-			登录
+			{{ $t("login.register") }}
 		</a-button>
 	</div>
 </template>

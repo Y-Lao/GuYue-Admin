@@ -1,4 +1,8 @@
 export default {
+	login: {
+		reset: "reset",
+		register: "register"
+	},
 	home: {
 		welcome: "Welcome"
 	},
