@@ -18,7 +18,7 @@ export interface ThemeConfigProps {
 	footer: boolean;
 }
 
-export type AssemblySizeType = "default" | "small" | "large";
+export type AssemblySizeType = "small" | "middle" | "large";
 export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
 
 /* tabsMenuProps */

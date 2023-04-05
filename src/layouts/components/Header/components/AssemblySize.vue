@@ -26,9 +26,9 @@ import { AssemblySizeType } from "@/stores/interface";
 const globalStore = GlobalStore();
 const assemblySize = computed(() => globalStore.assemblySize);
 
-const assemblySizeList: AssemblySizeType[] = ["default", "large", "small"];
+const assemblySizeList: AssemblySizeType[] = ["middle", "large", "small"];
 const assemblySizeListCh = reactive<{ [key: string]: string }>({
-	default: "默认",
+	middle: "默认",
 	large: "大型",
 	small: "小型"
 });

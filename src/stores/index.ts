@@ -10,7 +10,7 @@ export const GlobalStore = defineStore({
 	state: (): GlobalState => ({
 		token: "",
 		// element组件大小
-		assemblySize: "default",
+		assemblySize: "middle",
 		// language
 		language: "zh_CN",
 		// themeConfig
