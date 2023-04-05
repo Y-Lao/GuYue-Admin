@@ -10,6 +10,7 @@
 
 <script setup lang="ts" name="ColorPicker">
 import { ref } from "vue";
+import { ConfigProvider } from "ant-design-vue";
 
 interface ColorPickerProps {
 	colors: Array<string>; // 主题色 --> 必传
@@ -23,6 +24,11 @@ const selectedColorIndex = ref(0);
 const selectColor = (index: number) => {
 	selectedColorIndex.value = index;
 	const selectedColor = props.colors[selectedColorIndex.value];
+	ConfigProvider.config({
+		theme: {
+			primaryColor: selectedColor
+		}
+	});
 	console.log(selectedColor);
 };
 </script>

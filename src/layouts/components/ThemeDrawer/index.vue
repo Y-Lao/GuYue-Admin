@@ -3,7 +3,7 @@
 		<ThemeColor :colors="colors" :colorNames="colorNames" />
 		<p>Some contents...</p>
 		<p>Some contents...</p>
-		<p>Some contents...</p>
+		<p class="ddd">Some contents...</p>
 	</a-drawer>
 </template>
 
@@ -23,4 +23,7 @@ mittBus.on("openThemeDrawer", () => (drawerVisible.value = true));
 
 <style scoped lang="less">
 @import url("./index.less");
+.ddd {
+	background-color: @primary-color;
+}
 </style>

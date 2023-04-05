@@ -2,7 +2,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 // antd css
-import "ant-design-vue/dist/antd.css";
+// import "ant-design-vue/dist/antd.css"; // 默认样式
+import "ant-design-vue/dist/antd.variable.min.css"; // 动态主题样式
 // reset style sheet
 import "@/styles/reset.less";
 // CSS common style sheet

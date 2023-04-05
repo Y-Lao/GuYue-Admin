@@ -24,6 +24,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			preprocessorOptions: {
 				less: {
 					additionalData: `
+					@import "@/styles/var.less";
                     @import "@/styles/theme/global.less";
                     `
 				}
@@ -40,7 +41,11 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			}),
 			// UI组件库按需引入
 			Components({
-				resolvers: [AntDesignVueResolver()]
+				resolvers: [
+					AntDesignVueResolver({
+						importStyle: false // 动态主题需配置
+					})
+				]
 			})
 		],
 		server: {
