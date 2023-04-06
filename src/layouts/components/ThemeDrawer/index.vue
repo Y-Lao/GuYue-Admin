@@ -1,6 +1,9 @@
 <template>
 	<a-drawer v-model:visible="drawerVisible" title="Basic Drawer" placement="right">
-		<ThemeColor :colors="colors" :colorNames="colorNames" />
+		<div :style="{ marginBottom: '24px' }">
+			<h3 class="setting-drawer-index-title">主题色</h3>
+			<ThemeColor :colors="colors" :colorNames="colorNames" />
+		</div>
 		<p>Some contents...</p>
 		<p>Some contents...</p>
 		<p class="ddd">Some contents...</p>
