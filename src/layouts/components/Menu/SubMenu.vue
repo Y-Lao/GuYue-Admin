@@ -9,7 +9,7 @@
 			</template>
 			<SubMenu :menuList="subItem.children" />
 		</a-sub-menu>
-		<a-menu-item v-else :key="subItem.path" @click="handleClickMenu(subItem)">
+		<a-menu-item v-else :key="subItem.path + ''" @click="handleClickMenu(subItem)">
 			<template #icon>
 				<component :is="subItem.meta.icon"></component>
 			</template>

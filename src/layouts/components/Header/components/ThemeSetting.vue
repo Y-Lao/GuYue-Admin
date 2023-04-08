@@ -7,7 +7,6 @@
 <script setup lang="ts">
 import mittBus from "@/utils/mittBus";
 const openDrawer = () => {
-	console.log("123");
 	mittBus.emit("openThemeDrawer");
 };
 </script>

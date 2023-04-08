@@ -12,6 +12,8 @@
 	<a-layout-footer v-if="themeConfig.footer">
 		<Footer />
 	</a-layout-footer>
+	<!-- 主题设置按钮 -->
+	<ThemeButton />
 </template>
 
 <script setup lang="ts">
@@ -20,6 +22,7 @@ import { GlobalStore } from "@/stores";
 import { KeepAliveStore } from "@/stores/modules/keepAlive";
 import Tabs from "@/layouts/components/Tabs/index.vue";
 import Footer from "@/layouts/components/Footer/index.vue";
+import ThemeButton from "@/layouts/components/ThemeButton/index.vue";
 
 const globalStore = GlobalStore();
 const keepAliveStore = KeepAliveStore();
