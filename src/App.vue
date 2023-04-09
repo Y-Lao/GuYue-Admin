@@ -7,18 +7,15 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { GlobalStore } from "@/stores";
-import { ConfigProvider } from "ant-design-vue";
 import { getBrowserLang } from "@/utils/util";
-import { DEFAULT_PRIMARY } from "@/config/config";
 import enUS from "ant-design-vue/es/locale/en_US";
 import zhCN from "ant-design-vue/es/locale/zh_CN";
+import { useTheme } from "@/hooks/useTheme";
 
 // 初始化主题配置
-ConfigProvider.config({
-	theme: {
-		primaryColor: DEFAULT_PRIMARY
-	}
-});
+// 初始化主题配置
+const { initTheme } = useTheme();
+initTheme();
 
 const globalStore = GlobalStore();
 

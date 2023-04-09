@@ -1,7 +1,7 @@
 <template>
 	<a-button shape="circle" class="theme-btn" @click="openThemeDrawer">
 		<template #icon>
-			<setting-outlined />
+			<SvgIcon name="magic-stick" />
 		</template>
 	</a-button>
 </template>
@@ -18,6 +18,9 @@ const openThemeDrawer = () => {
 	position: fixed;
 	right: 30px;
 	bottom: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 50px;
 	height: 50px;
 	background-color: #ffffff;

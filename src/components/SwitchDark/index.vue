@@ -1,7 +1,7 @@
 <template>
-	<a-switch v-model:checked="checked1" class="switch-dark">
-		<template #checkedChildren><SvgIcon name="sunny" /></template>
-		<template #unCheckedChildren><SvgIcon name="moon" /></template>
+	<a-switch v-model:checked="checked1" class="switch-dark" v-bind="$attrs">
+		<template #checkedChildren><SvgIcon name="sunny" :iconStyle="{ width: '12px', height: '12px' }" /></template>
+		<template #unCheckedChildren><SvgIcon name="moon" :iconStyle="{ width: '12px', height: '12px' }" /></template>
 	</a-switch>
 </template>
 

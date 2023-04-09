@@ -9,7 +9,8 @@
 </template>
 
 <script setup lang="ts" name="ColorPicker">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { GlobalStore } from "@/stores";
 import { ConfigProvider } from "ant-design-vue";
 
 interface ColorPickerProps {
@@ -18,18 +19,20 @@ interface ColorPickerProps {
 }
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {});
+const globalStore = GlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
 
 const selectedColorIndex = ref(0);
 
 const selectColor = (index: number) => {
 	selectedColorIndex.value = index;
 	const selectedColor = props.colors[selectedColorIndex.value];
+	globalStore.setThemeConfig({ ...themeConfig.value, primary: selectedColor });
 	ConfigProvider.config({
 		theme: {
 			primaryColor: selectedColor
 		}
 	});
-	console.log(selectedColor);
 };
 </script>
 

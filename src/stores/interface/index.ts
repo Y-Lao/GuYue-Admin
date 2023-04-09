@@ -10,6 +10,10 @@ export interface GlobalState {
 export interface ThemeConfigProps {
 	maximize: boolean;
 	layout: LayoutType;
+	primary: string;
+	styleSetting: StyleType;
+	isGrey: boolean;
+	isWeak: boolean;
 	isCollapse: boolean;
 	breadcrumb: boolean;
 	breadcrumbIcon: boolean;
@@ -20,6 +24,7 @@ export interface ThemeConfigProps {
 
 export type AssemblySizeType = "small" | "middle" | "large";
 export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
+export type StyleType = "light" | "dark" | "realDark";
 
 /* tabsMenuProps */
 export interface TabsMenuProps {
