@@ -12,9 +12,9 @@ export const useTheme = () => {
 
 	// 切换暗黑模式
 	const switchDark = () => {
-		const body = document.documentElement as HTMLElement;
-		if (themeConfig.value.styleSetting == "realDark") body.setAttribute("data-theme", "dark");
-		else body.setAttribute("data-theme", "light");
+		// const body = document.documentElement as HTMLElement;
+		// if (themeConfig.value.styleSetting == "realDark") body.setAttribute("data-theme", "dark");
+		// else body.setAttribute("data-theme", "light");
 		changePrimary();
 	};
 

@@ -25,7 +25,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 				less: {
 					additionalData: `
 					@import "@/styles/var.less";
-                    @import "@/styles/theme/global.less";
                     `,
 					javascriptEnabled: true
 				}

@@ -85,11 +85,11 @@
 		</div>
 		<div class="theme-item-Horizontal">
 			<span>灰色模式</span>
-			<a-switch v-model:checked="themeConfig.isGrey" size="small" class="switch-btn" />
+			<a-switch v-model:checked="themeConfig.isGrey" size="small" class="switch-btn" @change="changeGreyOrWeak($event, 'grey')" />
 		</div>
 		<div class="theme-item-Horizontal">
 			<span>色弱模式</span>
-			<a-switch v-model:checked="themeConfig.isWeak" size="small" class="switch-btn" />
+			<a-switch v-model:checked="themeConfig.isWeak" size="small" class="switch-btn" @change="changeGreyOrWeak($event, 'weak')" />
 		</div>
 		<!-- 界面设置 -->
 		<a-divider
@@ -123,12 +123,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import mittBus from "@/utils/mittBus";
+import { useTheme } from "@/hooks/useTheme";
 import { GlobalStore } from "@/stores";
 import { LayoutType } from "@/stores/interface";
 import { DEFAULT_PRIMARY } from "@/config/config";
 import ThemeColor from "@/components/ThemeColor/index.vue";
+
+const { changeGreyOrWeak } = useTheme();
 
 const globalStore = GlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);
@@ -140,6 +143,16 @@ const colorNames = ref(["极客蓝(默认)", "薄暮", "火山", "日暮", "明�
 const changeLayout = (val: LayoutType) => {
 	globalStore.setThemeConfig({ ...themeConfig.value, layout: val });
 };
+
+// 监听布局变化，在 body 上添加相对应的 layout class
+watch(
+	() => themeConfig.value.layout,
+	() => {
+		const body = document.body as HTMLElement;
+		body.setAttribute("class", themeConfig.value.layout);
+	},
+	{ immediate: true }
+);
 
 // 打开主题设置
 const drawerVisible = ref(false);

@@ -13,7 +13,6 @@ import zhCN from "ant-design-vue/es/locale/zh_CN";
 import { useTheme } from "@/hooks/useTheme";
 
 // 初始化主题配置
-// 初始化主题配置
 const { initTheme } = useTheme();
 initTheme();
 

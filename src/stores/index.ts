@@ -23,7 +23,7 @@ export const GlobalStore = defineStore({
 			// 默认 primary 主题颜色
 			primary: DEFAULT_PRIMARY,
 			// 风格切换 --> 亮色：light | 暗色：dark | 暗黑：realDark
-			styleSetting: "realDark",
+			styleSetting: "dark",
 			// 灰色模式
 			isGrey: false,
 			// 色弱模式
