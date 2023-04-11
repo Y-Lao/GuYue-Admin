@@ -1,6 +1,6 @@
 <template>
 	<a-layout class="layout">
-		<a-layout-sider v-model:collapsed="isCollapse" class="aside" :trigger="null" collapsible>
+		<a-layout-sider v-model:collapsed="isCollapse" class="aside" :trigger="null" collapsible :theme="theme">
 			<div class="menu" :style="{ width: isCollapse ? '65px' : '200px' }">
 				<!-- logo -->
 				<div class="logo flx-center">
