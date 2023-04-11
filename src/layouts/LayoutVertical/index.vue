@@ -1,6 +1,13 @@
 <template>
 	<a-layout class="layout">
-		<a-layout-sider v-model:collapsed="isCollapse" class="aside" :trigger="null" collapsible :theme="theme">
+		<a-layout-sider
+			v-model:collapsed="isCollapse"
+			class="aside"
+			:trigger="null"
+			collapsible
+			:theme="theme"
+			:style="{ borderRight: theme === 'dark' ? '1px solid #001529' : '1px solid #f0f5ff' }"
+		>
 			<div class="menu" :style="{ width: isCollapse ? '65px' : '200px' }">
 				<!-- logo -->
 				<div class="logo flx-center">
@@ -45,7 +52,7 @@ const activeMenu = computed(() => {
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const menuList = computed(() => authStore.showMenuListGet);
 const theme = computed(() => {
-	return globalStore.themeConfig.styleSetting === "realDark" ? "" : globalStore.themeConfig.styleSetting;
+	return globalStore.themeConfig.styleSetting === "realDark" ? "dark" : globalStore.themeConfig.styleSetting;
 });
 </script>
 
