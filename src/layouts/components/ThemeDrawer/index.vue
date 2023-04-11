@@ -7,7 +7,7 @@
 		<div class="setting-drawer-block-checbox style-setting">
 			<a-tooltip :mouseEnterDelay="0.3">
 				<template #title> 亮色主题风格 </template>
-				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-light">
+				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-light" @click="changeTheme('light')">
 					<div class="inner"></div>
 					<span class="anticon anticon-check select-icon" v-show="themeConfig.styleSetting == 'light'">
 						<check-outlined />
@@ -16,7 +16,7 @@
 			</a-tooltip>
 			<a-tooltip :mouseEnterDelay="0.3">
 				<template #title> 暗色主题风格 </template>
-				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-dark">
+				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-dark" @click="changeTheme('dark')">
 					<div class="inner"></div>
 					<span class="anticon anticon-check select-icon" v-show="themeConfig.styleSetting == 'dark'">
 						<check-outlined />
@@ -25,7 +25,7 @@
 			</a-tooltip>
 			<a-tooltip :mouseEnterDelay="0.3">
 				<template #title> 暗黑模式 </template>
-				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-realDark">
+				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-realDark" @click="changeTheme('realDark')">
 					<div class="inner"></div>
 					<span class="anticon anticon-check select-icon" v-show="themeConfig.styleSetting == 'realDark'">
 						<check-outlined />
@@ -127,7 +127,7 @@ import { ref, computed, watch } from "vue";
 import mittBus from "@/utils/mittBus";
 import { useTheme } from "@/hooks/useTheme";
 import { GlobalStore } from "@/stores";
-import { LayoutType } from "@/stores/interface";
+import { LayoutType, StyleType } from "@/stores/interface";
 import { DEFAULT_PRIMARY } from "@/config/config";
 import ThemeColor from "@/components/ThemeColor/index.vue";
 
@@ -139,6 +139,10 @@ const themeConfig = computed(() => globalStore.themeConfig);
 const colors = ref([DEFAULT_PRIMARY, "#F5222D", "#FA541C", "#FAAD14", "#13C2C2", "#52C41A", "#1890FF", "#722ED1"]);
 const colorNames = ref(["极客蓝(默认)", "薄暮", "火山", "日暮", "明青", "极光绿", "拂晓蓝", "酱紫"]);
 
+// 切换主题
+const changeTheme = (val: StyleType) => {
+	globalStore.setThemeConfig({ ...themeConfig.value, styleSetting: val });
+};
 // 切换布局方式
 const changeLayout = (val: LayoutType) => {
 	globalStore.setThemeConfig({ ...themeConfig.value, layout: val });

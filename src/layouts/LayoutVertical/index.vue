@@ -9,7 +9,7 @@
 				</div>
 				<!-- 菜单栏 -->
 				<div class="scrollbar">
-					<a-menu v-model:selectedKeys="activeMenu" theme="dark" mode="inline">
+					<a-menu v-model:selectedKeys="activeMenu" :theme="theme" mode="inline">
 						<SubMenu :menuList="menuList" />
 					</a-menu>
 				</div>
@@ -38,13 +38,15 @@ import Main from "@/layouts/components/Main/index.vue";
 const route = useRoute();
 const authStore = AuthStore();
 const globalStore = GlobalStore();
-// const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
 const activeMenu = computed(() => {
 	let key = route.meta.activeMenu ? route.meta.activeMenu : route.path;
 	return [key + ""];
 });
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const menuList = computed(() => authStore.showMenuListGet);
+const theme = computed(() => {
+	return globalStore.themeConfig.styleSetting === "realDark" ? "" : globalStore.themeConfig.styleSetting;
+});
 </script>
 
 <style scoped lang="less">
