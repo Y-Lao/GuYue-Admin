@@ -1,17 +1,21 @@
 <template>
 	<div :class="['breadcrumb-box', !themeConfig.breadcrumbIcon && 'no-icon']">
 		<a-breadcrumb class="breadcrumb">
-			<template #separator><span style="color: #c1c3c8">></span></template>
-			<transition-group name="breadcrumb" mode="out-in">
-				<a-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
-					<div class="a-breadcrumb__inner is-link" @click="onBreadcrumbClick(item, index)">
-						<div class="breadcrumb-icon" v-show="item.meta.icon && themeConfig.breadcrumbIcon">
-							<component :is="item.meta.icon"></component>
-						</div>
-						<span class="breadcrumb-title">{{ item.meta.title }}</span>
+			<template #separator>
+				<SvgIcon name="dayu" style="color: #c1c3c8" :iconStyle="{ width: '18px', height: '18px' }" />
+			</template>
+			<a-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
+				<div
+					class="a-breadcrumb__inner is-link"
+					@click="onBreadcrumbClick(item, index)"
+					:class="index === breadcrumbList.length - 1 ? 'a-breadcrumb__inner_last' : ''"
+				>
+					<div class="breadcrumb-icon" v-show="item.meta.icon && themeConfig.breadcrumbIcon">
+						<component :is="item.meta.icon"></component>
 					</div>
-				</a-breadcrumb-item>
-			</transition-group>
+					<span class="breadcrumb-title">{{ item.meta.title }}</span>
+				</div>
+			</a-breadcrumb-item>
 		</a-breadcrumb>
 	</div>
 </template>
@@ -59,6 +63,9 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
 		.a-breadcrumb__inner {
 			display: inline-flex;
 			.breadcrumb-icon {
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				margin-top: 2px;
 				margin-right: 6px;
 				font-size: 16px;
@@ -69,7 +76,20 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
 		}
 		:global(.ant-breadcrumb-separator) {
 			position: relative;
-			top: -1px;
+			top: 5px;
+		}
+		.a-breadcrumb__inner.is-link {
+			font-weight: 700;
+			color: #303133;
+			&:hover {
+				color: var(--ant-primary-color);
+				cursor: pointer;
+			}
+		}
+		.a-breadcrumb__inner_last,
+		.a-breadcrumb__inner_last:hover {
+			font-weight: 400 !important;
+			color: #606266 !important;
 		}
 	}
 }

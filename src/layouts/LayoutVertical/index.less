@@ -9,11 +9,12 @@
 		overflow: inherit;
 		background-color: #191a20;
 		border-right: 1px solid #191a20;
+		transition: all 0.2s ease;
 		.menu {
 			display: flex;
 			flex-direction: column;
 			height: 100%;
-			transition: all 0.3s ease;
+			transition: all 0.2s ease;
 			.logo {
 				box-sizing: border-box;
 				height: 55px;
@@ -27,7 +28,6 @@
 			}
 			.scrollbar {
 				height: calc(100% - 55px);
-				// background-color: aquamarine;
 			}
 		}
 	}
@@ -40,15 +40,5 @@
 		padding: 0 15px;
 		background-color: #ffffff;
 		border-bottom: 1px solid #f1f1f1;
-		.tool-bar-lf {
-			height: 55px;
-			.a-breadcrumb__inner.is-link {
-				color: #e5eaf3;
-				&:hover {
-					color: #009688;
-					cursor: pointer;
-				}
-			}
-		}
 	}
 }
