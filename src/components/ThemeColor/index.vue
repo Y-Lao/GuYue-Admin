@@ -9,13 +9,14 @@
 </template>
 
 <script setup lang="ts" name="ColorPicker">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { GlobalStore } from "@/stores";
 import { ConfigProvider } from "ant-design-vue";
 
 interface ColorPickerProps {
 	colors: Array<string>; // 主题色 --> 必传
 	colorNames: Array<string>; // 主题色提示语 --> 必传
+	defaultColor: string; // 默认颜色 --> 必传
 }
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {});
@@ -23,6 +24,12 @@ const globalStore = GlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);
 
 const selectedColorIndex = ref(0);
+
+// 组件挂载
+onMounted(() => {
+	let index = props.colors.indexOf(props.defaultColor);
+	if (index !== -1) selectedColorIndex.value = index;
+});
 
 const selectColor = (index: number) => {
 	selectedColorIndex.value = index;

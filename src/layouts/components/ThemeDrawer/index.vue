@@ -81,7 +81,7 @@
 		>
 		<div class="theme-item-vertical">
 			<h3 class="ant-gw-setting-drawer-title">主题颜色</h3>
-			<ThemeColor :colors="colors" :colorNames="colorNames" />
+			<ThemeColor :colors="colors" :colorNames="colorNames" :defaultColor="themeConfig.primary" />
 		</div>
 		<div class="theme-item-Horizontal">
 			<span>灰色模式</span>
