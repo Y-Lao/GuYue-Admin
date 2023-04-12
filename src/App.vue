@@ -1,6 +1,8 @@
 <template>
 	<a-config-provider :componentSize="assemblySize" :locale="i18nLocale">
+		<!-- <a-spin :spinning="loading" :delay="500" :tip="$t('tip.loading')"> -->
 		<router-view></router-view>
+		<!-- </a-spin> -->
 	</a-config-provider>
 </template>
 
@@ -27,6 +29,9 @@ const i18nLocale = computed(() => {
 
 // 配置组件全局大小
 const assemblySize = computed(() => globalStore.assemblySize);
+
+// 全局loading
+// const loading = computed(() => globalStore.loading);
 </script>
 
 <style scoped></style>

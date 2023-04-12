@@ -28,5 +28,8 @@ export default {
 		personalData: "Personal Data",
 		changePassword: "Change Password",
 		logout: "Logout"
+	},
+	tip: {
+		loading: "Loading..."
 	}
 };

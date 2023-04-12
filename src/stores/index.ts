@@ -10,10 +10,12 @@ export const GlobalStore = defineStore({
 	id: "GlobalState",
 	state: (): GlobalState => ({
 		token: "",
-		// element组件大小
+		// antd组件大小
 		assemblySize: "middle",
 		// language
 		language: "zh_CN",
+		// 全局loading
+		loading: false,
 		// themeConfig
 		themeConfig: {
 			// 当前页面是否全屏
@@ -55,6 +57,10 @@ export const GlobalStore = defineStore({
 		// updateLanguage
 		updateLanguage(language: string) {
 			this.language = language;
+		},
+		// updateLoading
+		updateLoading(loading: boolean) {
+			this.loading = loading;
 		},
 		// setThemeConfig
 		setThemeConfig(themeConfig: ThemeConfigProps) {

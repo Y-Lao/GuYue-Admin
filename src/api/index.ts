@@ -5,6 +5,8 @@ import { ResultData } from "@/api/interface";
 import { ResultEnum } from "@/enums/httpEnum";
 import { checkStatus } from "./helper/checkStatus";
 import { GlobalStore } from "@/stores";
+import { LOGIN_URL } from "@/config/config";
+import router from "@/routers";
 
 // 配置
 const config = {
@@ -31,7 +33,7 @@ class RequestHttp {
 			(config: AxiosRequestConfig) => {
 				const globalState = GlobalStore();
 				// * 如果当前请求不需要显示 loading,在 api 服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
-				// config.headers!.noLoading || showFullScreenLoading();
+				config.headers!.noLoading || globalState.updateLoading(true);
 				const token = globalState.token;
 				return { ...config, headers: { "x-access-token": token } };
 			},
@@ -49,13 +51,13 @@ class RequestHttp {
 				const { data } = response;
 				const globalState = GlobalStore();
 				// * 在请求结束后，并关闭请求 loading
-				// 未完成
+				globalState.updateLoading(false);
 				// * 登录失效（code == 401）
 				if (data.code == ResultEnum.OVERDUE) {
 					message.error(data.msg);
 					globalState.setToken("");
 					// 跳转到登录页
-					// 未完成
+					router.replace(LOGIN_URL);
 					return Promise.reject(data);
 				}
 				//  * 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
@@ -69,7 +71,8 @@ class RequestHttp {
 			async (error: AxiosError) => {
 				const { response } = error;
 				// 关闭请求 loading
-				// 未完成
+				const globalState = GlobalStore();
+				globalState.updateLoading(false);
 				// 请求超时 && 网络错误单独判断，没有 response
 				if (error.message.indexOf("timeout") !== -1) message.error("请求超时！请您稍后重试");
 				if (error.message.indexOf("Network Error") !== -1) message.error("网络错误！请您稍后重试");

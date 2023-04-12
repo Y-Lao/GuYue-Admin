@@ -1,5 +1,5 @@
 import { defineConfig, loadEnv, ConfigEnv, UserConfig } from "vite";
-// import { createHtmlPlugin } from "vite-plugin-html";
+import { createHtmlPlugin } from "vite-plugin-html";
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import { wrapperEnv } from "./src/utils/getEnv";
@@ -32,6 +32,14 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 		},
 		plugins: [
 			vue(),
+			// 标题设置
+			createHtmlPlugin({
+				inject: {
+					data: {
+						title: viteEnv.VITE_GLOB_APP_TITLE
+					}
+				}
+			}),
 			// * 使用 svg 图标
 			createSvgIconsPlugin({
 				// 指定需要缓存的图标文件夹

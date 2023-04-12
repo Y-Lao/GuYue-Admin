@@ -3,6 +3,7 @@ export interface GlobalState {
 	token: string;
 	assemblySize: AssemblySizeType;
 	language: string;
+	loading: boolean;
 	themeConfig: ThemeConfigProps;
 }
 
