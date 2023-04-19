@@ -8,7 +8,7 @@
 			:theme="theme"
 			:style="{ borderRight: theme === 'dark' ? '1px solid #001529' : '1px solid #f0f5ff' }"
 		>
-			<div class="menu" :style="{ width: isCollapse ? '65px' : '200px' }">
+			<div class="menu" :style="{ width: isCollapse ? '70px' : '200px' }">
 				<!-- logo -->
 				<div class="logo flx-center">
 					<img src="@/assets/images/logo.svg" alt="logo" />
