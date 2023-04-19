@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { AuthState } from "@/stores/interface";
-import { getAuthMenuListApi } from "@/api/modules/login";
+import { getAuthButtonListApi, getAuthMenuListApi } from "@/api/modules/login";
 import { getFlatArr, getShowMenuList, getAllBreadcrumbList } from "@/utils/util";
 
 // AuthStore
@@ -10,9 +10,13 @@ export const AuthStore = defineStore({
 		// 当前页面的 router name，用来做按钮权限筛选
 		routeName: "",
 		// 菜单权限列表
-		authMenuList: []
+		authMenuList: [],
+		// 按钮权限列表
+		authButtonList: {}
 	}),
 	getters: {
+		// 按钮权限列表
+		authButtonListGet: state => state.authButtonList,
 		// 后端返回的菜单列表 ==> 这里没有经过任何处理
 		authMenuListGet: state => state.authMenuList,
 		// 扁平化之后的一维数组路由，主要用来添加动态路由
@@ -23,7 +27,12 @@ export const AuthStore = defineStore({
 		breadcrumbListGet: state => getAllBreadcrumbList(state.authMenuList)
 	},
 	actions: {
-		// getAuthMenuList
+		// 获取按钮权限列表
+		async getAuthButtonList() {
+			const { data } = await getAuthButtonListApi();
+			this.authButtonList = data;
+		},
+		// 获取菜单列表
 		async getAuthMenuList() {
 			const { data } = await getAuthMenuListApi();
 			this.authMenuList = data;

@@ -15,7 +15,7 @@
 					<span v-show="!isCollapse">GuYue Admin</span>
 				</div>
 				<!-- 菜单栏 -->
-				<div class="scrollbar">
+				<div class="scrollbar menu-scrollbar">
 					<a-menu v-model:selectedKeys="activeMenu" :theme="theme" mode="inline">
 						<SubMenu :menuList="menuList" />
 					</a-menu>

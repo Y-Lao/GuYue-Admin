@@ -18,4 +18,7 @@ export namespace Login {
 	export interface ResLogin {
 		access_token: string;
 	}
+	export interface ResAuthButtons {
+		[key: string]: string[];
+	}
 }

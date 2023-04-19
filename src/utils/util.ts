@@ -241,7 +241,7 @@ export const getAllBreadcrumbList = (menuList: Menu.MenuOptions[], result: { [ke
 };
 
 /**
- * @description 格式化表格单元格默认值(el-table-column)
+ * @description 格式化表格单元格默认值(a-table-column)
  * @param {Number} row 行
  * @param {Number} col 列
  * @param {String} callValue 当前单元格值

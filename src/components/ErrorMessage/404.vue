@@ -4,7 +4,7 @@
 		<div class="not-detail">
 			<h2>404</h2>
 			<h4>抱歉，您访问的页面不存在~🤷‍♂️🤷‍♀️</h4>
-			<el-button type="primary" @click="router.push(HOME_URL)">返回首页</el-button>
+			<a-button type="primary" @click="router.push(HOME_URL)">返回首页</a-button>
 		</div>
 	</div>
 </template>
