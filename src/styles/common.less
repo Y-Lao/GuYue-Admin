@@ -81,7 +81,7 @@
 	box-shadow: inset 0 0 0 white;
 }
 
-// /* nprogress样式 */
+/* nprogress样式 */
 #nprogress .bar {
 	background: var(--ant-primary-color) !important;
 }
@@ -93,30 +93,39 @@
 	box-shadow: 0 0 10px var(--ant-primary-color), 0 0 5px var(--ant-primary-color) !important;
 }
 
-// /* 外边距、内边距全局样式 */
-// @for $i from 0 through 40 {
-// 	.mt#{$i} {
-// 		margin-top: #{$i}px !important;
-// 	}
-// 	.mr#{$i} {
-// 		margin-right: #{$i}px !important;
-// 	}
-// 	.mb#{$i} {
-// 		margin-bottom: #{$i}px !important;
-// 	}
-// 	.ml#{$i} {
-// 		margin-left: #{$i}px !important;
-// 	}
-// 	.pt#{$i} {
-// 		padding-top: #{$i}px !important;
-// 	}
-// 	.pr#{$i} {
-// 		padding-right: #{$i}px !important;
-// 	}
-// 	.pb#{$i} {
-// 		padding-bottom: #{$i}px !important;
-// 	}
-// 	.pl#{$i} {
-// 		padding-left: #{$i}px !important;
-// 	}
-// }
+/*
+    外边距、内边距全局样式
+    marked by Y_Lao
+*/
+.loopStyle(@counter) when (@counter > 0) {
+	.mt-@{counter} {
+		margin-top: @counter * 1px !important;
+	}
+	.mr-@{counter} {
+		margin-right: @counter * 1px !important;
+	}
+	.mb-@{counter} {
+		margin-bottom: @counter * 1px !important;
+	}
+	.ml-@{counter} {
+		margin-left: @counter * 1px !important;
+	}
+	.pt-@{counter} {
+		padding-top: @counter * 1px !important;
+	}
+	.pr-@{counter} {
+		padding-right: @counter * 1px !important;
+	}
+	.pb-@{counter} {
+		padding-bottom: @counter * 1px !important;
+	}
+	.pl-@{counter} {
+		padding-left: @counter * 1px !important;
+	}
+	.w-@{counter} {
+		width: @counter * 1% !important;
+	}
+	.loopStyle((@counter - 1)); // 递归调用自身
+}
+
+.loopStyle(100);

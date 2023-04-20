@@ -17,6 +17,8 @@ import "@/assets/iconfont/iconfont.less";
 import "@/assets/fonts/font.less";
 // antd icons
 import * as Icons from "@ant-design/icons-vue";
+// custom directives
+import directives from "@/directives/index";
 // vue Router
 import router from "@/routers/index";
 // vue i18n
@@ -37,4 +39,4 @@ Object.keys(Icons).forEach(key => {
 // 注册全局组件
 registerGlobComp(app);
 
-app.use(router).use(I18n).use(pinia).mount("#app");
+app.use(directives).use(router).use(I18n).use(pinia).mount("#app");
