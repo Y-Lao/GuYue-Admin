@@ -7,8 +7,10 @@ import "ant-design-vue/dist/antd.variable.min.css"; // 动态主题样式
 // import 'ant-design-vue/dist/antd.dark.less'; // 暗黑主题样式
 // reset style sheet
 import "@/styles/reset.less";
-// CSS common style sheet
+// common style sheet
 import "@/styles/common.less";
+// custom antd css
+import "@/styles/antd.less";
 // iconfont css
 import "@/assets/iconfont/iconfont.less";
 // font css
