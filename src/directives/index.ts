@@ -1,8 +1,14 @@
 import { App, Directive } from "vue";
 import auth from "./modules/auth";
+import copy from "./modules/copy";
+import debounce from "./modules/debounce";
+import longpress from "./modules/longpress";
 
 const directivesList: { [key: string]: Directive } = {
-	auth
+	auth,
+	copy,
+	debounce,
+	longpress
 };
 
 const directives = {
