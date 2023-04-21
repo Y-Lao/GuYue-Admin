@@ -35,24 +35,24 @@
 <script setup lang="ts" name="layoutVertical">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { GlobalStore } from "@/stores";
-import { AuthStore } from "@/stores/modules/auth";
+import { useGlobalStore } from "@/stores/modules/global";
+import { useAuthStore } from "@/stores/modules/auth";
 import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
 import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
 import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
 import Main from "@/layouts/components/Main/index.vue";
 
 const route = useRoute();
-const authStore = AuthStore();
-const globalStore = GlobalStore();
+const authStore = useAuthStore();
+const globalStore = useGlobalStore();
 const activeMenu = computed(() => {
 	let key = route.meta.activeMenu ? route.meta.activeMenu : route.path;
 	return [key + ""];
 });
-const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
+const isCollapse = computed(() => globalStore.isCollapse);
 const menuList = computed(() => authStore.showMenuListGet);
 const theme = computed(() => {
-	return globalStore.themeConfig.styleSetting === "realDark" ? "dark" : globalStore.themeConfig.styleSetting;
+	return globalStore.styleSetting === "realDark" ? "dark" : globalStore.styleSetting;
 });
 </script>
 

@@ -21,7 +21,7 @@
 			</a-button>
 			<!-- 测试无权限 -->
 			<a-button type="primary" v-if="BUTTONS.batchAdd">
-				<template #icon> <vertical-align-bottom-outlined /> </template>批量添加
+				<template #icon> <plus-circle-outlined /> </template>批量添加
 			</a-button>
 		</a-space>
 		<div class="w-100"><a-divider orientation="left">使用 v-auth 指令方式绑定单个权限</a-divider></div>
@@ -43,7 +43,7 @@
 			</a-button>
 			<!-- 测试无权限 -->
 			<a-button type="primary" v-auth="'batchAdd'">
-				<template #icon> <vertical-align-bottom-outlined /> </template>批量添加
+				<template #icon> <plus-circle-outlined /> </template>批量添加
 			</a-button>
 		</a-space>
 		<div class="w-100"><a-divider orientation="left">使用 v-auth 指令绑定多个权限</a-divider></div>
@@ -65,7 +65,7 @@
 			</a-button>
 			<!-- 测试无权限 -->
 			<a-button type="primary" v-auth="['add', 'edit', 'delete', 'import', 'export', 'batchAdd']">
-				<template #icon> <vertical-align-bottom-outlined /> </template>批量添加
+				<template #icon> <plus-circle-outlined /> </template>批量添加
 			</a-button>
 		</a-space>
 	</div>

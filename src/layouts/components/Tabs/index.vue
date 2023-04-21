@@ -12,7 +12,7 @@
 			>
 				<a-tab-pane v-for="item in tabsMenuList" :key="item.path" :closable="item.close">
 					<template #tab>
-						<span> <component :is="item.icon" v-show="item.icon && themeConfig.tabsIcon"></component>{{ item.title }} </span>
+						<span> <component :is="item.icon" v-show="item.icon && tabsIcon"></component>{{ item.title }} </span>
 					</template>
 				</a-tab-pane>
 			</a-tabs>
@@ -25,22 +25,22 @@
 import Sortable from "sortablejs";
 import { ref, computed, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { GlobalStore } from "@/stores";
-import { TabsStore } from "@/stores/modules/tabs";
-import { AuthStore } from "@/stores/modules/auth";
-import { KeepAliveStore } from "@/stores/modules/keepAlive";
+import { useGlobalStore } from "@/stores/modules/global";
+import { useTabsStore } from "@/stores/modules/tabs";
+import { useAuthStore } from "@/stores/modules/auth";
+import { useKeepAliveStore } from "@/stores/modules/keepAlive";
 import router from "@/routers";
 import MoreButton from "./components/MoreButton.vue";
 
 const route = useRoute();
-const tabsStore = TabsStore();
-const globalStore = GlobalStore();
-const authStore = AuthStore();
-const keepAliveStore = KeepAliveStore();
+const tabsStore = useTabsStore();
+const globalStore = useGlobalStore();
+const authStore = useAuthStore();
+const keepAliveStore = useKeepAliveStore();
 
 const tabsMenuValue = ref(route.fullPath);
 const tabsMenuList = computed(() => tabsStore.tabsMenuList);
-const themeConfig = computed(() => globalStore.themeConfig);
+const tabsIcon = computed(() => globalStore.tabsIcon);
 const tabBarStyle = {
 	padding: "0 10px",
 	height: "40px",

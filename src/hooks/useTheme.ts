@@ -1,5 +1,5 @@
-import { computed } from "vue";
-import { GlobalStore } from "@/stores";
+import { storeToRefs } from "pinia";
+import { useGlobalStore } from "@/stores/modules/global";
 import { ConfigProvider } from "ant-design-vue";
 
 /**
@@ -7,8 +7,8 @@ import { ConfigProvider } from "ant-design-vue";
  */
 
 export const useTheme = () => {
-	const globalStore = GlobalStore();
-	const themeConfig = computed(() => globalStore.themeConfig);
+	const globalStore = useGlobalStore();
+	const { primary, isGrey, isWeak } = storeToRefs(globalStore);
 
 	// 切换暗黑模式
 	const switchDark = () => {
@@ -22,7 +22,7 @@ export const useTheme = () => {
 	const changePrimary = () => {
 		ConfigProvider.config({
 			theme: {
-				primaryColor: themeConfig.value.primary
+				primaryColor: primary.value
 			}
 		});
 	};
@@ -33,16 +33,16 @@ export const useTheme = () => {
 		if (!value) return body.setAttribute("style", "");
 		if (type === "grey") body.setAttribute("style", "filter: grayscale(1)");
 		if (type === "weak") body.setAttribute("style", "filter: invert(80%)");
-		let propName = type == "grey" ? "isWeak" : "isGrey";
-		globalStore.setThemeConfig({ ...themeConfig.value, [propName]: false });
+		const propName = type === "grey" ? "isWeak" : "isGrey";
+		globalStore.setGlobalState(propName, false);
 	};
 
 	// 初始化 theme 配置
 	const initTheme = () => {
 		switchDark();
 		changePrimary();
-		if (themeConfig.value.isGrey) changeGreyOrWeak(true, "grey");
-		if (themeConfig.value.isWeak) changeGreyOrWeak(true, "weak");
+		if (isGrey.value) changeGreyOrWeak(true, "grey");
+		if (isWeak.value) changeGreyOrWeak(true, "weak");
 	};
 
 	return {

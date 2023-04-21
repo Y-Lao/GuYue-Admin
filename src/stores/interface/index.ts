@@ -1,14 +1,12 @@
+export type AssemblySizeType = "small" | "middle" | "large";
+export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
+export type StyleType = "light" | "dark" | "realDark";
+
 /* GlobalState */
 export interface GlobalState {
-	token: string;
+	loading: boolean;
 	assemblySize: AssemblySizeType;
 	language: string;
-	loading: boolean;
-	themeConfig: ThemeConfigProps;
-}
-
-/* ThemeConfig */
-export interface ThemeConfigProps {
 	maximize: boolean;
 	layout: LayoutType;
 	primary: string;
@@ -22,10 +20,6 @@ export interface ThemeConfigProps {
 	tabsIcon: boolean;
 	footer: boolean;
 }
-
-export type AssemblySizeType = "small" | "middle" | "large";
-export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
-export type StyleType = "light" | "dark" | "realDark";
 
 /* tabsMenuProps */
 export interface TabsMenuProps {
@@ -53,4 +47,10 @@ export interface AuthState {
 /* keepAliveState */
 export interface keepAliveState {
 	keepAliveName: string[];
+}
+
+/* UserState */
+export interface UserState {
+	token: string;
+	userInfo: { name: string };
 }

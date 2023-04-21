@@ -43,19 +43,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, nextTick } from "vue";
-import { HOME_URL } from "@/config/config";
-import { GlobalStore } from "@/stores";
-import { TabsStore } from "@/stores/modules/tabs";
-import { KeepAliveStore } from "@/stores/modules/keepAlive";
+import { inject, nextTick } from "vue";
+import { HOME_URL } from "@/config";
+import { useGlobalStore } from "@/stores/modules/global";
+import { useTabsStore } from "@/stores/modules/tabs";
+import { useKeepAliveStore } from "@/stores/modules/keepAlive";
 import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 const router = useRouter();
-const tabsStore = TabsStore();
-const globalStore = GlobalStore();
-const keepAliveStore = KeepAliveStore();
-const themeConfig = computed(() => globalStore.themeConfig);
+const tabsStore = useTabsStore();
+const globalStore = useGlobalStore();
+const keepAliveStore = useKeepAliveStore();
 
 const refreshCurrentPage: Function = inject("refresh") as Function;
 // 刷新当前页面
@@ -73,7 +72,7 @@ const refresh = () => {
 
 // 页面全屏
 const maximize = () => {
-	globalStore.setThemeConfig({ ...themeConfig.value, maximize: true });
+	globalStore.setGlobalState("maximize", true);
 };
 
 // 关闭当前

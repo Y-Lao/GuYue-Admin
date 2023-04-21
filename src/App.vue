@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { GlobalStore } from "@/stores";
+import { useGlobalStore } from "@/stores/modules/global";
 import { getBrowserLang } from "@/utils/util";
 import enUS from "ant-design-vue/es/locale/en_US";
 import zhCN from "ant-design-vue/es/locale/zh_CN";
@@ -18,7 +18,7 @@ import { useTheme } from "@/hooks/useTheme";
 const { initTheme } = useTheme();
 initTheme();
 
-const globalStore = GlobalStore();
+const globalStore = useGlobalStore();
 
 // antd 语言配置
 const i18nLocale = computed(() => {

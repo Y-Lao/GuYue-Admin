@@ -1,19 +1,16 @@
 <template>
 	<div class="collapse-icon" @click="collapse">
-		<component :is="themeConfig.isCollapse ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'"></component>
+		<component :is="globalStore.isCollapse ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'"></component>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { GlobalStore } from "@/stores";
+import { useGlobalStore } from "@/stores/modules/global";
 
-const globalStore = GlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
-
+const globalStore = useGlobalStore();
 // 点击菜单Icon
 const collapse = () => {
-	globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: !themeConfig.value.isCollapse });
+	globalStore.setGlobalState("isCollapse", !globalStore.isCollapse);
 };
 </script>
 

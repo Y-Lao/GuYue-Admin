@@ -4,8 +4,9 @@ import { message } from "ant-design-vue";
 import { ResultData } from "@/api/interface";
 import { ResultEnum } from "@/enums/httpEnum";
 import { checkStatus } from "./helper/checkStatus";
-import { GlobalStore } from "@/stores";
-import { LOGIN_URL } from "@/config/config";
+import { useGlobalStore } from "@/stores/modules/global";
+import { LOGIN_URL } from "@/config";
+import { useUserStore } from "@/stores/modules/user";
 import router from "@/routers";
 
 export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -35,11 +36,12 @@ class RequestHttp {
 		 */
 		this.service.interceptors.request.use(
 			(config: CustomAxiosRequestConfig) => {
-				const globalState = GlobalStore();
+				const globalState = useGlobalStore();
+				const userStore = useUserStore();
 				// * 如果当前请求不需要显示 loading,在 api 服务中通过指定的第三个参数: { noLoading: true }来控制不显示loading，参见loginApi
-				config.noLoading || globalState.updateLoading(true);
+				config.noLoading || globalState.setGlobalState("loading", true);
 				if (config.headers && typeof config.headers.set === "function") {
-					config.headers.set("x-access-token", globalState.token);
+					config.headers.set("x-access-token", userStore.token);
 				}
 				return config;
 			},
@@ -55,13 +57,14 @@ class RequestHttp {
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
 				const { data } = response;
-				const globalState = GlobalStore();
+				const globalState = useGlobalStore();
+				const userStore = useUserStore();
 				// * 在请求结束后，并关闭请求 loading
-				globalState.updateLoading(false);
+				globalState.setGlobalState("loading", false);
 				// * 登录失效（code == 401）
 				if (data.code == ResultEnum.OVERDUE) {
 					message.error(data.msg);
-					globalState.setToken("");
+					userStore.setToken("");
 					// 跳转到登录页
 					router.replace(LOGIN_URL);
 					return Promise.reject(data);
@@ -77,8 +80,8 @@ class RequestHttp {
 			async (error: AxiosError) => {
 				const { response } = error;
 				// 关闭请求 loading
-				const globalState = GlobalStore();
-				globalState.updateLoading(false);
+				const globalState = useGlobalStore();
+				globalState.setGlobalState("loading", false);
 				// 请求超时 && 网络错误单独判断，没有 response
 				if (error.message.indexOf("timeout") !== -1) message.error("请求超时！请您稍后重试");
 				if (error.message.indexOf("Network Error") !== -1) message.error("网络错误！请您稍后重试");

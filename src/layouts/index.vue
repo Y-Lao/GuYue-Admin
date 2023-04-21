@@ -1,12 +1,12 @@
 <!-- 一次性加载 LayoutComponents -->
 <template>
-	<component :is="LayoutComponents[themeConfig.layout]"></component>
+	<component :is="LayoutComponents[layout]"></component>
 	<ThemeDrawer />
 </template>
 
 <script setup lang="ts" name="layout">
 import { computed, type Component } from "vue";
-import { GlobalStore } from "@/stores";
+import { useGlobalStore } from "@/stores/modules/global";
 // 主题抽屉
 import ThemeDrawer from "./components/ThemeDrawer/index.vue";
 // 纵向布局
@@ -16,8 +16,8 @@ const LayoutComponents: { [key: string]: Component } = {
 	vertical: LayoutVertical
 };
 
-const globalStore = GlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
+const globalStore = useGlobalStore();
+const layout = computed(() => globalStore.layout);
 </script>
 
 <style scoped lang="less"></style>

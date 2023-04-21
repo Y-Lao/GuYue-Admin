@@ -35,8 +35,8 @@
 
 <script setup lang="ts">
 import { ref, createVNode } from "vue";
-import { GlobalStore } from "@/stores";
-import { LOGIN_URL } from "@/config/config";
+import { useUserStore } from "@/stores/modules/user";
+import { LOGIN_URL } from "@/config";
 import { logoutApi } from "@/api/modules/login";
 import { useRouter } from "vue-router";
 import { Modal, message } from "ant-design-vue";
@@ -45,7 +45,7 @@ import InfoDialog from "./InfoDialog.vue";
 import PasswordDialog from "./PasswordDialog.vue";
 
 const router = useRouter();
-const globalStore = GlobalStore();
+const userStore = useUserStore();
 
 // 退出登录
 const logout = () => {
@@ -61,7 +61,7 @@ const logout = () => {
 				// 1.调出退出登录接口
 				await logoutApi();
 				// 2.清除token
-				globalStore.setToken("");
+				userStore.setToken("");
 				// 3.重定向到登录页
 				router.replace(LOGIN_URL);
 				message.success("退出登录成功！");

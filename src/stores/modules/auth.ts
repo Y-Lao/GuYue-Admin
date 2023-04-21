@@ -3,9 +3,9 @@ import { AuthState } from "@/stores/interface";
 import { getAuthButtonListApi, getAuthMenuListApi } from "@/api/modules/login";
 import { getFlatArr, getShowMenuList, getAllBreadcrumbList } from "@/utils/util";
 
-// AuthStore
-export const AuthStore = defineStore({
-	id: "AuthStore",
+// useAuthStore
+export const useAuthStore = defineStore({
+	id: "guyue-auth",
 	state: (): AuthState => ({
 		// 当前页面的 router name，用来做按钮权限筛选
 		routeName: "",

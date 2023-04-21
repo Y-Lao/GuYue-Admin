@@ -39,14 +39,18 @@ import { UserOutlined, LockOutlined, CloseCircleOutlined } from "@ant-design/ico
 import { notification } from "ant-design-vue";
 import type { FormInstance } from "ant-design-vue";
 import { loginApi } from "@/api/modules/login";
-import { GlobalStore } from "@/stores";
+import { useUserStore } from "@/stores/modules/user";
+import { useTabsStore } from "@/stores/modules/tabs";
+import { useKeepAliveStore } from "@/stores/modules/keepAlive";
 import { getTimeState } from "@/utils/util";
-import { HOME_URL } from "@/config/config";
+import { HOME_URL } from "@/config";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import md5 from "js-md5";
 
 const router = useRouter();
-const globalStore = GlobalStore();
+const tabsStore = useTabsStore();
+const userStore = useUserStore();
+const keepAliveStore = useKeepAliveStore();
 
 // 定义 formRef (校验规则)
 const loginFormRef = ref<FormInstance>();
@@ -65,13 +69,14 @@ const login = (formEl: FormInstance | undefined) => {
 		try {
 			// 1.执行登录接口
 			const { data } = await loginApi({ ...loginForm, password: md5(loginForm.password) });
-			globalStore.setToken(data.access_token);
+			userStore.setToken(data.access_token);
 
 			// 2.添加动态路由
 			await initDynamicRouter();
 
 			// 3.清空 tabs、keepAlive 保留的数据
-			// 未完成
+			tabsStore.closeMultipleTab();
+			keepAliveStore.setKeepAliveName();
 
 			// 4.跳转到首页
 			router.push(HOME_URL);

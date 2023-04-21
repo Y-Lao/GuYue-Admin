@@ -20,10 +20,10 @@
 
 <script setup lang="ts">
 import { reactive, computed } from "vue";
-import { GlobalStore } from "@/stores";
+import { useGlobalStore } from "@/stores/modules/global";
 import { AssemblySizeType } from "@/stores/interface";
 
-const globalStore = GlobalStore();
+const globalStore = useGlobalStore();
 const assemblySize = computed(() => globalStore.assemblySize);
 
 const assemblySizeList: AssemblySizeType[] = ["middle", "large", "small"];
@@ -35,6 +35,6 @@ const assemblySizeListCh = reactive<{ [key: string]: string }>({
 
 const setAssemblySize = (item: AssemblySizeType) => {
 	if (assemblySize.value === item) return;
-	globalStore.setAssemblySizeSize(item);
+	globalStore.setGlobalState("assemblySize", item);
 };
 </script>

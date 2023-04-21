@@ -3,8 +3,8 @@ import { TabsState, TabsMenuProps } from "@/stores/interface";
 import piniaPersistConfig from "@/config/piniaPersist";
 import router from "@/routers/index";
 
-export const TabsStore = defineStore({
-	id: "TabsState",
+export const useTabsStore = defineStore({
+	id: "guyue-tabs",
 	state: (): TabsState => ({
 		tabsMenuList: []
 	}),
@@ -48,5 +48,5 @@ export const TabsStore = defineStore({
 			});
 		}
 	},
-	persist: piniaPersistConfig("TabsState")
+	persist: piniaPersistConfig("guyue-tabs")
 });

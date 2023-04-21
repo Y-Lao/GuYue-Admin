@@ -1,5 +1,5 @@
 <template>
-	<div :class="['breadcrumb-box', !themeConfig.breadcrumbIcon && 'no-icon']">
+	<div :class="['breadcrumb-box', !globalStore.breadcrumbIcon && 'no-icon']">
 		<a-breadcrumb class="breadcrumb">
 			<template #separator>
 				<SvgIcon name="dayu" style="color: #c1c3c8" :iconStyle="{ width: '18px', height: '18px' }" />
@@ -10,7 +10,7 @@
 					@click="onBreadcrumbClick(item, index)"
 					:class="index === breadcrumbList.length - 1 ? 'a-breadcrumb__inner_last' : ''"
 				>
-					<div class="breadcrumb-icon" v-show="item.meta.icon && themeConfig.breadcrumbIcon">
+					<div class="breadcrumb-icon" v-show="item.meta.icon && globalStore.breadcrumbIcon">
 						<component :is="item.meta.icon"></component>
 					</div>
 					<span class="breadcrumb-title">{{ item.meta.title }}</span>
@@ -22,16 +22,16 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { GlobalStore } from "@/stores";
-import { AuthStore } from "@/stores/modules/auth";
+import { useGlobalStore } from "@/stores/modules/global";
+import { useAuthStore } from "@/stores/modules/auth";
 import { useRoute, useRouter } from "vue-router";
-import { HOME_URL } from "@/config/config";
+import { HOME_URL } from "@/config";
 
 const route = useRoute();
 const router = useRouter();
-const authStore = AuthStore();
-const globalStore = GlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
+const authStore = useAuthStore();
+const globalStore = useGlobalStore();
+
 const breadcrumbList = computed(() => {
 	let breadcrumbData = authStore.breadcrumbListGet[route.matched[route.matched.length - 1].path] ?? [];
 	// 不需要首页面包屑可删除以下判断

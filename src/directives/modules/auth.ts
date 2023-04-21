@@ -1,13 +1,13 @@
 /**
  * description v-auth 按钮权限指令
  */
-import { AuthStore } from "@/stores/modules/auth";
+import { useAuthStore } from "@/stores/modules/auth";
 import type { Directive, DirectiveBinding } from "vue";
 
 const auth: Directive = {
 	mounted(el: HTMLElement, binding: DirectiveBinding) {
 		const { value } = binding;
-		const authStore = AuthStore();
+		const authStore = useAuthStore();
 		const currentPageRoles = authStore.authButtonListGet[authStore.routeName] ?? [];
 		// 判断v-auth是否绑定多个权限
 		if (value instanceof Array && value.length) {
