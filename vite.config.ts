@@ -7,6 +7,15 @@ import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 // 按需引入antdV
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
+import pkg from "./package.json";
+import dayjs from "dayjs";
+
+// 项目信息
+const { dependencies, devDependencies, name, version } = pkg;
+const __APP_INFO__ = {
+	pkg: { dependencies, devDependencies, name, version },
+	lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss")
+};
 
 // @see: https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
@@ -20,6 +29,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 				"@": resolve(__dirname, "./src"),
 				"vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js"
 			}
+		},
+		define: {
+			__APP_INFO__: JSON.stringify(__APP_INFO__)
 		},
 		css: {
 			preprocessorOptions: {

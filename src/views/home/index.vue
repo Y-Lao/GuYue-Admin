@@ -1,5 +1,5 @@
 <template>
-	<div>Home</div>
+	<div class="card content-box">Home</div>
 </template>
 
 <script setup lang="ts" name="home">

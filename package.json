@@ -1,7 +1,7 @@
 {
 	"name": "guyue-admin",
 	"private": true,
-	"version": "0.0.1",
+	"version": "1.0.1",
 	"description": "GuYue-Admin后台管理系统",
 	"author": "GuYue <986953860@qq.com>",
 	"license": "MIT",
@@ -24,6 +24,8 @@
 		"@types/node": "^18.15.3",
 		"ant-design-vue": "^3.2.15",
 		"axios": "^1.2.1",
+		"echarts": "^5.4.1",
+		"echarts-liquidfill": "^3.1.0",
 		"js-md5": "^0.7.3",
 		"mitt": "^3.0.0",
 		"nprogress": "^0.2.0",

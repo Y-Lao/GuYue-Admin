@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts" name="layoutVertical">
-import { computed } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { useGlobalStore } from "@/stores/modules/global";
 import { useAuthStore } from "@/stores/modules/auth";
@@ -45,14 +45,16 @@ import Main from "@/layouts/components/Main/index.vue";
 const route = useRoute();
 const authStore = useAuthStore();
 const globalStore = useGlobalStore();
-const activeMenu = computed(() => {
-	let key = route.meta.activeMenu ? route.meta.activeMenu : route.path;
-	return [key + ""];
-});
+const activeMenu = ref<Array<string>>([]);
 const isCollapse = computed(() => globalStore.isCollapse);
 const menuList = computed(() => authStore.showMenuListGet);
 const theme = computed(() => {
 	return globalStore.styleSetting === "realDark" ? "dark" : globalStore.styleSetting;
+});
+
+watchEffect(() => {
+	let key = route.meta.activeMenu ? route.meta.activeMenu : route.path;
+	activeMenu.value = [key + ""];
 });
 </script>
 

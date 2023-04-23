@@ -1,14 +1,20 @@
 import { App, Directive } from "vue";
 import auth from "./modules/auth";
 import copy from "./modules/copy";
+import draggable from "./modules/draggable";
 import debounce from "./modules/debounce";
+import throttle from "./modules/throttle";
 import longpress from "./modules/longpress";
+import waterMarker from "./modules/waterMarker";
 
 const directivesList: { [key: string]: Directive } = {
 	auth,
 	copy,
+	draggable,
 	debounce,
-	longpress
+	throttle,
+	longpress,
+	waterMarker
 };
 
 const directives = {
