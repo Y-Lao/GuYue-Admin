@@ -60,7 +60,6 @@ const refreshCurrentPage: Function = inject("refresh") as Function;
 // 刷新当前页面
 const refresh = () => {
 	setTimeout(() => {
-		console.log(2);
 		keepAliveStore.removeKeepAliveName(route.name as string);
 		refreshCurrentPage(false);
 		nextTick(() => {
