@@ -4,6 +4,8 @@ export type StyleType = "light" | "dark" | "realDark";
 
 /* GlobalState */
 export interface GlobalState {
+	refreshPage: boolean;
+	routeName: string;
 	loading: boolean;
 	assemblySize: AssemblySizeType;
 	language: string;

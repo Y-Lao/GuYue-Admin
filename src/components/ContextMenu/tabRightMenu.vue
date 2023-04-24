@@ -22,6 +22,7 @@
 <script setup lang="ts">
 import { onMounted, ref, nextTick } from "vue";
 import { VerticalRightOutlined, VerticalLeftOutlined, CloseCircleOutlined, SyncOutlined } from "@ant-design/icons-vue";
+import { useGlobalStore } from "@/stores/modules/global";
 import { useTabsStore } from "@/stores/modules/tabs";
 import { useKeepAliveStore } from "@/stores/modules/keepAlive";
 
@@ -30,6 +31,7 @@ interface MenuValue {
 	name: string;
 }
 
+const globalStore = useGlobalStore();
 const tabsStore = useTabsStore();
 const keepAliveStore = useKeepAliveStore();
 
@@ -51,7 +53,7 @@ const clickMenu = (type: string) => {
 	if (type === "closeLeft") closeLeftTab(props.data);
 	if (type === "closeRight") closeRightTab(props.data);
 	if (type === "closeOther") closeOtherTab(props.data);
-	if (type === "refreshPage") refresh();
+	if (type === "refreshPage") refresh(props.data);
 	props.onClose();
 };
 
@@ -76,8 +78,16 @@ const closeOtherTab = (menu: MenuValue) => {
 };
 
 // 刷新当前页面
-const refresh = () => {
-	console.log("刷新当前页面");
+const refresh = (menu: MenuValue) => {
+	if (globalStore.routeName !== menu.name) return;
+	setTimeout(() => {
+		keepAliveStore.removeKeepAliveName(menu.name as string);
+		globalStore.setGlobalState("refreshPage", false);
+		nextTick(() => {
+			keepAliveStore.addKeepAliveName(menu.name as string);
+			globalStore.setGlobalState("refreshPage", true);
+		});
+	}, 0);
 };
 </script>
 

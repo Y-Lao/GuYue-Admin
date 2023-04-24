@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide } from "vue";
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useGlobalStore } from "@/stores/modules/global";
 import { useKeepAliveStore } from "@/stores/modules/keepAlive";
@@ -30,9 +30,7 @@ const { tabs, footer } = storeToRefs(globalStore);
 const keepAliveStore = useKeepAliveStore();
 
 // 刷新当前页面
-const isRouterShow = ref(true);
-const refreshCurrentPage = (val: boolean) => (isRouterShow.value = val);
-provide("refresh", refreshCurrentPage);
+const isRouterShow = computed(() => globalStore.refreshPage);
 </script>
 
 <style scoped lang="less">

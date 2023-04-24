@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, nextTick } from "vue";
+import { nextTick } from "vue";
 import { HOME_URL } from "@/config";
 import { useGlobalStore } from "@/stores/modules/global";
 import { useTabsStore } from "@/stores/modules/tabs";
@@ -56,15 +56,14 @@ const tabsStore = useTabsStore();
 const globalStore = useGlobalStore();
 const keepAliveStore = useKeepAliveStore();
 
-const refreshCurrentPage: Function = inject("refresh") as Function;
 // 刷新当前页面
 const refresh = () => {
 	setTimeout(() => {
 		keepAliveStore.removeKeepAliveName(route.name as string);
-		refreshCurrentPage(false);
+		globalStore.setGlobalState("refreshPage", false);
 		nextTick(() => {
 			keepAliveStore.addKeepAliveName(route.name as string);
-			refreshCurrentPage(true);
+			globalStore.setGlobalState("refreshPage", true);
 		});
 	}, 0);
 };

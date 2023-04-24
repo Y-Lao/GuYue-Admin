@@ -104,6 +104,8 @@ watch(
 		if (route.meta.isFull) return;
 		// 当前tabs
 		tabsMenuValue.value = route.fullPath;
+		// 当前route name
+		globalStore.setGlobalState("routeName", route.name);
 		const tabsParams = {
 			icon: route.meta.icon as string,
 			title: route.meta.title as string,

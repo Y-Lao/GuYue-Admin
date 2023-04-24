@@ -8,6 +8,10 @@ export const useGlobalStore = defineStore({
 	// id: 必须的，在所有 Store 中唯一
 	id: "guyue-global",
 	state: (): GlobalState => ({
+		// 刷新页面
+		refreshPage: true,
+		// 当前Route Name
+		routeName: "",
 		// 全局loading
 		loading: false,
 		// 布局切换 -->  纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns
