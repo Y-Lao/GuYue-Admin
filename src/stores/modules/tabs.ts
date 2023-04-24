@@ -30,7 +30,7 @@ export const useTabsStore = defineStore({
 			}
 			this.tabsMenuList = tabsMenuList.filter(tab => tab.path !== tabPath);
 		},
-		// Close MultipleTab(关闭其他)
+		// Close MultipleTab(更多按钮---关闭其他)
 		async closeMultipleTab(tabsMenuValue?: string) {
 			this.tabsMenuList = this.tabsMenuList.filter(tab => {
 				return tab.path === tabsMenuValue || !tab.close;
@@ -46,6 +46,33 @@ export const useTabsStore = defineStore({
 			this.tabsMenuList.forEach(item => {
 				if (item.path == nowFullPath) item.title = tabsMenuTitle;
 			});
+		},
+		// Close Right(右键菜单---关闭左侧)
+		async closeLeftTab(tabPath: string) {
+			const pathIndex = this.tabsMenuList.findIndex(obj => obj.path === tabPath);
+			this.tabsMenuList = this.tabsMenuList.filter((obj, index) => {
+				if (pathIndex > index) {
+					if (!obj["close"]) return obj;
+				}
+				if (pathIndex <= index) return obj;
+			});
+		},
+		// Close Right(右键菜单---关闭右侧)
+		async closeRightTab(tabPath: string) {
+			const pathIndex = this.tabsMenuList.findIndex(obj => obj.path === tabPath);
+			this.tabsMenuList = this.tabsMenuList.filter((obj, index) => {
+				if (pathIndex >= index) return obj;
+				if (!obj["close"]) return obj;
+			});
+			const lastPath = this.tabsMenuList[this.tabsMenuList.length - 1].path;
+			router.push(lastPath);
+		},
+		// Close MultipleTab(右键菜单---关闭其他)
+		async rightCloseMultipleTab(tabPath: string) {
+			this.tabsMenuList = this.tabsMenuList.filter(tab => {
+				return tab.path === tabPath || !tab.close;
+			});
+			router.push(tabPath);
 		}
 	},
 	persist: piniaPersistConfig("guyue-tabs")

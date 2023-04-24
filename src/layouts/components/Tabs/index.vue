@@ -12,7 +12,9 @@
 			>
 				<a-tab-pane v-for="item in tabsMenuList" :key="item.path" :closable="item.close">
 					<template #tab>
-						<span> <component :is="item.icon" v-show="item.icon && tabsIcon"></component>{{ item.title }} </span>
+						<span @click.right="showContextMenu($event, { path: item.path, name: item.name })">
+							<component :is="item.icon" v-show="item.icon && tabsIcon"></component>{{ item.title }}
+						</span>
 					</template>
 				</a-tab-pane>
 			</a-tabs>
@@ -31,6 +33,12 @@ import { useAuthStore } from "@/stores/modules/auth";
 import { useKeepAliveStore } from "@/stores/modules/keepAlive";
 import router from "@/routers";
 import MoreButton from "./components/MoreButton.vue";
+import ContextMenu from "@/components/ContextMenu";
+
+interface MenuValue {
+	path: string;
+	name: string;
+}
 
 const route = useRoute();
 const tabsStore = useTabsStore();
@@ -51,6 +59,12 @@ onMounted(() => {
 	tabsDrop();
 	initTabs();
 });
+
+// 右键菜单
+const showContextMenu = (e: MouseEvent, menu: MenuValue) => {
+	e.preventDefault();
+	ContextMenu(e, menu);
+};
 
 // 标签拖拽排序
 const tabsDrop = () => {
