@@ -2,7 +2,7 @@
 	<div class="message">
 		<a-popover placement="bottom" trigger="click">
 			<a-badge count="6" class="item">
-				<i :class="'iconfont icon-xiaoxi'" class="toolBar-icon"></i>
+				<i :class="'iconfont icon-xiaoxi'" class="toolBar-icon" id="messageGuide"></i>
 			</a-badge>
 			<template #content>
 				<a-tabs v-model:activeKey="activeKey">

@@ -1,6 +1,6 @@
 <template>
 	<div :class="['breadcrumb-box', !globalStore.breadcrumbIcon && 'no-icon']">
-		<a-breadcrumb class="breadcrumb">
+		<a-breadcrumb class="breadcrumb" id="breadcrumbGuide">
 			<template #separator>
 				<SvgIcon name="dayu" style="color: #c1c3c8" :iconStyle="{ width: '18px', height: '18px' }" />
 			</template>

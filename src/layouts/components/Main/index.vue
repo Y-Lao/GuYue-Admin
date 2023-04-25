@@ -3,7 +3,7 @@
 	<a-layout-content>
 		<router-view v-slot="{ Component, route }">
 			<transition appear name="fade-transform" mode="out-in">
-				<keep-alive :include="keepAliveStore.keepAliveName">
+				<keep-alive :include="keepAliveName">
 					<component :is="Component" :key="route.path" v-if="isRouterShow"></component>
 				</keep-alive>
 			</transition>
@@ -27,7 +27,9 @@ import ThemeButton from "@/layouts/components/ThemeButton/index.vue";
 
 const globalStore = useGlobalStore();
 const { tabs, footer } = storeToRefs(globalStore);
+
 const keepAliveStore = useKeepAliveStore();
+const { keepAliveName } = storeToRefs(keepAliveStore);
 
 // 刷新当前页面
 const isRouterShow = computed(() => globalStore.refreshPage);

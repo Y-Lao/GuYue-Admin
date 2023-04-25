@@ -1,6 +1,6 @@
 <template>
 	<div class="collapse-icon" @click="collapse">
-		<component :is="globalStore.isCollapse ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'"></component>
+		<component :is="globalStore.isCollapse ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'" id="collapseIconGuide"></component>
 	</div>
 </template>
 

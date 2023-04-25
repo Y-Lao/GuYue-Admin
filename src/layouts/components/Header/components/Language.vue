@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<a-dropdown :trigger="['click']" placement="bottom">
-			<i :class="'iconfont icon-zhongyingwen'" class="toolBar-icon"></i>
+			<i :class="'iconfont icon-zhongyingwen'" class="toolBar-icon" id="languageGuide"></i>
 			<template #overlay>
 				<a-menu>
 					<a-menu-item key="zh_CN" :disabled="language && language === 'zh_CN'" @click="handleSetLanguage('zh_CN')"

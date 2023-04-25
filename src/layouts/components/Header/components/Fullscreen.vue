@@ -1,6 +1,11 @@
 <template>
 	<div class="fullscreen">
-		<i :class="['iconfont', isFullscreen ? 'icon-suoxiao' : 'icon-fangda']" class="toolBar-icon" @click="toggle"></i>
+		<i
+			:class="['iconfont', isFullscreen ? 'icon-suoxiao' : 'icon-fangda']"
+			class="toolBar-icon"
+			@click="toggle"
+			id="fullscreenGuide"
+		></i>
 	</div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<a-dropdown :trigger="['click']" placement="bottom">
-			<i :class="'iconfont icon-contentright'" class="toolBar-icon"></i>
+			<i :class="'iconfont icon-contentright'" class="toolBar-icon" id="assemblySizeGuide"></i>
 			<template #overlay>
 				<a-menu>
 					<a-menu-item

@@ -1,6 +1,6 @@
 <template>
 	<div class="layout-search-modal">
-		<i :class="'iconfont icon-sousuo'" class="toolBar-icon" @click="handleOpen"></i>
+		<i :class="'iconfont icon-sousuo'" class="toolBar-icon" @click="handleOpen" id="searchMenuGuide"></i>
 		<a-modal
 			v-model:visible="isShowSearch"
 			:closable="false"

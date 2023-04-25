@@ -24,6 +24,7 @@
 		"@types/node": "^18.15.3",
 		"ant-design-vue": "^3.2.15",
 		"axios": "^1.2.1",
+		"driver.js": "^0.9.8",
 		"echarts": "^5.4.1",
 		"echarts-liquidfill": "^3.1.0",
 		"js-md5": "^0.7.3",
