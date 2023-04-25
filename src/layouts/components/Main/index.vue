@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useGlobalStore } from "@/stores/modules/global";
 import { useKeepAliveStore } from "@/stores/modules/keepAlive";
@@ -26,13 +26,24 @@ import Footer from "@/layouts/components/Footer/index.vue";
 import ThemeButton from "@/layouts/components/ThemeButton/index.vue";
 
 const globalStore = useGlobalStore();
-const { tabs, footer } = storeToRefs(globalStore);
+const { maximize, tabs, footer } = storeToRefs(globalStore);
 
 const keepAliveStore = useKeepAliveStore();
 const { keepAliveName } = storeToRefs(keepAliveStore);
 
 // 刷新当前页面
 const isRouterShow = computed(() => globalStore.refreshPage);
+
+// 监听当前页面是否最大化，动态添加 class
+watch(
+	() => maximize.value,
+	() => {
+		const app = document.getElementById("app") as HTMLElement;
+		if (maximize.value) app.classList.add("main-maximize");
+		else app.classList.remove("main-maximize");
+	},
+	{ immediate: true }
+);
 </script>
 
 <style scoped lang="less">
