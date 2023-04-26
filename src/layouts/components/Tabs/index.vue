@@ -71,6 +71,7 @@ const tabsDrop = () => {
 	Sortable.create(document.querySelector(".ant-tabs-nav-list") as HTMLElement, {
 		draggable: ".ant-tabs-tab",
 		animation: 300,
+		chosenClass: "chosen",
 		onEnd: ({ newIndex, oldIndex }) => {
 			const tabsList = [...tabsStore.tabsMenuList];
 			const currRow = tabsList.splice(oldIndex as number, 1)[0];
