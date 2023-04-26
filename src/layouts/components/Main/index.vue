@@ -1,4 +1,5 @@
 <template>
+	<Maximize v-if="maximize" />
 	<Tabs v-if="tabs" />
 	<a-layout-content>
 		<router-view v-slot="{ Component, route }">
@@ -21,6 +22,7 @@ import { computed, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useGlobalStore } from "@/stores/modules/global";
 import { useKeepAliveStore } from "@/stores/modules/keepAlive";
+import Maximize from "./components/Maximize.vue";
 import Tabs from "@/layouts/components/Tabs/index.vue";
 import Footer from "@/layouts/components/Footer/index.vue";
 import ThemeButton from "@/layouts/components/ThemeButton/index.vue";

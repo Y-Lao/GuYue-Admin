@@ -91,12 +91,13 @@
 			</div>
 		</div>
 		<script>
-			const color = JSON.parse(window.localStorage.getItem("GlobalState")).themeConfig.primary;
-			const isDark = JSON.parse(window.localStorage.getItem("GlobalState")).themeConfig.styleSetting;
-			const dot = document.querySelectorAll(".dot i");
-			const html = document.querySelector("html");
-			dot.forEach(item => (item.style.background = color));
-			if (isDark === "realDark") html.style.background = "#141414";
+			const globalState = JSON.parse(window.localStorage.getItem("guyue-global"));
+			if (globalState) {
+				const dot = document.querySelectorAll(".dot i");
+				const html = document.querySelector("html");
+				dot.forEach(item => (item.style.background = globalState.primary));
+				if (globalState.styleSetting === "realDark") html.style.background = "#141414";
+			}
 		</script>
 		<script type="module" src="/src/main.ts"></script>
 	</body>
