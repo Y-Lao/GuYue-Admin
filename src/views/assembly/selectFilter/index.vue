@@ -85,4 +85,6 @@ const filterData = [
 	}
 ];
 </script>
-<style scoped lang="less"></style>
+<style scoped lang="less">
+@import url("./index.less");
+</style>
