@@ -343,3 +343,12 @@ export function transformDataToTree(data: object[], idStr: string, pidStr: strin
 	});
 	return tree;
 }
+
+/**
+ * @description 动态引入svg图片
+ * @param {String} name
+ * @return
+ * */
+export const getSvgImage = (name: string) => {
+	return new URL(`/src/assets/icons/${name}.svg`, import.meta.url).pathname;
+};

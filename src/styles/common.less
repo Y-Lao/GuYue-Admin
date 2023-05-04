@@ -6,7 +6,6 @@
 }
 .flx-justify-between {
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
 }
 .flx-align-center {
@@ -124,6 +123,9 @@
 	}
 	.w-@{counter} {
 		width: @counter * 1% !important;
+	}
+	.h-@{counter} {
+		height: @counter * 1% !important;
 	}
 	.loopStyle((@counter - 1)); // 递归调用自身
 }

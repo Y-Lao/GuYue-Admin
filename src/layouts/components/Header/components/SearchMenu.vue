@@ -86,7 +86,7 @@ const handleClickMenu = (menuItem: Menu.MenuOptions) => {
 	:global(.search-menu-item:hover) {
 		background-color: #f5f7fa;
 	}
-	:global(.ant-select-item-option) {
+	.ant-select-item-option {
 		padding: 0;
 	}
 	:global(.search-menu-title) {

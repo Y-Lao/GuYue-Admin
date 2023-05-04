@@ -28,6 +28,8 @@ import pinia from "@/stores/index";
 // svg icons
 import "virtual:svg-icons-register";
 import { registerGlobComp } from "@/components/registerGlobComp";
+// 数字动画
+import VueAnimateNumber from "vue-animate-number";
 
 const app = createApp(App);
 
@@ -39,4 +41,4 @@ Object.keys(Icons).forEach(key => {
 // 注册全局组件
 registerGlobComp(app);
 
-app.use(directives).use(router).use(I18n).use(pinia).mount("#app");
+app.use(directives).use(router).use(I18n).use(pinia).use(VueAnimateNumber).mount("#app");
