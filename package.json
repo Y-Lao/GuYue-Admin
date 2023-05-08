@@ -24,6 +24,7 @@
 		"@vueuse/core": "^8.0.1",
 		"ant-design-vue": "^3.2.15",
 		"axios": "^1.2.1",
+		"countup.js": "^2.6.2",
 		"dayjs": "^1.11.7",
 		"driver.js": "^0.9.8",
 		"echarts": "^5.4.1",
@@ -35,7 +36,6 @@
 		"pinia-plugin-persistedstate": "^3.0.1",
 		"sortablejs": "^1.15.0",
 		"vue": "^3.2.45",
-		"vue-animate-number": "^0.4.2",
 		"vue-i18n": "^9.1.9",
 		"vue-router": "^4.1.6",
 		"vuedraggable": "^4.1.0"

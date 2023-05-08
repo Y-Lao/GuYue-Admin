@@ -14,7 +14,9 @@
 						</div>
 					</div>
 					<div class="flx-justify-between">
-						<a-typography-title :level="2">{{ item.value }}</a-typography-title>
+						<a-typography-title :level="2">
+							<CountUp :end="item.value" :options="{ prefix: item.prefix }"></CountUp>
+						</a-typography-title>
 						<div>
 							<a-tag :color="item.isRise ? '#18A058' : '#D03050'">{{ item.change }}</a-tag>
 							<SvgIcon :name="item.isRise ? 'rise' : 'decline'" />
@@ -69,6 +71,8 @@ import SaleroomView from "./components/SaleroomView.vue";
 import AccessSourceView from "./components/AccessSourceView.vue";
 import AreaRankingView from "./components/AreaRankingView.vue";
 
+import CountUp from "@/components/CountUp/index.vue";
+
 /* 骨架屏 */
 const loading = ref(true);
 /* 统计数据 */
@@ -76,34 +80,38 @@ const statisticList = ref([
 	{
 		title: "访问量",
 		period: "周",
-		value: "63,089",
+		value: 63089,
 		change: "+31%",
 		icon: "visits",
-		isRise: true
+		isRise: true,
+		prefix: ""
 	},
 	{
 		title: "销售额",
 		period: "周",
-		value: "￥138,826",
+		value: 138826,
 		change: "+23%",
 		icon: "sale",
-		isRise: true
+		isRise: true,
+		prefix: "￥"
 	},
 	{
 		title: "订单量",
 		period: "周",
-		value: "9,500",
+		value: 9500,
 		change: "-20%",
 		icon: "order_count",
-		isRise: false
+		isRise: false,
+		prefix: ""
 	},
 	{
 		title: "成交额",
 		period: "月",
-		value: "396,200",
+		value: 396200,
 		change: "-11%",
 		icon: "volume",
-		isRise: false
+		isRise: false,
+		prefix: "￥"
 	}
 ]);
 

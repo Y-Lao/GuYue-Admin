@@ -1,4 +1,16 @@
 /* flex */
+.flex {
+	display: flex;
+}
+.flex-row {
+	flex-direction: row;
+}
+.flex-col {
+	flex-direction: column;
+}
+.justify-center {
+	justify-content: center;
+}
 .flx-center {
 	display: flex;
 	align-items: center;
@@ -121,6 +133,13 @@
 	.pl-@{counter} {
 		padding-left: @counter * 1px !important;
 	}
+	.px-@{counter} {
+		padding-right: @counter * 1px;
+		padding-left: @counter * 1px;
+	}
+	.p-@{counter} {
+		padding: @counter * 1px !important;
+	}
 	.w-@{counter} {
 		width: @counter * 1% !important;
 	}
@@ -131,3 +150,14 @@
 }
 
 .loopStyle(100);
+
+// 去除margin
+h1,
+dl,
+dd,
+h4,
+h2,
+h3,
+p {
+	margin: 0;
+}
