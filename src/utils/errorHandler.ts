@@ -1,4 +1,4 @@
-import { ElNotification } from "element-plus";
+import { notification } from "ant-design-vue";
 
 /**
  * @description 全局代码错误捕捉
@@ -16,11 +16,10 @@ const errorHandler = (error: any) => {
 		URIError: "URI错误"
 	};
 	let errorName = errorMap[error.name] || "未知错误";
-	ElNotification({
-		title: errorName,
-		message: error,
-		type: "error",
-		duration: 3000
+	notification["error"]({
+		message: errorName,
+		description: error,
+		duration: 3
 	});
 };
 

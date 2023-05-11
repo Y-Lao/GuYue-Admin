@@ -19,16 +19,22 @@
 			</a-col>
 			<a-col :span="12" class="flx-justify-between">
 				<a-card :bordered="false" :bodyStyle="{ padding: '6px' }">
-					<p>项目数</p>
-					<a-typography-text strong class="info-size">16</a-typography-text>
+					<p class="count-text">项目数</p>
+					<a-typography-text strong class="info-size">
+						<CountUp :end="1600" :options="{ prefix: '' }"></CountUp>
+					</a-typography-text>
 				</a-card>
 				<a-card :bordered="false" :bodyStyle="{ padding: '6px' }">
-					<p>待办</p>
-					<a-typography-text strong class="info-size">9/26</a-typography-text>
+					<p class="count-text">待办</p>
+					<a-typography-text strong class="info-size">
+						<CountUp :end="9" :options="{ prefix: '' }"></CountUp>/<CountUp :end="16" :options="{ prefix: '' }"></CountUp>
+					</a-typography-text>
 				</a-card>
 				<a-card :bordered="false" :bodyStyle="{ padding: '6px' }">
-					<p>消息</p>
-					<a-typography-text strong class="info-size">36</a-typography-text>
+					<p class="count-text">消息</p>
+					<a-typography-text strong class="info-size">
+						<CountUp :end="1136" :options="{ prefix: '' }"></CountUp>
+					</a-typography-text>
 				</a-card>
 			</a-col>
 		</a-row>
@@ -103,6 +109,7 @@ import { useUserStore } from "@/stores/modules/user";
 import { getTimeState } from "@/utils/util";
 import { useRouter } from "vue-router";
 import Pie from "./components/pie.vue";
+import CountUp from "@/components/CountUp/index.vue";
 
 interface DataItem {
 	id: string;

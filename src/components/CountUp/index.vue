@@ -66,8 +66,13 @@ const initCount = () => {
 	numAnim.start();
 };
 
+const updateCount = (num: number) => {
+	numAnim.update(num);
+};
+
 defineExpose({
-	initCount
+	initCount,
+	updateCount
 });
 </script>
 
