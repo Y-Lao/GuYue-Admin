@@ -2,6 +2,14 @@ import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
 
+export function isProdEnv(): boolean {
+	return import.meta.env.PROD;
+}
+
+export function isDevEnv(): boolean {
+	return import.meta.env.DEV;
+}
+
 export function isDevFn(mode: string): boolean {
 	return mode === "development";
 }
