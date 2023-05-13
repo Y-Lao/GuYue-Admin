@@ -1,14 +1,8 @@
-import MenuContext from "./tabRightMenu.vue";
-import { h, render } from "vue";
+import { Component, h, render } from "vue";
 
 interface Instance {
 	id: number;
 	destroy: () => void;
-}
-
-interface MenuValue {
-	path: string;
-	name: string;
 }
 
 // 定义一个变量，用于记录当前菜单实例
@@ -16,7 +10,7 @@ let curInstance: Instance | null = null;
 // 定义一个变量，用于记录菜单的id
 let seed = 1;
 // 定义一个函数，用于展示右键菜单
-const contextMenu = (e: MouseEvent, data: MenuValue) => {
+const contextMenu = (e: MouseEvent, data: any, component: Component) => {
 	// 如果当前已经存在菜单实例，就销毁它
 	if (curInstance) {
 		curInstance.destroy();
@@ -39,7 +33,7 @@ const contextMenu = (e: MouseEvent, data: MenuValue) => {
 		}
 	};
 	// 渲染虚拟节点
-	const vnode = h(MenuContext, props);
+	const vnode = h(component, props);
 	// vnode为需要渲染的虚拟节点，container为渲染的容器
 	render(vnode, container);
 	// 首先需要先把菜单真正渲染到页面，才能拿到它的宽度和高度

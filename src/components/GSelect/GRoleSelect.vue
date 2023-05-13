@@ -61,11 +61,26 @@ const getRoleList = async () => {
 		isLoading.value = false;
 	}
 };
+/* 刷新数据 */
+const refresh = () => {
+	const useRoleList = createCacheStorage(CacheConfig.RoleSelect);
+	useRoleList.remove();
+	getRoleList();
+};
+/* 获取数据源 */
+const getData = () => {
+	return roleList.value;
+};
 
 watchEffect(() => {
 	if (props.isImmediately) {
 		getRoleList();
 	}
+});
+
+defineExpose({
+	refresh,
+	getData
 });
 </script>
 

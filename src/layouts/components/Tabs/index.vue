@@ -34,6 +34,7 @@ import { useKeepAliveStore } from "@/stores/modules/keepAlive";
 import router from "@/routers";
 import MoreButton from "./components/MoreButton.vue";
 import ContextMenu from "@/components/ContextMenu";
+import MenuContext from "@/components/ContextMenu/tabRightMenu.vue";
 
 interface MenuValue {
 	path: string;
@@ -63,7 +64,7 @@ onMounted(() => {
 // 右键菜单
 const showContextMenu = (e: MouseEvent, menu: MenuValue) => {
 	e.preventDefault();
-	ContextMenu(e, menu);
+	ContextMenu(e, menu, MenuContext);
 };
 
 // 标签拖拽排序
