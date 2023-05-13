@@ -7,9 +7,9 @@
 					<a-button type="primary" class="mt-6" @click.right="showContextMenu($event, '右键菜单')">右键试试</a-button>
 				</template>
 			</a-alert>
-			<a-alert message="头像组件右键展示菜单" type="success" @click.right="showContextMenu($event, '右键菜单')">
+			<a-alert message="头像组件右键展示菜单" type="success">
 				<template #description>
-					<a-avatar :size="60" class="mt-6">
+					<a-avatar :size="60" class="mt-6" @click.right="showContextMenu($event, '右键菜单')">
 						<template #icon>
 							<img alt="avatar" src="@/assets/images/v2.webp" />
 						</template>
