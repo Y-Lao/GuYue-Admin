@@ -49,3 +49,15 @@ export namespace User {
 		status: number;
 	}
 }
+
+// 角色列表模块
+export namespace Role {
+	export interface RoleList {
+		id: string;
+		createTime: string;
+		updateTime: string;
+		name: string;
+		status: number;
+		type: number;
+	}
+}

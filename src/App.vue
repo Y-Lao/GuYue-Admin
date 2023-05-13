@@ -3,6 +3,9 @@
 		<!-- <a-spin :spinning="loading" :delay="500" :tip="$t('tip.loading')"> -->
 		<router-view></router-view>
 		<!-- </a-spin> -->
+		<template #renderEmpty>
+			<Empty />
+		</template>
 	</a-config-provider>
 </template>
 
@@ -16,6 +19,8 @@ import { useTheme } from "@/hooks/useTheme";
 // 组件picker时间国际化
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
+// 自定义空状态
+import Empty from "@/components/Empty/index.vue";
 
 // 初始化主题配置
 const { initTheme } = useTheme();
