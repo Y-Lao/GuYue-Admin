@@ -2,8 +2,8 @@
 	<div class="card content-box">
 		<a-alert
 			class="w-100 mb-20"
-			message="基础表单"
-			description="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景 🍓🍓🍓🍇🍇🍇"
+			message="基础表单 🍓🍓🍓🍇🍇🍇"
+			description="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。"
 			type="info"
 		/>
 		<a-form ref="formRef" :model="formState" v-bind="formItemLayout" :colon="false" :rules="rules" class="w-60">

@@ -1,6 +1,6 @@
 <template>
 	<div class="card content-box">
-		<a-alert class="w-100 mb-20" message="动态表单" description="表单页用于向用户动态收集信息 🍓🍓🍓🍇🍇🍇" type="info" />
+		<a-alert class="w-100 mb-20" message="动态表单 🍓🍓🍓🍇🍇🍇" description="表单页用于向用户动态收集信息。" type="info" />
 		<a-form ref="formRef" name="dynamic_form_nest_item" :model="dynamicValidateForm" @finish="onFinish">
 			<a-space v-for="(item, index) in dynamicValidateForm.filters" :key="item.id" style="display: flex" align="baseline">
 				<!-- 控制 -->
