@@ -1,6 +1,6 @@
 <template>
 	<div class="card content-box">
-		<span class="text">标签页操作 🍓🍓🍓🍈🍈🍈</span>
+		<a-alert class="w-100 mb-20" message="标签页操作 🍓🍓🍓🍈🍈🍈" type="info" />
 		<div class="mb-30">
 			<a-input-search placeholder="请输入内容" v-model:value="tabsTitle" style="width: 500px">
 				<template #enterButton>

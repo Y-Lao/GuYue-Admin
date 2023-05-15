@@ -1,6 +1,6 @@
 <template>
 	<div class="card content-box">
-		<span class="text"> 分类筛选器 🍓🍇🍓🍇</span>
+		<a-alert class="mb-12 w-100" message="分类筛选器 🍓🍇🍓🍇" type="info" />
 		<SelectFilter :data="filterData" @change="changeFilter" :default-values="filterResult" />
 		<span class="result">返回值: {{ filterResult }}</span>
 		<a-descriptions title="配置项 📚" :column="1" bordered class="w-100" size="small">

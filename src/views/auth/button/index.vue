@@ -1,6 +1,6 @@
 <template>
 	<div class="card content-box">
-		<span class="text title">按钮权限 🍇🍒🥭🍏 </span>
+		<a-alert class="w-100 mb-20" message="按钮权限 🍇🍒🥭🍏" type="info" />
 		<a-alert class="mb-20" :message="`当前用户按钮权限：${JSON.stringify(Object.keys(BUTTONS))}`" type="success" />
 		<div class="w-100"><a-divider orientation="left">使用 Hooks 方式绑定权限</a-divider></div>
 		<a-space :size="16" class="mb-20">

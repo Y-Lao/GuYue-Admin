@@ -1,6 +1,6 @@
 <template>
 	<div class="card content-box">
-		<span class="text">长按指令 🍇🍇🍇🍓🍓🍓</span>
+		<a-alert class="w-100 mb-20" message="长按指令 🍇🍇🍇🍓🍓🍓" type="info" />
 		<a-button type="primary" v-longpress="longpress">长按2秒触发事件</a-button>
 	</div>
 </template>

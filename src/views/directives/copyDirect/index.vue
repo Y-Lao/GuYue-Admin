@@ -1,6 +1,6 @@
 <template>
 	<div class="card content-box">
-		<span class="text">复制指令🍇🍇🍇🍒🍒🍒</span>
+		<a-alert class="w-100 mb-20" message="复制指令🍇🍇🍇🍒🍒🍒" type="info" />
 		<div class="box-content">
 			<a-input-search placeholder="请输入内容" v-model:value="data" style="width: 500px" class="mb-20">
 				<template #enterButton>

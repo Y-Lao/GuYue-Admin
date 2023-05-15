@@ -1,6 +1,6 @@
 <template>
 	<div class="card content-box">
-		<span class="text">防抖指令 🍇🍇🍇🍊🍊🍊</span>
+		<a-alert class="w-100 mb-20" message="防抖指令 🍇🍇🍇🍊🍊🍊" type="info" />
 		<a-button type="primary" v-debounce="debounceClick">防抖按钮(0.5秒后执行)</a-button>
 	</div>
 </template>

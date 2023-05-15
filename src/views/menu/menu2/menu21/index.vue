@@ -1,6 +1,6 @@
 <template>
 	<div class="card content-box">
-		<span class="text">我是menu2-1 🍓🍇🍈🍉</span>
+		<a-alert class="w-100 mb-20" message="我是menu2-1 🍓🍇🍈🍉" type="info" />
 		<a-input v-model:value="value" placeholder="测试缓存"></a-input>
 	</div>
 </template>

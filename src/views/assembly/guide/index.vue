@@ -1,8 +1,8 @@
 <template>
 	<div class="card content-box">
-		<span class="text">引导页 🍓🍓🍓🍇🍇🍇</span>
+		<a-alert class="w-100 mb-20" message="引导页 🍓🍓🍓🍇🍇🍇" type="info" />
 		<a-alert
-			class="mb-20 w-100"
+			class="mb-12 w-100"
 			message="引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。本 Demo 是基于 driver.js."
 			type="info"
 		/>

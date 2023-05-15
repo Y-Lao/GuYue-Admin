@@ -1,6 +1,11 @@
 <template>
 	<div class="card content-box">
-		<span class="text">基础表单 --- 表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景 🍓🍓🍓🍇🍇🍇 </span>
+		<a-alert
+			class="w-100 mb-20"
+			message="基础表单"
+			description="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景 🍓🍓🍓🍇🍇🍇"
+			type="info"
+		/>
 		<a-form ref="formRef" :model="formState" v-bind="formItemLayout" :colon="false" :rules="rules" class="w-60">
 			<!-- 预约姓名 -->
 			<a-form-item label="预约姓名" name="appointment_name">

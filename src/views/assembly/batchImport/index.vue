@@ -1,6 +1,6 @@
 <template>
 	<div class="card content-box">
-		<span class="text">批量添加数据 🍓🍓🍓🍓</span>
+		<a-alert class="w-100 mb-20" message="批量添加数据" description="支持Excel数据上传" type="info" />
 		<a-button type="primary" @click="batchAdd">
 			<template #icon><upload-outlined /></template>
 			批量添加数据
