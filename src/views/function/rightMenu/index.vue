@@ -2,7 +2,7 @@
 	<div class="card content-box">
 		<a-alert class="mb-20 w-100" message="右键菜单🍇🍇" description="右键菜单示例，指定元素右键显示操作菜单" type="info" />
 		<div class="w-100">
-			<a-alert message="右键展示菜单" type="success" class="mb-12">
+			<a-alert message="右键展示菜单" type="success" class="mb-20">
 				<template #description>
 					<a-button type="primary" class="mt-6" @click.right="showContextMenu($event, '右键菜单')">右键试试</a-button>
 				</template>

@@ -1,9 +1,9 @@
 <template>
 	<div class="card content-box">
 		<a-alert class="w-100 mb-20" message="数字滚动 🍓🍓🍓🍇🍇🍇" type="info" />
-		<a-alert class="mb-12 w-100" message="【Vue3 TS】 基于 countUp.js 实现数字滚动的插件。" type="info" />
+		<a-alert class="mb-20 w-100" message="【Vue3 TS】 基于 countUp.js 实现数字滚动的插件。" type="info" />
 		<a-alert
-			class="mb-12 w-100"
+			class="mb-20 w-100"
 			message="【插件使用】 <CountUp ref='countUpRef' :end='2023' :options='{ prefix: '￥' }'></CountUp>"
 			type="info"
 		/>
