@@ -10,9 +10,9 @@ import { reactive, computed, toRefs } from "vue";
  * @param {Function} requestError 对错误进行处理的方法---> 非必传
  * */
 export const useTable = (
-	api: (params: any) => Promise<any>,
+	api?: (params: any) => Promise<any>,
 	initParams: object = {},
-	isPageable: boolean,
+	isPageable: boolean = true,
 	dataCallback?: (data: any) => any,
 	requestError?: (error: any) => void
 ) => {
@@ -144,6 +144,18 @@ export const useTable = (
 		getTableList();
 	};
 
+	/**
+	 * @description 当前页改变或每页条数改变
+	 * @param {Number}page 当前页
+	 * @param {Number}pageSize 当前条数
+	 * @return void
+	 * */
+	const handlePageAndPageSize = (page: number, pageSize: number) => {
+		state.pageable.pageNum = page;
+		state.pageable.pageSize = pageSize;
+		getTableList();
+	};
+
 	return {
 		...toRefs(state),
 		getTableList,
@@ -151,6 +163,7 @@ export const useTable = (
 		reset,
 		handleSizeChange,
 		handleCurrentChange,
-		updatedTotalParam
+		updatedTotalParam,
+		handlePageAndPageSize
 	};
 };

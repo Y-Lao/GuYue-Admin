@@ -39,36 +39,71 @@
 			</div>
 		</div>
 		<!-- 表格主体 -->
-		<!-- <a-table ref="tableRef" v-bind="$attrs" :dataSource="[]" :border="border" :rowKey="rowKey" :pagination="pagination">
-        </a-table> -->
+		<!-- <a-table ref="tableRef" :columns="columns" v-bind="$attrs" :dataSource="data ?? tableData" :border="border"
+			:rowKey="rowKey" :pagination="pagination" :scroll="{ y: 240 }">
+		</a-table> -->
+		<!-- 分页组件 -->
+		<!-- <Pagination :pageabale="pageable" :handle-page-and-page-size="handlePageAndPageSize" /> -->
 	</div>
 </template>
 
 <script setup lang="ts" name="ProTable">
-// import { computed } from 'vue';
+// import { ref, onMounted } from 'vue';
 // import type { TableProps } from 'ant-design-vue';
+// import { useTable } from "@/hooks/useTable";
+// import Pagination from "./components/Pagination.vue";
+// import type { TableColumnsType } from 'ant-design-vue';
 
 // interface ProTableProps extends Partial<TableProps<any>> {
-//     border?: boolean; // 是否带有纵向边框 ---> 非必传(默认值为true)
-//     toolButton?: boolean; // 是否显示表格功能按钮 ---> 非必传(默认值为true)
-//     rowKey?: string; // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id ---> 非必传(默认值为id)
+// 	data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ---> 非必传
+// 	requestApi?: (params: any) => Promise<any>; // 请求表格数据的 api ---> 非必传
+// 	requestAuto?: boolean; // 是否自动执行请求 api ---> 非必传（默认为true）
+// 	requestError?: (params: any) => void; // 表格 api 请求错误监听 ---> 非必传
+// 	dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理 ---> 非必传
+// 	isPagination?: boolean; // 是否需要分页组件 ---> 非必传（默认为true）
+// 	initParam?: any; // 初始化请求参数 ---> 非必传（默认为{}）
+// 	border?: boolean; // 是否带有纵向边框 ---> 非必传(默认值为true)
+// 	toolButton?: boolean; // 是否显示表格功能按钮 ---> 非必传(默认值为true)
+// 	rowKey?: string; // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id ---> 非必传(默认值为id)
 // }
-
-/* 列表分页 */
-// const pagination = computed(() => ({
-//     total: total.value,
-//     current: current.value,
-//     pageSize: pageSize.value,
-//     showTotal: total => `总共 ${total} 项`,
-//     defaultPageSize: 10,
-//     // pageSizeOptions: ['5', '10', '15', '20'], // 可不设置使用默认
-//     showSizeChanger: true, // 是否显示pagesize选择
-//     showQuickJumper: true, // 是否显示跳转窗
-// }));
 /* 接受父组件参数，配置默认值 */
 // const props = withDefaults(defineProps<ProTableProps>(), {
-//     border: true,
-//     toolButton: true,
-//     rowKey: "id",
+// 	requestAuto: true,
+// 	isPagination: true,
+// 	initParam: {},
+// 	border: true,
+// 	toolButton: true,
+// 	rowKey: "id",
 // })
+/* 表格操作 Hooks */
+// const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange, handlePageAndPageSize } =
+// 	useTable(props.requestApi, props.initParam, props.isPagination, props.dataCallback, props.requestError);
+/* 初始化请求 */
+// onMounted(() => props.requestAuto && getTableList());
+// const columns = ref<TableColumnsType>([
+// 	{
+// 		title: '用户姓名',
+// 		dataIndex: 'username',
+// 		key: 'username',
+// 	},
+// 	{
+// 		title: '性别',
+// 		dataIndex: 'gender',
+// 		key: 'age',
+// 	},
+// 	{
+// 		title: '年龄',
+// 		dataIndex: 'user.detail.age',
+// 		key: 'user.detail.age',
+// 	},
+// 	{
+// 		title: 'Tags',
+// 		key: 'tags',
+// 		dataIndex: 'tags',
+// 	},
+// 	{
+// 		title: 'Action',
+// 		key: 'action',
+// 	},
+// ]);
 </script>
