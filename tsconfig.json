@@ -1,3 +1,4 @@
+// 文档地址：https://www.tslang.cn/docs/handbook/tsconfig-json.html
 {
   "compilerOptions": {
     // 指定ECMAScript目标版本
@@ -11,6 +12,7 @@
     // 启用所有严格类型检查选项
     // 启用 --strict相当于启用 --noImplicitAny, --noImplicitThis, --alwaysStrict，
     // --strictNullChecks和 --strictFunctionTypes和--strictPropertyInitialization
+    // "noImplicitThis": false, // js/ts 混用时设为false
     "strict": true,
     "jsx": "preserve",
     "resolveJsonModule": true,
@@ -28,6 +30,14 @@
 		},
     "noEmit": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "vite.config.ts"],
+  "include": [
+    "src/**/*.ts", 
+    "src/**/*.d.ts", 
+    "src/**/*.tsx", 
+    "src/**/*.vue", 
+    "build/**/*.ts",
+    "build/**/*.d.ts",
+    "vite.config.ts"
+  ],
 	"exclude": ["node_modules", "dist", "**/*.js"]
 }

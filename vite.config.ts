@@ -1,12 +1,7 @@
 import { defineConfig, loadEnv, ConfigEnv, UserConfig } from "vite";
-import { createHtmlPlugin } from "vite-plugin-html";
-import vue from "@vitejs/plugin-vue";
+import { createVitePlugins } from "./build/plugins";
 import { resolve } from "path";
 import { wrapperEnv } from "./src/utils/getEnv";
-import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
-// 按需引入antdV
-import Components from "unplugin-vue-components/vite";
-import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import pkg from "./package.json";
 import dayjs from "dayjs";
 
@@ -43,32 +38,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 				}
 			}
 		},
-		plugins: [
-			vue(),
-			// 标题设置
-			createHtmlPlugin({
-				inject: {
-					data: {
-						title: viteEnv.VITE_GLOB_APP_TITLE
-					}
-				}
-			}),
-			// * 使用 svg 图标
-			createSvgIconsPlugin({
-				// 指定需要缓存的图标文件夹
-				iconDirs: [resolve(process.cwd(), "src/assets/icons")],
-				// 指定symbolId格式
-				symbolId: "icon-[dir]-[name]"
-			}),
-			// UI组件库按需引入
-			Components({
-				resolvers: [
-					AntDesignVueResolver({
-						importStyle: false // 动态主题需配置
-					})
-				]
-			})
-		],
+		plugins: createVitePlugins(viteEnv),
 		server: {
 			// 服务器主机名，如果允许外部访问，可设置为 "0.0.0.0"
 			host: "0.0.0.0",
