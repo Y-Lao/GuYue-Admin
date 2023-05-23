@@ -49,6 +49,26 @@
 			:pagination="pagination"
 			:scroll="{ x: 1500, y: getTableScroll() }"
 		>
+			<!-- <template v-for="slot in Object.keys($slots)" #[slot]="scope">
+				<slot :name="slot" v-bind="scope"></slot>
+			</template> -->
+			<!-- 个性化头部单元格 -->
+			<!-- <template #headerCell="{ title, column }">
+				<slot name="headerCell" :title="title" :column="column"></slot>
+			</template> -->
+			<!-- 个性化单元格 -->
+			<template #bodyCell="{ text, record, index, column }">
+				<slot name="bodyCell" :text="text" :record="record" :index="index" :column="column"></slot>
+				<template v-if="column.ellipsis">
+					<!-- <a-tooltip placement="top">
+						<template #title>
+							<span>{{text}}</span>
+						</template>
+						<span>{{text}}</span>
+					</a-tooltip> -->
+					<TableTooltip :content="text">{{ text }}</TableTooltip>
+				</template>
+			</template>
 		</a-table>
 		<!-- 分页组件 -->
 		<Pagination :pageabale="pageable" :handle-page-and-page-size="handlePageAndPageSize" />
@@ -56,12 +76,12 @@
 </template>
 
 <script setup lang="tsx" name="ProTable">
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import type { TableProps } from "ant-design-vue";
 import { useTable } from "@/hooks/useTable";
 import Pagination from "./components/Pagination.vue";
-import type { TableColumnsType } from "ant-design-vue";
 import { getTableScroll } from "@/utils/table";
+import TableTooltip from "@/components/TableTooltip/index.vue";
 
 interface ProTableProps extends Partial<TableProps<any>> {
 	data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ---> 非必传
@@ -94,56 +114,4 @@ const { tableData, pageable, getTableList, handlePageAndPageSize } = useTable(
 );
 /* 初始化请求 */
 onMounted(() => props.requestAuto && getTableList());
-const columns = ref<TableColumnsType>([
-	{
-		title: "用户姓名",
-		dataIndex: "username",
-		key: "username"
-	},
-	{
-		title: "性别",
-		dataIndex: "gender",
-		key: "age"
-	},
-	{
-		title: "年龄",
-		dataIndex: ["user", "detail", "age"],
-		key: "user.detail.age"
-	},
-	{
-		title: "身份证号",
-		key: "idCard",
-		dataIndex: "idCard",
-		ellipsis: true
-	},
-	{
-		title: "邮箱",
-		key: "email",
-		dataIndex: "email",
-		ellipsis: true
-	},
-	{
-		title: "居住地址",
-		key: "address",
-		dataIndex: "address"
-	},
-	{
-		title: "用户状态",
-		key: "status",
-		dataIndex: "status",
-		customRender: ({ record }) => {
-			return <a-tag color={record.status ? "success" : "error"}>{record.status ? "启用" : "禁用"}</a-tag>;
-		}
-	},
-	{
-		title: "创建时间",
-		key: "createTime",
-		dataIndex: "createTime"
-	},
-	{
-		title: "操作",
-		key: "operation",
-		dataIndex: "operation"
-	}
-]);
 </script>
