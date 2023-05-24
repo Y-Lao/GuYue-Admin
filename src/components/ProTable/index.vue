@@ -79,6 +79,7 @@
 import { onMounted } from "vue";
 import type { TableProps } from "ant-design-vue";
 import { useTable } from "@/hooks/useTable";
+// import { useSelection } from "@/hooks/useSelection";
 import Pagination from "./components/Pagination.vue";
 import { getTableScroll } from "@/utils/table";
 import TableTooltip from "@/components/TableTooltip/index.vue";
@@ -104,6 +105,8 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	toolButton: true,
 	rowKey: "id"
 });
+/* 表格多选 Hooks */
+// const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 /* 表格操作 Hooks */
 const { tableData, pageable, getTableList, handlePageAndPageSize } = useTable(
 	props.requestApi,

@@ -39,16 +39,14 @@ const contentRef = ref();
 const isShowTooltip = ref(false);
 /* 鼠标移出 */
 const mouseleave = () => {
-	// isShowTooltip.value = false
+	isShowTooltip.value = false;
 };
 /* 鼠标移入 */
 const mouseenter = () => {
 	// 关键代码逻辑
-	if (contentRef.value.parentNode.offsetWidth > contentRef.value.offsetWidth) {
-		isShowTooltip.value = false;
-	} else {
-		isShowTooltip.value = true;
-	}
+	const tooltipWidth = contentRef.value.parentNode.offsetWidth;
+	const contentWidth = contentRef.value.offsetWidth;
+	isShowTooltip.value = tooltipWidth > contentWidth ? false : true;
 };
 </script>
 

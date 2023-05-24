@@ -1,18 +1,37 @@
 <template>
 	<div class="table-box">
 		<ProTable :request-api="getUserList" :columns="columns">
-			<template #bodyCell="{ column, record }">
+			<template #bodyCell="{ column }">
+				<!-- 表格操作 -->
 				<template v-if="column.key === 'operation'">
-					<span>
-						<a>Invite 一 {{ record.name }}</a>
-						<a-divider type="vertical" />
-						<a>Delete</a>
-						<a-divider type="vertical" />
-						<a class="ant-dropdown-link">
-							More actions
-							<down-outlined />
-						</a>
-					</span>
+					<!-- 查看 -->
+					<a-button type="link" size="small">
+						<template #icon>
+							<eye-outlined />
+						</template>
+						查看
+					</a-button>
+					<!-- 编辑 -->
+					<a-button type="link" size="small">
+						<template #icon>
+							<form-outlined />
+						</template>
+						编辑
+					</a-button>
+					<!-- 重置密码 -->
+					<a-button type="link" size="small">
+						<template #icon>
+							<sync-outlined />
+						</template>
+						重置密码
+					</a-button>
+					<!-- 删除 -->
+					<a-button type="link" size="small">
+						<template #icon>
+							<exception-outlined />
+						</template>
+						删除
+					</a-button>
 				</template>
 			</template>
 		</ProTable>
@@ -36,7 +55,10 @@ const columns = ref<TableColumnsType>([
 		title: "性别",
 		dataIndex: "gender",
 		key: "age",
-		align: "center"
+		align: "center",
+		customRender: ({ text }) => {
+			return text == 1 ? "男" : "女";
+		}
 	},
 	{
 		title: "年龄",
@@ -49,8 +71,7 @@ const columns = ref<TableColumnsType>([
 		key: "idCard",
 		dataIndex: "idCard",
 		ellipsis: true,
-		align: "center",
-		width: 100
+		align: "center"
 	},
 	{
 		title: "邮箱",
@@ -63,6 +84,7 @@ const columns = ref<TableColumnsType>([
 		title: "居住地址",
 		key: "address",
 		dataIndex: "address",
+		ellipsis: true,
 		align: "center"
 	},
 	{
@@ -78,13 +100,15 @@ const columns = ref<TableColumnsType>([
 		title: "创建时间",
 		key: "createTime",
 		dataIndex: "createTime",
+		ellipsis: true,
 		align: "center"
 	},
 	{
 		title: "操作",
 		key: "operation",
 		dataIndex: "operation",
-		align: "center"
+		align: "center",
+		width: 400
 	}
 ]);
 </script>
