@@ -5,37 +5,35 @@
 		<!-- 表格头部 操作按钮 -->
 		<div class="table-header">
 			<div class="header-button-lf">
-				<slot name="tableHeader"></slot>
+				<slot name="tableHeader" :selectedListIds="selectedListIds" :selectedList="selectedList" :isSelected="isSelected"></slot>
 			</div>
 			<div class="header-button-ri">
-				<a-space>
-					<slot name="toolButton">
-						<!-- 刷新 -->
-						<a-button shape="circle" class="tool-btn">
-							<template #icon>
-								<sync-outlined />
-							</template>
-						</a-button>
-						<!-- 打印 -->
-						<a-button shape="circle" class="tool-btn">
-							<template #icon>
-								<printer-outlined />
-							</template>
-						</a-button>
-						<!-- 表格配置 -->
-						<a-button shape="circle" class="tool-btn">
-							<template #icon>
-								<setting-outlined />
-							</template>
-						</a-button>
-						<!-- 搜索栏显隐 -->
-						<a-button shape="circle" class="tool-btn">
-							<template #icon>
-								<SearchOutlined />
-							</template>
-						</a-button>
-					</slot>
-				</a-space>
+				<slot name="toolButton">
+					<!-- 刷新 -->
+					<a-button shape="circle" class="tool-btn">
+						<template #icon>
+							<sync-outlined />
+						</template>
+					</a-button>
+					<!-- 打印 -->
+					<a-button shape="circle" class="tool-btn">
+						<template #icon>
+							<printer-outlined />
+						</template>
+					</a-button>
+					<!-- 表格配置 -->
+					<a-button shape="circle" class="tool-btn">
+						<template #icon>
+							<setting-outlined />
+						</template>
+					</a-button>
+					<!-- 搜索栏显隐 -->
+					<a-button shape="circle" class="tool-btn">
+						<template #icon>
+							<SearchOutlined />
+						</template>
+					</a-button>
+				</slot>
 			</div>
 		</div>
 		<!-- 表格主体 -->
@@ -46,6 +44,7 @@
 			:dataSource="data ?? tableData"
 			:border="border"
 			:rowKey="rowKey"
+			:row-selection="multiple ? rowSelection : false"
 			:pagination="pagination"
 			:scroll="{ x: 1500, y: getTableScroll() }"
 		>
@@ -78,8 +77,9 @@
 <script setup lang="tsx" name="ProTable">
 import { onMounted } from "vue";
 import type { TableProps } from "ant-design-vue";
+import { Table } from "ant-design-vue";
 import { useTable } from "@/hooks/useTable";
-// import { useSelection } from "@/hooks/useSelection";
+import { useSelection } from "@/hooks/useSelection";
 import Pagination from "./components/Pagination.vue";
 import { getTableScroll } from "@/utils/table";
 import TableTooltip from "@/components/TableTooltip/index.vue";
@@ -92,6 +92,7 @@ interface ProTableProps extends Partial<TableProps<any>> {
 	dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理 ---> 非必传
 	isPagination?: boolean; // 是否需要分页组件 ---> 非必传（默认为true）
 	initParam?: any; // 初始化请求参数 ---> 非必传（默认为{}）
+	multiple?: boolean; //表格是否多选 ---> 非必传(默认为false)
 	border?: boolean; // 是否带有纵向边框 ---> 非必传(默认值为true)
 	toolButton?: boolean; // 是否显示表格功能按钮 ---> 非必传(默认值为true)
 	rowKey?: string; // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id ---> 非必传(默认值为id)
@@ -101,12 +102,13 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	requestAuto: true,
 	isPagination: true,
 	initParam: {},
+	multiple: false,
 	border: true,
 	toolButton: true,
 	rowKey: "id"
 });
 /* 表格多选 Hooks */
-// const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
+const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 /* 表格操作 Hooks */
 const { tableData, pageable, getTableList, handlePageAndPageSize } = useTable(
 	props.requestApi,
@@ -115,6 +117,14 @@ const { tableData, pageable, getTableList, handlePageAndPageSize } = useTable(
 	props.dataCallback,
 	props.requestError
 );
+/* 表格选择操作 */
+const rowSelection: TableProps["rowSelection"] = {
+	onChange: (selectedRowKeys, selectedRows) => {
+		// 表格行选中
+		selectionChange(selectedRows);
+	},
+	selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT, Table.SELECTION_NONE]
+};
 /* 初始化请求 */
 onMounted(() => props.requestAuto && getTableList());
 </script>

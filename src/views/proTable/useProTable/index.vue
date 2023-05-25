@@ -1,6 +1,39 @@
 <template>
 	<div class="table-box">
-		<ProTable :request-api="getUserList" :columns="columns">
+		<ProTable :request-api="getUserList" :columns="columns" multiple>
+			<!-- 表格 header 按钮 -->
+			<template #tableHeader="scope">
+				<!-- 新增用户 -->
+				<a-button type="primary">
+					<template #icon>
+						<plus-circle-outlined />
+					</template>
+					新增用户
+				</a-button>
+				<!-- 批量添加用户 -->
+				<a-button type="primary">
+					<template #icon>
+						<upload-outlined />
+					</template>
+					批量添加用户
+				</a-button>
+				<!-- 导出用户数据 -->
+				<a-button type="primary">
+					<template #icon>
+						<download-outlined />
+					</template>
+					导出用户数据
+				</a-button>
+				<!-- To 子集详情页面 -->
+				<a-button type="primary"> To 子集详情页面 </a-button>
+				<!-- 批量删除用户 -->
+				<a-button danger :disabled="!scope.isSelected">
+					<template #icon>
+						<delete-outlined />
+					</template>
+					批量删除用户
+				</a-button>
+			</template>
 			<template #bodyCell="{ column }">
 				<!-- 表格操作 -->
 				<template v-if="column.key === 'operation'">

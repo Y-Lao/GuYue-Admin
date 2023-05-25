@@ -39,7 +39,7 @@ const contentRef = ref();
 const isShowTooltip = ref(false);
 /* 鼠标移出 */
 const mouseleave = () => {
-	isShowTooltip.value = false;
+	// isShowTooltip.value = false;
 };
 /* 鼠标移入 */
 const mouseenter = () => {
