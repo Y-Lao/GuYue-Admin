@@ -19,3 +19,8 @@ export const BatchAddUser = (params: FormData) => {
 export const exportUserInfo = (params: User.ReqUserParams) => {
 	return http.download(PORT + `/user/export`, params);
 };
+
+// 重置用户密码
+export const resetUserPassWord = (params: { id: string }) => {
+	return http.post(PORT + `/user/rest_password`, params);
+};

@@ -1,6 +1,6 @@
 <template>
 	<div class="table-box">
-		<ProTable :request-api="getUserList" :columns="columns" multiple>
+		<ProTable ref="proTable" :request-api="getUserList" :columns="columns" multiple>
 			<!-- 表格 header 按钮 -->
 			<template #tableHeader="scope">
 				<!-- 新增用户 -->
@@ -11,21 +11,21 @@
 					新增用户
 				</a-button>
 				<!-- 批量添加用户 -->
-				<a-button type="primary">
+				<a-button type="primary" @click="batchAdd">
 					<template #icon>
 						<upload-outlined />
 					</template>
 					批量添加用户
 				</a-button>
 				<!-- 导出用户数据 -->
-				<a-button type="primary">
+				<a-button type="primary" @click="downloadFile">
 					<template #icon>
 						<download-outlined />
 					</template>
 					导出用户数据
 				</a-button>
 				<!-- To 子集详情页面 -->
-				<a-button type="primary"> To 子集详情页面 </a-button>
+				<a-button type="primary" @click="toDetail(scope.selectedListIds)"> 用户详情页面 </a-button>
 				<!-- 批量删除用户 -->
 				<a-button danger :disabled="!scope.isSelected">
 					<template #icon>
@@ -34,7 +34,7 @@
 					批量删除用户
 				</a-button>
 			</template>
-			<template #bodyCell="{ column }">
+			<template #bodyCell="{ column, record }">
 				<!-- 表格操作 -->
 				<template v-if="column.key === 'operation'">
 					<!-- 查看 -->
@@ -52,7 +52,7 @@
 						编辑
 					</a-button>
 					<!-- 重置密码 -->
-					<a-button type="link" size="small">
+					<a-button type="link" size="small" @click="resetPass(record)">
 						<template #icon>
 							<sync-outlined />
 						</template>
@@ -68,14 +68,22 @@
 				</template>
 			</template>
 		</ProTable>
+		<ImportExcel ref="importRef" />
 	</div>
 </template>
 
 <script setup lang="tsx">
-import { ref } from "vue";
+import { ref, createVNode } from "vue";
+import { useRouter } from "vue-router";
+import { User } from "@/api/interface";
 import ProTable from "@/components/ProTable/index.vue";
-import { getUserList } from "@/api/modules/user";
 import type { TableColumnsType } from "ant-design-vue";
+import ImportExcel from "@/components/ImportExcel/index.vue";
+import { useDownload } from "@/hooks/useDownload";
+import { useHandleData } from "@/hooks/useHandleData";
+import { Modal, message } from "ant-design-vue";
+import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
+import { getUserList, exportUserInfo, BatchAddUser, resetUserPassWord } from "@/api/modules/user";
 
 const columns = ref<TableColumnsType>([
 	{
@@ -144,6 +152,47 @@ const columns = ref<TableColumnsType>([
 		width: 400
 	}
 ]);
+/* 获取 ProTable 实例，调用其获取刷新数据方法，获取到当前查询参数 */
+const proTable = ref();
+/* 路由实例 */
+const router = useRouter();
+/* 跳转详情页 */
+const toDetail = (ids: Array<string>) => {
+	if (ids.length === 0 || ids.length > 1) {
+		message.warning("请选择一位用户");
+		return;
+	}
+	router.push(`/proTable/useProTable/detail/${ids[0]}?params=detail-page`);
+};
+/* 重置用户密码 */
+const resetPass = async (params: User.ResUserList) => {
+	await useHandleData(resetUserPassWord, { id: params.id }, `重置【${params.username}】用户密码`);
+	proTable.value.getTableList();
+};
+/* 导出用户列表 */
+const downloadFile = () => {
+	Modal.confirm({
+		title: "温馨提示",
+		icon: createVNode(ExclamationCircleOutlined),
+		content: "确认导出用户数据?",
+		onOk: async () => {
+			await useDownload(exportUserInfo, "用户列表", {});
+		},
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		onCancel() {}
+	});
+};
+/* 批量添加用户 */
+const importRef = ref<InstanceType<typeof ImportExcel> | null>(null);
+const batchAdd = () => {
+	const params = {
+		title: "用户",
+		tempApi: exportUserInfo,
+		importApi: BatchAddUser,
+		getTableList: proTable.value.getTableList
+	};
+	importRef.value?.acceptParams(params);
+};
 </script>
 
 <style scoped lang="less"></style>
