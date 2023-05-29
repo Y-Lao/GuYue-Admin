@@ -1,6 +1,32 @@
 <template>
 	<div class="table-box">
 		<ProTable ref="proTable" :request-api="getUserList" :columns="columns" multiple>
+			<!-- 表单搜索项 -->
+			<template #searchForm="scope">
+				<a-col :span="8">
+					<a-form-item name="Rname" label="姓名">
+						<a-input placeholder="placeholder" v-model:value="scope.formState['Rname']"></a-input>
+					</a-form-item>
+				</a-col>
+				<a-col :span="8">
+					<a-form-item name="role" label="角色类型">
+						<GRoleSelect v-model:value="scope.formState['role']" />
+					</a-form-item>
+				</a-col>
+				<a-col :span="8">
+					<a-form-item name="gender" label="性别">
+						<a-select v-model:value="scope.formState['gender']">
+							<a-select-option value="0">男</a-select-option>
+							<a-select-option value="1">女</a-select-option>
+						</a-select>
+					</a-form-item>
+				</a-col>
+				<a-col :span="8" v-show="scope.expand">
+					<a-form-item name="createTime" label="创建时间">
+						<a-range-picker v-model:value="scope.formState['createTime']" value-format="YYYY-MM-DD" />
+					</a-form-item>
+				</a-col>
+			</template>
 			<!-- 表格 header 按钮 -->
 			<template #tableHeader="scope">
 				<!-- 新增用户 -->
@@ -79,6 +105,7 @@ import { User } from "@/api/interface";
 import ProTable from "@/components/ProTable/index.vue";
 import type { TableColumnsType } from "ant-design-vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
+import GRoleSelect from "@/components/GSelect/GRoleSelect.vue";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
 import { Modal, message } from "ant-design-vue";

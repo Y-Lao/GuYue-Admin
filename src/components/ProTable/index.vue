@@ -1,5 +1,17 @@
 <template>
 	<!-- 查询表单 -->
+	<SearchForm
+		ref="searchForm"
+		:getScrollY="getScrollY"
+		:search="search"
+		:reset="reset"
+		:search-param="searchParam"
+		v-show="isShowSearch"
+	>
+		<template #searchItem="scope">
+			<slot name="searchForm" :expand="scope.expand" :formState="scope.formState"></slot>
+		</template>
+	</SearchForm>
 	<!-- 表格内容 card -->
 	<div class="card table-main">
 		<!-- 表格头部 操作按钮 -->
@@ -28,7 +40,7 @@
 						</template>
 					</a-button>
 					<!-- 搜索栏显隐 -->
-					<a-button shape="circle" class="tool-btn">
+					<a-button shape="circle" class="tool-btn" @click="isShowSearch = !isShowSearch">
 						<template #icon>
 							<SearchOutlined />
 						</template>
@@ -46,7 +58,7 @@
 			:rowKey="rowKey"
 			:row-selection="multiple ? rowSelection : false"
 			:pagination="pagination"
-			:scroll="{ x: 1500, y: getTableScroll() }"
+			:scroll="{ x: 1500, y: scrollY }"
 		>
 			<!-- <template v-for="slot in Object.keys($slots)" #[slot]="scope">
 				<slot :name="slot" v-bind="scope"></slot>
@@ -59,13 +71,13 @@
 			<template #bodyCell="{ text, record, index, column }">
 				<slot name="bodyCell" :text="text" :record="record" :index="index" :column="column"></slot>
 				<template v-if="column.ellipsis">
-					<!-- <a-tooltip placement="top">
+					<a-tooltip placement="top">
 						<template #title>
-							<span>{{text}}</span>
+							<span>{{ text }}</span>
 						</template>
-						<span>{{text}}</span>
-					</a-tooltip> -->
-					<TableTooltip :content="text">{{ text }}</TableTooltip>
+						<span>{{ text }}</span>
+					</a-tooltip>
+					<!-- <TableTooltip :content="text">{{ text }}</TableTooltip> -->
 				</template>
 			</template>
 		</a-table>
@@ -75,14 +87,15 @@
 </template>
 
 <script setup lang="tsx" name="ProTable">
-import { onMounted } from "vue";
+import { ref, onMounted, nextTick, watch } from "vue";
 import type { TableProps } from "ant-design-vue";
 import { Table } from "ant-design-vue";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import Pagination from "./components/Pagination.vue";
+import SearchForm from "@/components/SearchForm/index.vue";
 import { getTableScroll } from "@/utils/table";
-import TableTooltip from "@/components/TableTooltip/index.vue";
+// import TableTooltip from "@/components/TableTooltip/index.vue";
 
 interface ProTableProps extends Partial<TableProps<any>> {
 	data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ---> 非必传
@@ -107,10 +120,12 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	toolButton: true,
 	rowKey: "id"
 });
+/* 是否显示搜索模块 */
+const isShowSearch = ref(true);
 /* 表格多选 Hooks */
 const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 /* 表格操作 Hooks */
-const { tableData, pageable, getTableList, handlePageAndPageSize } = useTable(
+const { tableData, searchParam, pageable, getTableList, search, reset, handlePageAndPageSize } = useTable(
 	props.requestApi,
 	props.initParam,
 	props.isPagination,
@@ -126,5 +141,25 @@ const rowSelection: TableProps["rowSelection"] = {
 	selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT, Table.SELECTION_NONE]
 };
 /* 初始化请求 */
-onMounted(() => props.requestAuto && getTableList());
+onMounted(() => {
+	props.requestAuto && getTableList();
+	scrollY.value = getTableScroll();
+});
+/* 搜索表单实例 */
+const scrollY = ref("0");
+const searchForm = ref();
+/* 获取table scrollY */
+const getScrollY = () => {
+	nextTick(() => {
+		let scrol_Y = getTableScroll();
+		scrollY.value = scrol_Y;
+	});
+};
+/* 监听搜索栏显隐 */
+watch(
+	() => isShowSearch.value,
+	() => {
+		getScrollY();
+	}
+);
 </script>
