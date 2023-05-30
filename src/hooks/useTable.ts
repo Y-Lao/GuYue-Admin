@@ -28,6 +28,8 @@ export const useTable = (
 			// 总条数
 			total: 0
 		},
+		// 表格是否加载中
+		isLoading: false,
 		// 查询参数(只包括查询)
 		searchParam: {},
 		// 初始化默认的查询参数
@@ -60,6 +62,7 @@ export const useTable = (
 		try {
 			// 先把初始化参数和分页参数放到总参数里面
 			Object.assign(state.totalParam, initParams, isPageable ? pageParam.value : {});
+			state.isLoading = true;
 			let { data } = await api(state.totalParam);
 			dataCallback && (data = dataCallback(data));
 			state.tableData = isPageable ? data.list : data;
@@ -68,6 +71,8 @@ export const useTable = (
 			isPageable && updatePageable({ pageNum, pageSize, total });
 		} catch (error) {
 			requestError && requestError(error);
+		} finally {
+			state.isLoading = false;
 		}
 	};
 

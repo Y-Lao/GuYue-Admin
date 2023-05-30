@@ -51,10 +51,11 @@
 		<!-- 表格主体 -->
 		<a-table
 			ref="tableRef"
+			:loading="isLoading"
 			:columns="columns"
 			v-bind="$attrs"
 			:dataSource="data ?? tableData"
-			:border="border"
+			:bordered="border"
 			:rowKey="rowKey"
 			:row-selection="multiple ? rowSelection : false"
 			:pagination="pagination"
@@ -79,6 +80,21 @@
 					</a-tooltip>
 					<!-- <TableTooltip :content="text">{{ text }}</TableTooltip> -->
 				</template>
+				<!-- 序号 -->
+				<template v-if="column.key === 'index'">
+					<span>{{ parseInt(index) + 1 }}</span>
+				</template>
+			</template>
+			<!-- 无数据 -->
+			<template #emptyText>
+				<div class="table-empty" :style="{ height: noDataHeight }">
+					<slot name="emptyText">
+						<div class="notData-container">
+							<img src="@/assets/images/emptyData.png" alt="notData" />
+							<div class="notice">暂无数据</div>
+						</div>
+					</slot>
+				</div>
 			</template>
 		</a-table>
 		<!-- 分页组件 -->
@@ -106,7 +122,7 @@ interface ProTableProps extends Partial<TableProps<any>> {
 	isPagination?: boolean; // 是否需要分页组件 ---> 非必传（默认为true）
 	initParam?: any; // 初始化请求参数 ---> 非必传（默认为{}）
 	multiple?: boolean; //表格是否多选 ---> 非必传(默认为false)
-	border?: boolean; // 是否带有纵向边框 ---> 非必传(默认值为true)
+	border?: boolean; // 是否带有纵向边框 ---> 非必传(默认值为false)
 	toolButton?: boolean; // 是否显示表格功能按钮 ---> 非必传(默认值为true)
 	rowKey?: string; // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id ---> 非必传(默认值为id)
 }
@@ -116,7 +132,7 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	isPagination: true,
 	initParam: {},
 	multiple: false,
-	border: true,
+	border: false,
 	toolButton: true,
 	rowKey: "id"
 });
@@ -125,7 +141,7 @@ const isShowSearch = ref(true);
 /* 表格多选 Hooks */
 const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 /* 表格操作 Hooks */
-const { tableData, searchParam, pageable, getTableList, search, reset, handlePageAndPageSize } = useTable(
+const { tableData, isLoading, searchParam, pageable, getTableList, search, reset, handlePageAndPageSize } = useTable(
 	props.requestApi,
 	props.initParam,
 	props.isPagination,
@@ -140,21 +156,26 @@ const rowSelection: TableProps["rowSelection"] = {
 	},
 	selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT, Table.SELECTION_NONE]
 };
-/* 初始化请求 */
-onMounted(() => {
-	props.requestAuto && getTableList();
-	scrollY.value = getTableScroll();
-});
 /* 搜索表单实例 */
 const scrollY = ref("0");
 const searchForm = ref();
+/* 空状态高度 */
+const noDataHeight = ref("0");
 /* 获取table scrollY */
 const getScrollY = () => {
 	nextTick(() => {
 		let scrol_Y = getTableScroll();
+		let height = getTableScroll({ extraHeight: 108 });
 		scrollY.value = scrol_Y;
+		noDataHeight.value = height;
 	});
 };
+/* 初始化请求 */
+onMounted(() => {
+	props.requestAuto && getTableList();
+	scrollY.value = getTableScroll();
+	noDataHeight.value = getTableScroll({ extraHeight: 108 });
+});
 /* 监听搜索栏显隐 */
 watch(
 	() => isShowSearch.value,
@@ -162,4 +183,32 @@ watch(
 		getScrollY();
 	}
 );
+/* 暴露给父组件的参数和方法(外部需要什么，都可以从这里暴露出去) */
+defineExpose({
+	tableData,
+	searchParam,
+	pageable,
+	getTableList,
+	reset,
+	isSelected,
+	selectedList,
+	selectedListIds
+});
 </script>
+
+<style scoped lang="less">
+.notData-container {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 70px;
+	text-align: center;
+	img {
+		height: 210px;
+	}
+	.notice {
+		font-size: 16px;
+		line-height: 29px;
+		color: #333333;
+	}
+}
+</style>

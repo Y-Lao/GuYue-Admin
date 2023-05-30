@@ -3,17 +3,17 @@
 		<ProTable ref="proTable" :request-api="getUserList" :columns="columns" multiple>
 			<!-- 表单搜索项 -->
 			<template #searchForm="scope">
-				<a-col :span="8">
-					<a-form-item name="Rname" label="姓名">
-						<a-input placeholder="placeholder" v-model:value="scope.formState['Rname']"></a-input>
+				<a-col :span="6">
+					<a-form-item name="name" label="姓名">
+						<a-input placeholder="placeholder" v-model:value="scope.formState['name']"></a-input>
 					</a-form-item>
 				</a-col>
-				<a-col :span="8">
+				<a-col :span="6">
 					<a-form-item name="role" label="角色类型">
 						<GRoleSelect v-model:value="scope.formState['role']" />
 					</a-form-item>
 				</a-col>
-				<a-col :span="8">
+				<a-col :span="6">
 					<a-form-item name="gender" label="性别">
 						<a-select v-model:value="scope.formState['gender']">
 							<a-select-option value="0">男</a-select-option>
@@ -21,7 +21,15 @@
 						</a-select>
 					</a-form-item>
 				</a-col>
-				<a-col :span="8" v-show="scope.expand">
+				<a-col :span="6">
+					<a-form-item name="status" label="用户状态">
+						<a-select v-model:value="scope.formState['status']">
+							<a-select-option value="0">禁用</a-select-option>
+							<a-select-option value="1">启用</a-select-option>
+						</a-select>
+					</a-form-item>
+				</a-col>
+				<a-col :span="6" v-show="scope.expand">
 					<a-form-item name="createTime" label="创建时间">
 						<a-range-picker v-model:value="scope.formState['createTime']" value-format="YYYY-MM-DD" />
 					</a-form-item>
@@ -114,9 +122,22 @@ import { getUserList, exportUserInfo, BatchAddUser, resetUserPassWord } from "@/
 
 const columns = ref<TableColumnsType>([
 	{
+		title: "#",
+		fixed: "left",
+		key: "index",
+		align: "center"
+	},
+	{
 		title: "用户姓名",
 		dataIndex: "username",
+		fixed: "left",
 		key: "username",
+		align: "center"
+	},
+	{
+		title: "角色类型",
+		dataIndex: "rolename",
+		key: "rolename",
 		align: "center"
 	},
 	{
@@ -176,7 +197,8 @@ const columns = ref<TableColumnsType>([
 		key: "operation",
 		dataIndex: "operation",
 		align: "center",
-		width: 400
+		fixed: "right",
+		width: 320
 	}
 ]);
 /* 获取 ProTable 实例，调用其获取刷新数据方法，获取到当前查询参数 */
