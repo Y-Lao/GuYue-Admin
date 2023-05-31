@@ -181,6 +181,8 @@ const rowSelection = {
 	},
 	selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT, Table.SELECTION_NONE]
 };
+/* 清空选中数据列表 */
+const clearSelection = () => selectionChange([]);
 /* 搜索表单实例 */
 const scrollY = ref("0");
 const searchForm = ref();
@@ -225,7 +227,8 @@ defineExpose({
 	reset,
 	isSelected,
 	selectedList,
-	selectedListIds
+	selectedListIds,
+	clearSelection
 });
 </script>
 

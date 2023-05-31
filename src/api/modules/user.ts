@@ -24,3 +24,8 @@ export const exportUserInfo = (params: User.ReqUserParams) => {
 export const resetUserPassWord = (params: { id: string }) => {
 	return http.post(PORT + `/user/rest_password`, params);
 };
+
+// 删除用户
+export const deleteUser = (params: { id: string[] }) => {
+	return http.post(PORT + `/user/delete`, params);
+};

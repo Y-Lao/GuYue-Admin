@@ -62,9 +62,9 @@
 				<a-button type="primary" @click="toDetail(scope.selectedListIds)"> 用户详情页面 </a-button>
 			</template>
 			<!-- 表格底部操作按钮 -->
-			<template #footer-btn>
+			<template #footer-btn="scope">
 				<!-- 批量删除 -->
-				<a-button danger>
+				<a-button danger @click="batchDelete(scope.selectedListIds)">
 					<template #icon>
 						<delete-outlined />
 					</template>
@@ -123,7 +123,7 @@ import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
 import { Modal, message } from "ant-design-vue";
 import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
-import { getUserList, exportUserInfo, BatchAddUser, resetUserPassWord } from "@/api/modules/user";
+import { getUserList, exportUserInfo, BatchAddUser, deleteUser, resetUserPassWord } from "@/api/modules/user";
 
 const columns = ref<TableColumnsType>([
 	{
@@ -246,6 +246,12 @@ const batchAdd = () => {
 		getTableList: proTable.value.getTableList
 	};
 	importRef.value?.acceptParams(params);
+};
+/* 批量删除用户 */
+const batchDelete = async (id: Key[]) => {
+	await useHandleData(deleteUser, { id }, "删除所选用户信息");
+	proTable.value.clearSelection();
+	proTable.value.getTableList();
 };
 </script>
 
