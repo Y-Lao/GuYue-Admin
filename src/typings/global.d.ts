@@ -20,6 +20,10 @@ declare namespace Menu {
 	}
 }
 
+/* table */
+declare type Key = string | number;
+declare type DefaultRecordType = any;
+
 /* FileType */
 declare namespace File {
 	type ImageMimeType =

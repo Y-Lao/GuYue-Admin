@@ -10,7 +10,7 @@ export const useSelection = (rowkey: string = "id") => {
 
 	/* 当前选中的所有 ids 数组 */
 	const selectedListIds = computed(() => {
-		let ids: string[] = [];
+		let ids: Key[] = [];
 		selectedList.value.forEach(item => ids.push(item[rowkey]));
 		return ids;
 	});

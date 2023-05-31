@@ -99,11 +99,23 @@
 		</a-table>
 		<!-- 分页组件 -->
 		<Pagination :pageabale="pageable" :handle-page-and-page-size="handlePageAndPageSize" />
+		<!-- 底部操作按钮 -->
+		<div class="footer-slot-wrapper" v-show="selectedList.length">
+			<a-space>
+				<a-checkbox v-model:checked="state.checkAll" @change="onCheckAllChange" :indeterminate="state.indeterminate">
+					已选择
+					<span class="footer-selected-count">{{ selectedList.length }}</span>
+					项
+				</a-checkbox>
+				<!-- 按钮插槽 -->
+				<slot name="footer-btn" :selectedListIds="selectedListIds" :selectedList="selectedList" :isSelected="isSelected"></slot>
+			</a-space>
+		</div>
 	</div>
 </template>
 
 <script setup lang="tsx" name="ProTable">
-import { ref, onMounted, nextTick, watch } from "vue";
+import { ref, reactive, onMounted, nextTick, watch } from "vue";
 import type { TableProps } from "ant-design-vue";
 import { Table } from "ant-design-vue";
 import { useTable } from "@/hooks/useTable";
@@ -138,6 +150,18 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 });
 /* 是否显示搜索模块 */
 const isShowSearch = ref(true);
+/* 表格 DOM 元素 */
+const tableRef = ref();
+/* 底部全选按钮状态 */
+const state = reactive({
+	indeterminate: false,
+	checkAll: false
+});
+/* 底部全选 */
+const onCheckAllChange = (e: any) => {
+	if (e.target.checked) selectionChange(tableData.value);
+	else selectionChange([]);
+};
 /* 表格多选 Hooks */
 const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 /* 表格操作 Hooks */
@@ -149,9 +173,10 @@ const { tableData, isLoading, searchParam, pageable, getTableList, search, reset
 	props.requestError
 );
 /* 表格选择操作 */
-const rowSelection: TableProps["rowSelection"] = {
-	onChange: (selectedRowKeys, selectedRows) => {
-		// 表格行选中
+const rowSelection = {
+	selectedRowKeys: selectedListIds,
+	onChange: (selectedRowKeys: Key[], selectedRows: DefaultRecordType[]) => {
+		// 表格行选中操作
 		selectionChange(selectedRows);
 	},
 	selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT, Table.SELECTION_NONE]
@@ -183,6 +208,14 @@ watch(
 		getScrollY();
 	}
 );
+/* 监听 selectedList */
+watch(
+	() => selectedList.value,
+	newVal => {
+		state.indeterminate = !!newVal.length && newVal.length < tableData.value.length;
+		state.checkAll = newVal.length === tableData.value.length;
+	}
+);
 /* 暴露给父组件的参数和方法(外部需要什么，都可以从这里暴露出去) */
 defineExpose({
 	tableData,
@@ -209,6 +242,20 @@ defineExpose({
 		font-size: 16px;
 		line-height: 29px;
 		color: #333333;
+	}
+}
+.footer-slot-wrapper {
+	position: absolute;
+	bottom: 20px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	width: calc(100% - 40px);
+	height: 32px;
+	background: #ffffff;
+	.footer-selected-count {
+		font-weight: 600;
+		color: @primary-color;
 	}
 }
 </style>

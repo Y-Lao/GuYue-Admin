@@ -60,13 +60,18 @@
 				</a-button>
 				<!-- To 子集详情页面 -->
 				<a-button type="primary" @click="toDetail(scope.selectedListIds)"> 用户详情页面 </a-button>
-				<!-- 批量删除用户 -->
-				<a-button danger :disabled="!scope.isSelected">
+			</template>
+			<!-- 表格底部操作按钮 -->
+			<template #footer-btn>
+				<!-- 批量删除 -->
+				<a-button danger>
 					<template #icon>
 						<delete-outlined />
 					</template>
-					批量删除用户
+					批量删除
 				</a-button>
+				<!-- 分配角色 -->
+				<a-button type="primary"> 分配角色 </a-button>
 			</template>
 			<template #bodyCell="{ column, record }">
 				<!-- 表格操作 -->
@@ -206,7 +211,7 @@ const proTable = ref();
 /* 路由实例 */
 const router = useRouter();
 /* 跳转详情页 */
-const toDetail = (ids: Array<string>) => {
+const toDetail = (ids: Key[]) => {
 	if (ids.length === 0 || ids.length > 1) {
 		message.warning("请选择一位用户");
 		return;
