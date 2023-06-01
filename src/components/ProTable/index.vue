@@ -22,7 +22,7 @@
 			<div class="header-button-ri">
 				<slot name="toolButton">
 					<!-- 刷新 -->
-					<a-button shape="circle" class="tool-btn">
+					<a-button shape="circle" class="tool-btn" @click="getTableList">
 						<template #icon>
 							<sync-outlined />
 						</template>
@@ -100,17 +100,19 @@
 		<!-- 分页组件 -->
 		<Pagination :pageabale="pageable" :handle-page-and-page-size="handlePageAndPageSize" />
 		<!-- 底部操作按钮 -->
-		<div class="footer-slot-wrapper" v-show="selectedList.length">
-			<a-space>
-				<a-checkbox v-model:checked="state.checkAll" @change="onCheckAllChange" :indeterminate="state.indeterminate">
-					已选择
-					<span class="footer-selected-count">{{ selectedList.length }}</span>
-					项
-				</a-checkbox>
-				<!-- 按钮插槽 -->
-				<slot name="footer-btn" :selectedListIds="selectedListIds" :selectedList="selectedList" :isSelected="isSelected"></slot>
-			</a-space>
-		</div>
+		<transition appear name="fade-transform" mode="out-in">
+			<div class="footer-slot-wrapper" v-show="selectedList.length">
+				<a-space>
+					<a-checkbox v-model:checked="state.checkAll" @change="onCheckAllChange" :indeterminate="state.indeterminate">
+						已选择
+						<span class="footer-selected-count">{{ selectedList.length }}</span>
+						项
+					</a-checkbox>
+					<!-- 按钮插槽 -->
+					<slot name="footer-btn" :selectedListIds="selectedListIds" :selectedList="selectedList" :isSelected="isSelected"></slot>
+				</a-space>
+			</div>
+		</transition>
 	</div>
 </template>
 

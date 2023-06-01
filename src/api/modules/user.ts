@@ -29,3 +29,8 @@ export const resetUserPassWord = (params: { id: string }) => {
 export const deleteUser = (params: { id: string[] }) => {
 	return http.post(PORT + `/user/delete`, params);
 };
+
+// 切换用户状态
+export const changeUserStatus = (params: { id: string; status: number }) => {
+	return http.post(PORT + `/user/change`, params);
+};

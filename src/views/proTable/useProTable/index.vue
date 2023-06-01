@@ -16,16 +16,16 @@
 				<a-col :span="6">
 					<a-form-item name="gender" label="性别">
 						<a-select v-model:value="scope.formState['gender']">
-							<a-select-option value="0">男</a-select-option>
-							<a-select-option value="1">女</a-select-option>
+							<a-select-option :value="1">男</a-select-option>
+							<a-select-option :value="2">女</a-select-option>
 						</a-select>
 					</a-form-item>
 				</a-col>
 				<a-col :span="6">
 					<a-form-item name="status" label="用户状态">
 						<a-select v-model:value="scope.formState['status']">
-							<a-select-option value="0">禁用</a-select-option>
-							<a-select-option value="1">启用</a-select-option>
+							<a-select-option :value="0">禁用</a-select-option>
+							<a-select-option :value="1">启用</a-select-option>
 						</a-select>
 					</a-form-item>
 				</a-col>
@@ -121,10 +121,14 @@ import ImportExcel from "@/components/ImportExcel/index.vue";
 import GRoleSelect from "@/components/GSelect/GRoleSelect.vue";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
+import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { Modal, message } from "ant-design-vue";
 import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
-import { getUserList, exportUserInfo, BatchAddUser, deleteUser, resetUserPassWord } from "@/api/modules/user";
+import { getUserList, exportUserInfo, BatchAddUser, deleteUser, resetUserPassWord, changeUserStatus } from "@/api/modules/user";
 
+/* 页面按钮权限 -- 按钮权限既可以使用 hooks，也可以直接使用 v-auth 指令，指令适合直接绑定在按钮上，hooks 适合根据按钮权限显示不同的内容 */
+const { BUTTONS } = useAuthButtons();
+/* 表格列表项 */
 const columns = ref<TableColumnsType>([
 	{
 		title: "#",
@@ -187,7 +191,18 @@ const columns = ref<TableColumnsType>([
 		dataIndex: "status",
 		align: "center",
 		customRender: ({ record }) => {
-			return <a-tag color={record.status ? "success" : "error"}>{record.status ? "启用" : "禁用"}</a-tag>;
+			return BUTTONS.value.status ? (
+				<a-switch
+					v-model:checked={record.status}
+					checked-children="启用"
+					checkedValue={1}
+					un-checked-children="禁用"
+					unCheckedValue={0}
+					onClick={() => changeStatus(record)}
+				/>
+			) : (
+				<a-tag color={record.status ? "success" : "error"}>{record.status ? "启用" : "禁用"}</a-tag>
+			);
 		}
 	},
 	{
@@ -251,6 +266,11 @@ const batchAdd = () => {
 const batchDelete = async (id: Key[]) => {
 	await useHandleData(deleteUser, { id }, "删除所选用户信息");
 	proTable.value.clearSelection();
+	proTable.value.getTableList();
+};
+/* 切换用户状态 */
+const changeStatus = async (row: User.ResUserList) => {
+	await useHandleData(changeUserStatus, { id: row.id, status: row.status == 1 ? 0 : 1 }, `切换【${row.username}】用户状态`);
 	proTable.value.getTableList();
 };
 </script>
