@@ -4,8 +4,12 @@
 	</div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+<script setup lang="ts" name="ParticleClock">
+import { ref, onMounted, onUnmounted, computed } from "vue";
+import { useGlobalStore } from "@/stores/modules/global";
+
+const globalStore = useGlobalStore();
+const primary = computed(() => globalStore.primary);
 
 onMounted(() => {
 	// 当组件挂载时
@@ -29,7 +33,6 @@ const canvas = ref();
 let ctx: any;
 /* 定义动画帧 ID 变量 */
 let animationFrameId: any;
-
 /* 初始化画布尺寸函数 */
 const initCanvasSize = () => {
 	// 设置画布宽度
@@ -55,12 +58,12 @@ class Particle {
 		const rad = (getRandom(0, 360) * Math.PI) / 180; // 计算随机弧度
 		this.x = cx + r * Math.cos(rad); // 设置粒子 X 坐标
 		this.y = cy + r * Math.sin(rad); // 设置粒子 Y 坐标
-		this.size = getRandom(3 * devicePixelRatio, 8 * devicePixelRatio); // 设置粒子大小
+		this.size = getRandom(2 * devicePixelRatio, 6 * devicePixelRatio); // 设置粒子大小
 	}
 	// 绘制粒子方法
 	draw() {
 		ctx.beginPath(); // 开始路径
-		ctx.fillStyle = "#4d70ff"; // 设置填充样式
+		ctx.fillStyle = primary.value; // 设置填充样式
 		ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI); // 绘制圆形
 		ctx.fill(); // 填充路径
 	}
@@ -124,7 +127,7 @@ const update = () => {
 	const { width, height } = canvas.value; // 获取画布宽高
 	ctx.fillStyle = "#000"; // 设置填充样式
 	ctx.textBaseline = "middle"; // 设置文本基线
-	ctx.font = `${260 * devicePixelRatio}px 'DS-Digital', sans-serif`; // 设置字体样式
+	ctx.font = `${240 * devicePixelRatio}px 'DS-Digital', sans-serif`; // 设置字体样式
 	ctx.fillText(text, (width - ctx.measureText(text).width) / 2, height / 2); // 绘制文本
 	const points = getPoints(); // 获取点集
 	clear(); // 清除画布
@@ -176,9 +179,10 @@ const getPoints = () => {
 
 <style scoped lang="less">
 .particle-clock-container {
-	width: 160px;
+	width: 120px;
 	height: 50px;
 	margin-top: 4px;
+	margin-right: 6px;
 	canvas {
 		display: block;
 		width: 100%;
