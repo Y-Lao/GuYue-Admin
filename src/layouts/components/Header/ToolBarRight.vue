@@ -1,5 +1,6 @@
 <template>
 	<div class="tool-bar-ri">
+		<ParticleClock />
 		<div class="header-icon">
 			<AssemblySize id="assembly-size" />
 			<Language id="language" />
@@ -29,6 +30,8 @@ import Message from "./components/Message.vue";
 import Fullscreen from "./components/Fullscreen.vue";
 // 头像
 import Avatar from "./components/Avatar.vue";
+// 粒子时钟
+import ParticleClock from "@/components/ParticleClock/index.vue";
 </script>
 
 <style scoped lang="less">
@@ -49,7 +52,7 @@ import Avatar from "./components/Avatar.vue";
 		#message,
 		#fullscreen {
 			height: 100%;
-			margin-left: 21px;
+			margin-right: 21px;
 			line-height: 55px;
 		}
 		#message {
@@ -62,7 +65,7 @@ import Avatar from "./components/Avatar.vue";
 	.username {
 		height: 100%;
 		padding-top: 2px;
-		margin: 0 20px;
+		margin: 0 20px 0 0;
 		font-size: 15px;
 		line-height: 55px;
 	}

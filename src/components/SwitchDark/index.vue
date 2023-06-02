@@ -7,6 +7,8 @@
 
 <script setup lang="ts" name="SwitchDark">
 import { ref } from "vue";
+import SvgIcon from "@/components/SvgIcon/index.vue";
+
 const checked1 = ref(false);
 </script>
 

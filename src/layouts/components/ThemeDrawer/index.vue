@@ -131,6 +131,7 @@ import { useGlobalStore } from "@/stores/modules/global";
 import { LayoutType, StyleType } from "@/stores/interface";
 import { DEFAULT_PRIMARY } from "@/config";
 import ThemeColor from "@/components/ThemeColor/index.vue";
+import SvgIcon from "@/components/SvgIcon/index.vue";
 
 const { changeGreyOrWeak } = useTheme();
 

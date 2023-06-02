@@ -24,7 +24,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="svgIcon">
+<script setup lang="ts" name="Select">
 import { ref } from "vue";
 import GRoleSelect from "@/components/GSelect/GRoleSelect.vue";
 import { message } from "ant-design-vue";

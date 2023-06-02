@@ -12,6 +12,7 @@
 import { ref, onMounted } from "vue";
 import { useGlobalStore } from "@/stores/modules/global";
 import { ConfigProvider } from "ant-design-vue";
+import SvgIcon from "@/components/SvgIcon/index.vue";
 
 interface ColorPickerProps {
 	colors: Array<string>; // 主题色 --> 必传

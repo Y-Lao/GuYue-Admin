@@ -70,7 +70,7 @@ import PageView from "./components/PageView.vue";
 import SaleroomView from "./components/SaleroomView.vue";
 import AccessSourceView from "./components/AccessSourceView.vue";
 import AreaRankingView from "./components/AreaRankingView.vue";
-
+import SvgIcon from "@/components/SvgIcon/index.vue";
 import CountUp from "@/components/CountUp/index.vue";
 
 /* 骨架屏 */
