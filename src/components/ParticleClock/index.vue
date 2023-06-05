@@ -58,7 +58,7 @@ class Particle {
 		const rad = (getRandom(0, 360) * Math.PI) / 180; // 计算随机弧度
 		this.x = cx + r * Math.cos(rad); // 设置粒子 X 坐标
 		this.y = cy + r * Math.sin(rad); // 设置粒子 Y 坐标
-		this.size = getRandom(2 * devicePixelRatio, 6 * devicePixelRatio); // 设置粒子大小
+		this.size = 12; // 设置粒子大小
 	}
 	// 绘制粒子方法
 	draw() {

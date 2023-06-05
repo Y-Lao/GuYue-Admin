@@ -73,6 +73,13 @@
 				<!-- 分配角色 -->
 				<a-button type="primary"> 分配角色 </a-button>
 			</template>
+			<!-- 自定义表头 -->
+			<template #headerCell="{ column }">
+				<template v-if="column.key === 'rolename'">
+					<TableFilter v-model:filter-value="filterValue" :options="options" :title="'角色类型'" />
+				</template>
+			</template>
+			<!-- 操作 -->
 			<template #bodyCell="{ column, record }">
 				<!-- 表格操作 -->
 				<template v-if="column.key === 'operation'">
@@ -112,7 +119,7 @@
 </template>
 
 <script setup lang="tsx">
-import { ref, createVNode } from "vue";
+import { ref, createVNode, watch } from "vue";
 import { useRouter } from "vue-router";
 import { User } from "@/api/interface";
 import ProTable from "@/components/ProTable/index.vue";
@@ -125,6 +132,20 @@ import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { Modal, message } from "ant-design-vue";
 import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
 import { getUserList, exportUserInfo, BatchAddUser, deleteUser, resetUserPassWord, changeUserStatus } from "@/api/modules/user";
+import TableFilter from "@/components/TableFilter/index.vue";
+
+const options = [
+	{ label: "未生成", value: 0 },
+	{ label: "已生成", value: 1 }
+];
+const filterValue = ref();
+
+watch(
+	() => filterValue.value,
+	() => {
+		console.log("9999", filterValue.value);
+	}
+);
 
 /* 页面按钮权限 -- 按钮权限既可以使用 hooks，也可以直接使用 v-auth 指令，指令适合直接绑定在按钮上，hooks 适合根据按钮权限显示不同的内容 */
 const { BUTTONS } = useAuthButtons();
@@ -144,7 +165,7 @@ const columns = ref<TableColumnsType>([
 		align: "center"
 	},
 	{
-		title: "角色类型",
+		// title: "角色类型",
 		dataIndex: "rolename",
 		key: "rolename",
 		align: "center"

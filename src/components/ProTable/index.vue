@@ -65,9 +65,9 @@
 				<slot :name="slot" v-bind="scope"></slot>
 			</template> -->
 			<!-- 个性化头部单元格 -->
-			<!-- <template #headerCell="{ title, column }">
+			<template #headerCell="{ title, column }">
 				<slot name="headerCell" :title="title" :column="column"></slot>
-			</template> -->
+			</template>
 			<!-- 个性化单元格 -->
 			<template #bodyCell="{ text, record, index, column }">
 				<slot name="bodyCell" :text="text" :record="record" :index="index" :column="column"></slot>

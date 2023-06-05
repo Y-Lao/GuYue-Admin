@@ -1,6 +1,6 @@
 <template>
 	<div class="tool-bar-ri">
-		<ParticleClock />
+		<!-- <ParticleClock /> -->
 		<div class="header-icon">
 			<AssemblySize id="assembly-size" />
 			<Language id="language" />
@@ -31,7 +31,7 @@ import Fullscreen from "./components/Fullscreen.vue";
 // 头像
 import Avatar from "./components/Avatar.vue";
 // 粒子时钟
-import ParticleClock from "@/components/ParticleClock/index.vue";
+// import ParticleClock from "@/components/ParticleClock/index.vue";
 </script>
 
 <style scoped lang="less">
