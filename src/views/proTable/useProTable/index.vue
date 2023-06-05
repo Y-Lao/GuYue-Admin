@@ -1,6 +1,6 @@
 <template>
 	<div class="table-box">
-		<ProTable ref="proTable" :request-api="getUserList" :columns="columns" multiple>
+		<ProTable ref="proTable" :request-api="getTableList" :columns="columns" multiple>
 			<!-- 表单搜索项 -->
 			<template #searchForm="scope">
 				<a-col :span="6">
@@ -76,7 +76,7 @@
 			<!-- 自定义表头 -->
 			<template #headerCell="{ column }">
 				<template v-if="column.key === 'rolename'">
-					<TableFilter v-model:filter-value="filterValue" :options="options" :title="'角色类型'" />
+					<TableFilter v-model:filter-value="rolenameValue" :options="options" :title="'角色类型'" />
 				</template>
 			</template>
 			<!-- 操作 -->
@@ -134,19 +134,24 @@ import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
 import { getUserList, exportUserInfo, BatchAddUser, deleteUser, resetUserPassWord, changeUserStatus } from "@/api/modules/user";
 import TableFilter from "@/components/TableFilter/index.vue";
 
+/* 角色类型 */
 const options = [
 	{ label: "未生成", value: 0 },
 	{ label: "已生成", value: 1 }
 ];
-const filterValue = ref();
-
-watch(
-	() => filterValue.value,
-	() => {
-		console.log("9999", filterValue.value);
-	}
-);
-
+/* 角色类型值 */
+const rolenameValue = ref("");
+/* 如果你想在请求之前对当前请求参数做一些操作，可以自定义如下函数：params 为当前所有的请求参数（包括分页），最后返回请求列表接口
+   默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList" */
+const getTableList = (params: any) => {
+	let newParams = JSON.parse(JSON.stringify(params));
+	newParams.createTime && (newParams.startTime = newParams.createTime[0]);
+	newParams.createTime && (newParams.endTime = newParams.createTime[1]);
+	delete newParams.createTime;
+	// 表格表头过滤参数
+	newParams["rolename"] = rolenameValue.value;
+	return getUserList(newParams);
+};
 /* 页面按钮权限 -- 按钮权限既可以使用 hooks，也可以直接使用 v-auth 指令，指令适合直接绑定在按钮上，hooks 适合根据按钮权限显示不同的内容 */
 const { BUTTONS } = useAuthButtons();
 /* 表格列表项 */
@@ -294,6 +299,13 @@ const changeStatus = async (row: User.ResUserList) => {
 	await useHandleData(changeUserStatus, { id: row.id, status: row.status == 1 ? 0 : 1 }, `切换【${row.username}】用户状态`);
 	proTable.value.getTableList();
 };
+/* 监听 */
+watch(
+	() => rolenameValue.value,
+	() => {
+		proTable.value.getTableList();
+	}
+);
 </script>
 
 <style scoped lang="less"></style>
