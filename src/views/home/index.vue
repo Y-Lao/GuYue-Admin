@@ -3,9 +3,9 @@
 		<a-row>
 			<a-col :span="12">
 				<div class="flx-align-center">
-					<a-avatar :size="64">
+					<a-avatar :size="{ md: 42, xl: 52, xxl: 64 }">
 						<template #icon>
-							<img alt="avatar" src="@/assets/images/avatar.gif" />
+							<img alt="avatar" src="@/assets/images/avatar.jpg" />
 						</template>
 					</a-avatar>
 					<div>
@@ -43,15 +43,18 @@
 		<!-- 工程项目 -->
 		<a-col :span="12">
 			<a-card title="工程项目" class="mb-12">
-				<a-card-grid style="width: 33.3%" v-for="item in projectData" :key="item.title">
+				<template #extra><a href="https://gitee.com/Y_lao/GuYue-Admin" target="_blank">更多项目</a></template>
+				<a-card-grid v-for="item in projectData" :key="item.title">
 					<div class="flex flex-row">
 						<component :is="item.icon" :style="{ fontSize: '30px', color: item.color }"></component>
-						<span class="ml-16 project-text">
+						<span class="project-text">
 							<a-anchor-link :href="item.link" :title="item.title" target="_blank" />
 						</span>
 					</div>
-					<div class="flex mt-8 text-gray" style="height: 40px">{{ item.desc }}</div>
-					<div class="flex mt-8 text-gray">{{ item.author }}</div>
+					<div class="flex mt-8 text-gray" style="height: 40px; overflow: hidden">{{ item.desc }}</div>
+					<div class="flex mt-8 text-gray" style="height: 20px; overflow: hidden; font-size: 12px; color: rgb(0 0 0 / 25%)">
+						{{ item.author }}
+					</div>
 				</a-card-grid>
 			</a-card>
 			<!-- 动态 -->
@@ -66,7 +69,7 @@
 								<template #avatar>
 									<a-avatar :size="40">
 										<template #icon>
-											<img alt="avatar" src="@/assets/images/v2.webp" />
+											<img alt="avatar" src="@/assets/images/avatar.jpg" />
 										</template>
 									</a-avatar>
 								</template>
@@ -80,7 +83,7 @@
 		<a-col :span="12">
 			<a-card title="快捷操作" class="mb-12">
 				<a-card-grid
-					style="width: 33.3%; padding: 12px; text-align: center"
+					style="padding: 12px; text-align: center"
 					v-for="item in shortcutKeyList"
 					:key="item.title"
 					class="shortcut-key"

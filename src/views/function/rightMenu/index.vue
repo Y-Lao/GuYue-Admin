@@ -11,7 +11,7 @@
 				<template #description>
 					<a-avatar :size="60" class="mt-6" @click.right="showContextMenu($event, '右键菜单')">
 						<template #icon>
-							<img alt="avatar" src="@/assets/images/v2.webp" />
+							<img alt="avatar" src="@/assets/images/avatar.jpg" />
 						</template>
 					</a-avatar>
 				</template>

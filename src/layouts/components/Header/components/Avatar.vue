@@ -1,7 +1,7 @@
 <template>
 	<a-dropdown :trigger="['click']" placement="bottom">
 		<div class="avatar">
-			<img src="@/assets/images/avatar.gif" alt="avatar" />
+			<img src="@/assets/images/avatar.jpg" alt="avatar" />
 		</div>
 		<template #overlay>
 			<a-menu>
