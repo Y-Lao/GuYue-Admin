@@ -94,19 +94,19 @@ yarn commit
 
 - 登录页：
 
-![login_light](https://i.imgtg.com/2023/04/13/8tknp.png)
+![login_light](https://imgtg.com/image/O5xkjc)
 
 - 首页：
 
-![home_light](https://i.imgtg.com/2023/04/13/8tl1j.png)
+![home_light](https://imgtg.com/image/O5xno1)
 
 - 表格页：
 
-![table_light](https://i.imgtg.com/2023/04/13/8tfMx.png)
+![table_light](https://imgtg.com/image/O5xhsG)
 
 - 数据可视化
 
-![dashboard](https://i.imgtg.com/2023/04/14/82Grx.png)
+![dashboard](https://imgtg.com/image/O5xFgM)
 
 - 数据大屏：
 
