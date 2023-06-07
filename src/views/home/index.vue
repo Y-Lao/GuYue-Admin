@@ -1,5 +1,5 @@
 <template>
-	<a-card title="工作台" :bordered="false" :bodyStyle="{ padding: '16px' }" class="mb-12">
+	<a-card title="工作台" :bordered="false" :bodyStyle="{ padding: '15px' }" class="mb-6">
 		<a-row>
 			<a-col :span="12">
 				<div class="flx-align-center">
@@ -39,10 +39,10 @@
 			</a-col>
 		</a-row>
 	</a-card>
-	<a-row :gutter="12">
+	<a-row :gutter="6">
 		<!-- 工程项目 -->
 		<a-col :span="12">
-			<a-card title="工程项目" class="mb-12">
+			<a-card title="工程项目" class="mb-6">
 				<template #extra><a href="https://gitee.com/Y_lao/GuYue-Admin" target="_blank">更多项目</a></template>
 				<a-card-grid v-for="item in projectData" :key="item.title">
 					<div class="flex flex-row">
@@ -81,7 +81,7 @@
 		</a-col>
 		<!-- 快捷操作 -->
 		<a-col :span="12">
-			<a-card title="快捷操作" class="mb-12">
+			<a-card title="快捷操作" class="mb-6">
 				<a-card-grid
 					style="padding: 12px; text-align: center"
 					v-for="item in shortcutKeyList"

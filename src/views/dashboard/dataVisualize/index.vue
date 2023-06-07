@@ -1,6 +1,6 @@
 <template>
 	<!-- 统计数据 -->
-	<a-row :gutter="16" class="mb-16">
+	<a-row :gutter="4" class="mb-6">
 		<a-col :md="12" :xl="6" v-for="item in statisticList" :key="item.title">
 			<a-card hoverable size="small">
 				<a-skeleton :loading="loading" active>
@@ -27,7 +27,7 @@
 		</a-col>
 	</a-row>
 	<!-- 访问量、区域排行 -->
-	<a-row :gutter="16" class="mb-16">
+	<a-row :gutter="6" class="mb-6">
 		<a-col :md="24" :xl="12">
 			<a-card title="访问量" :bordered="false" hoverable>
 				<a-skeleton :loading="loading" active>
@@ -44,7 +44,7 @@
 		</a-col>
 	</a-row>
 	<!-- 销售额、访问来源 -->
-	<a-row :gutter="16" class="mb-16">
+	<a-row :gutter="6" class="mb-6">
 		<a-col :md="24" :xl="12">
 			<a-card title="销售额" :bordered="false" hoverable>
 				<a-skeleton :loading="loading" active>
