@@ -11,9 +11,12 @@ import { useGlobalStore } from "@/stores/modules/global";
 import ThemeDrawer from "./components/ThemeDrawer/index.vue";
 // 纵向布局
 import LayoutVertical from "./LayoutVertical/index.vue";
+// 横向布局
+import LayoutTransverse from "./LayoutTransverse/index.vue";
 
 const LayoutComponents: { [key: string]: Component } = {
-	vertical: LayoutVertical
+	vertical: LayoutVertical,
+	transverse: LayoutTransverse
 };
 
 const globalStore = useGlobalStore();

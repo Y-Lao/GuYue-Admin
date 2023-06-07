@@ -1,7 +1,7 @@
 <template>
 	<div class="message">
 		<a-popover placement="bottom" trigger="click">
-			<a-badge count="6" class="item">
+			<a-badge count="6" class="item message-guide-container">
 				<i :class="'iconfont icon-xiaoxi'" class="toolBar-icon" id="messageGuide"></i>
 			</a-badge>
 			<template #content>

@@ -49,18 +49,18 @@
 			</a-tooltip>
 			<a-tooltip :mouseEnterDelay="0.3">
 				<template #title> 顶部菜单布局 </template>
-				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-top" @click="changeLayout('classic')">
+				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-top" @click="changeLayout('transverse')">
 					<div class="inner"></div>
-					<span class="anticon anticon-check select-icon" v-show="layout == 'classic'">
+					<span class="anticon anticon-check select-icon" v-show="layout == 'transverse'">
 						<check-outlined />
 					</span>
 				</div>
 			</a-tooltip>
 			<a-tooltip :mouseEnterDelay="0.3">
 				<template #title> 混合布局 </template>
-				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-mix" @click="changeLayout('transverse')">
+				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-mix" @click="changeLayout('classic')">
 					<div class="inner"></div>
-					<span class="anticon anticon-check select-icon" v-show="layout == 'transverse'">
+					<span class="anticon anticon-check select-icon" v-show="layout == 'classic'">
 						<check-outlined />
 					</span>
 				</div>
