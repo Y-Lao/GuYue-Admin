@@ -34,7 +34,7 @@
 						</template>
 					</a-button>
 					<!-- 表格配置 -->
-					<a-button shape="circle" class="tool-btn">
+					<a-button shape="circle" class="tool-btn" @click="openCompactHeaders">
 						<template #icon>
 							<setting-outlined />
 						</template>
@@ -60,6 +60,7 @@
 			:row-selection="multiple ? rowSelection : false"
 			:pagination="pagination"
 			:scroll="{ x: 1500, y: scrollY }"
+			@resizeColumn="handleResizeColumn"
 		>
 			<!-- <template v-for="slot in Object.keys($slots)" #[slot]="scope">
 				<slot :name="slot" v-bind="scope"></slot>
@@ -113,18 +114,21 @@
 				</a-space>
 			</div>
 		</transition>
+		<!-- 列表设置 -->
+		<CompactHeaders ref="CompactHeadersRef" />
 	</div>
 </template>
 
 <script setup lang="tsx" name="ProTable">
 import { ref, reactive, onMounted, nextTick, watch } from "vue";
-import type { TableProps } from "ant-design-vue";
+import type { TableProps, TableColumnType } from "ant-design-vue";
 import { Table } from "ant-design-vue";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import Pagination from "./components/Pagination.vue";
 import SearchForm from "@/components/SearchForm/index.vue";
 import { getTableScroll } from "@/utils/table";
+import CompactHeaders from "@/components/CompactHeaders/index.vue";
 // import TableTooltip from "@/components/TableTooltip/index.vue";
 
 interface ProTableProps extends Partial<TableProps<any>> {
@@ -136,7 +140,7 @@ interface ProTableProps extends Partial<TableProps<any>> {
 	isPagination?: boolean; // 是否需要分页组件 ---> 非必传（默认为true）
 	initParam?: any; // 初始化请求参数 ---> 非必传（默认为{}）
 	multiple?: boolean; //表格是否多选 ---> 非必传(默认为false)
-	border?: boolean; // 是否带有纵向边框 ---> 非必传(默认值为false)
+	border?: boolean; // 是否带有纵向边框 ---> 非必传(默认值为true)
 	toolButton?: boolean; // 是否显示表格功能按钮 ---> 非必传(默认值为true)
 	rowKey?: string; // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id ---> 非必传(默认值为id)
 }
@@ -146,7 +150,7 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	isPagination: true,
 	initParam: {},
 	multiple: false,
-	border: false,
+	border: true,
 	toolButton: true,
 	rowKey: "id"
 });
@@ -198,6 +202,16 @@ const getScrollY = () => {
 		scrollY.value = scrol_Y;
 		noDataHeight.value = height;
 	});
+};
+/* 可伸缩列，伸缩距离(100 - 400) --> 单页数据量大，拖拽表头与表体不同步（待优化） */
+const handleResizeColumn = (w: string | number, col: TableColumnType) => {
+	if (100 > Number(w) || Number(w) > 400) return;
+	if (col.width) col.width = w;
+};
+/* 打开列表设置 */
+const CompactHeadersRef = ref<InstanceType<typeof CompactHeaders> | null>(null);
+const openCompactHeaders = () => {
+	CompactHeadersRef.value?.acceptParams();
 };
 /* 初始化请求 */
 onMounted(() => {

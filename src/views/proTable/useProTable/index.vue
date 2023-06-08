@@ -164,16 +164,22 @@ const columns = ref<TableColumnsType>([
 	},
 	{
 		title: "用户姓名",
+		resizable: true,
 		dataIndex: "username",
 		fixed: "left",
 		key: "username",
-		align: "center"
+		align: "center",
+		width: 100,
+		minWidth: 100,
+		maxWidth: 150
 	},
 	{
 		// title: "角色类型",
 		dataIndex: "rolename",
+		resizable: true,
 		key: "rolename",
-		align: "center"
+		align: "center",
+		width: 150
 	},
 	{
 		title: "性别",
@@ -194,15 +200,19 @@ const columns = ref<TableColumnsType>([
 		title: "身份证号",
 		key: "idCard",
 		dataIndex: "idCard",
+		resizable: true,
 		ellipsis: true,
-		align: "center"
+		align: "center",
+		width: 150
 	},
 	{
 		title: "邮箱",
 		key: "email",
 		dataIndex: "email",
+		resizable: true,
 		ellipsis: true,
-		align: "center"
+		align: "center",
+		width: 150
 	},
 	{
 		title: "居住地址",

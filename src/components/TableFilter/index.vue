@@ -1,13 +1,15 @@
 <template>
 	<a-dropdown :trigger="[trigger]" @visibleChange="PopoverShow">
-		<p class="table-filter-title">
-			<span>{{ title }}</span>
-			<component
-				:is="iconUpOrDowm ? UpOutlined : DownOutlined"
-				class="title-icon"
-				:style="{ color: iconUpOrDowm ? primary : '' }"
-			/>
-		</p>
+		<div class="table-filter-title-container">
+			<p class="table-filter-title">
+				<span class="mr-12">{{ title }}</span>
+				<component
+					:is="iconUpOrDowm ? UpOutlined : DownOutlined"
+					class="title-icon"
+					:style="{ color: iconUpOrDowm ? primary : '' }"
+				/>
+			</p>
+		</div>
 		<template #overlay>
 			<a-menu @click="onClick" v-bind="$attrs">
 				<a-menu-item v-for="item in filterOptions" :key="item.value">
@@ -107,10 +109,14 @@ watch(
 </script>
 
 <style scoped lang="less">
+.table-filter-title-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 .table-filter-title {
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
 	cursor: pointer;
 }
 .title-icon {
