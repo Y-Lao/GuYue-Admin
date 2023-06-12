@@ -1,6 +1,6 @@
 <template>
 	<a-modal class="table-head-modal" :visible="tableHeadPop" title="列表视图设置" :width="750" @cancel="handleCancel">
-		<div>列表</div>
+		<div></div>
 		<template #footer>
 			<div class="pop-btn-box">
 				<!-- <div class="btn-left">

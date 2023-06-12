@@ -133,6 +133,7 @@ import { Modal, message } from "ant-design-vue";
 import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
 import { getUserList, exportUserInfo, BatchAddUser, deleteUser, resetUserPassWord, changeUserStatus } from "@/api/modules/user";
 import TableFilter from "@/components/TableFilter/index.vue";
+import TablePreview from "@/components/TablePreview/index.vue";
 
 /* 角色类型 */
 const options = [
@@ -174,6 +175,26 @@ const columns = ref<TableColumnsType>([
 		maxWidth: 150
 	},
 	{
+		title: "用户相册",
+		dataIndex: "avatar",
+		key: "avatar",
+		align: "center",
+		width: 160,
+		customRender: ({ text }) => {
+			return <TablePreview src={text} />;
+		}
+	},
+	{
+		title: "用户介绍",
+		dataIndex: "introduction",
+		key: "introduction",
+		align: "center",
+		width: 160,
+		customRender: ({ text }) => {
+			return <TablePreview src={text} type="video" />;
+		}
+	},
+	{
 		// title: "角色类型",
 		dataIndex: "rolename",
 		resizable: true,
@@ -184,7 +205,7 @@ const columns = ref<TableColumnsType>([
 	{
 		title: "性别",
 		dataIndex: "gender",
-		key: "age",
+		key: "gender",
 		align: "center",
 		customRender: ({ text }) => {
 			return text == 1 ? "男" : "女";
