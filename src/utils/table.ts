@@ -34,3 +34,26 @@ export function getTableScroll({ extraHeight, ref }: any = {}) {
 	}
 	return height;
 }
+
+/* 自定义列表获取相同项 */
+export const getJsonArrEqual = (arr1: any, arr2: any) => {
+	let newArr: any[] = [],
+		kvIndex: any = {};
+	for (let i = 0; i < arr1.length; i++) {
+		for (let j = 0; j < arr2.length; j++) {
+			if (arr1[i].title == arr2[j].title) {
+				let item: any;
+				if (kvIndex[arr1[i].title] == undefined) {
+					kvIndex[arr1[i].title] = newArr.length;
+					item = {};
+					for (let attr in arr1[i]) item[attr] = arr1[i][attr];
+					newArr[kvIndex[arr1[i].title]] = item;
+				} else {
+					item = newArr[kvIndex[arr1[i].title]];
+					for (let attr in arr2[j]) item[attr] = arr2[j][attr];
+				}
+			}
+		}
+	}
+	return newArr;
+};

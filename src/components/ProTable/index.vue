@@ -52,13 +52,13 @@
 		<a-table
 			ref="tableRef"
 			:loading="isLoading"
-			:columns="columns"
+			:columns="tableColumns"
 			v-bind="$attrs"
 			:dataSource="data ?? tableData"
 			:bordered="border"
 			:rowKey="rowKey"
 			:row-selection="multiple ? rowSelection : false"
-			:pagination="pagination"
+			:pagination="false"
 			:scroll="{ x: 1500, y: scrollY }"
 			@resizeColumn="handleResizeColumn"
 		>
@@ -115,13 +115,13 @@
 			</div>
 		</transition>
 		<!-- 列表设置 -->
-		<CompactHeaders ref="CompactHeadersRef" />
+		<CompactHeaders ref="CompactHeadersRef" v-model:columns="tableColumns" />
 	</div>
 </template>
 
 <script setup lang="tsx" name="ProTable">
 import { ref, reactive, onMounted, nextTick, watch } from "vue";
-import type { TableProps, TableColumnType } from "ant-design-vue";
+import type { TableColumnType } from "ant-design-vue";
 import { Table } from "ant-design-vue";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
@@ -131,7 +131,8 @@ import { getTableScroll } from "@/utils/table";
 import CompactHeaders from "@/components/CompactHeaders/index.vue";
 // import TableTooltip from "@/components/TableTooltip/index.vue";
 
-interface ProTableProps extends Partial<TableProps<any>> {
+interface ProTableProps {
+	columns: TableColumnType[];
 	data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ---> 非必传
 	requestApi?: (params: any) => Promise<any>; // 请求表格数据的 api ---> 非必传
 	requestAuto?: boolean; // 是否自动执行请求 api ---> 非必传（默认为true）
@@ -189,6 +190,8 @@ const rowSelection = {
 };
 /* 清空选中数据列表 */
 const clearSelection = () => selectionChange([]);
+/* 接受 columns 并设置为响应式 */
+const tableColumns = ref<TableColumnType[]>(props.columns);
 /* 搜索表单实例 */
 const scrollY = ref("0");
 const searchForm = ref();

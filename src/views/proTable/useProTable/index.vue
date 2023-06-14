@@ -161,6 +161,7 @@ const columns = ref<TableColumnsType>([
 		title: "#",
 		fixed: "left",
 		key: "index",
+		dataIndex: "index",
 		align: "center"
 	},
 	{
@@ -195,7 +196,7 @@ const columns = ref<TableColumnsType>([
 		}
 	},
 	{
-		// title: "角色类型",
+		title: "角色类型",
 		dataIndex: "rolename",
 		resizable: true,
 		key: "rolename",
