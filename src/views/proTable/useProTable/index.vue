@@ -215,7 +215,7 @@ const columns = ref<TableColumnsType>([
 	{
 		title: "年龄",
 		dataIndex: ["user", "detail", "age"],
-		key: "user.detail.age",
+		key: "age",
 		align: "center"
 	},
 	{
