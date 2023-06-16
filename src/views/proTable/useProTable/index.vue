@@ -1,6 +1,6 @@
 <template>
 	<div class="table-box">
-		<ProTable ref="proTable" :request-api="getTableList" :columns="columns" multiple>
+		<ProTable ref="proTable" table-key="user-information" :request-api="getTableList" :columns="columns" multiple>
 			<!-- 表单搜索项 -->
 			<template #searchForm="scope">
 				<a-col :span="6">
@@ -162,7 +162,8 @@ const columns = ref<TableColumnsType>([
 		fixed: "left",
 		key: "index",
 		dataIndex: "index",
-		align: "center"
+		align: "center",
+		width: 80
 	},
 	{
 		title: "用户姓名",

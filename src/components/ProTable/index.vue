@@ -115,7 +115,7 @@
 			</div>
 		</transition>
 		<!-- 列表设置 -->
-		<CompactHeaders ref="CompactHeadersRef" v-model:columns="tableColumns" />
+		<CompactHeaders ref="CompactHeadersRef" :table-key="props.tableKey" v-model:columns="tableColumns" />
 	</div>
 </template>
 
@@ -130,9 +130,13 @@ import SearchForm from "@/components/SearchForm/index.vue";
 import { getTableScroll } from "@/utils/table";
 import CompactHeaders from "@/components/CompactHeaders/index.vue";
 // import TableTooltip from "@/components/TableTooltip/index.vue";
+import { createCacheStorage } from "@/utils/cache/storageCache";
+import { StorageType } from "@/enums/cache";
+import { isArray } from "@/utils/is";
 
 interface ProTableProps {
 	columns: TableColumnType[];
+	tableKey: string; // table 唯一标识，缓存自定义列使用 --> 必传
 	data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ---> 非必传
 	requestApi?: (params: any) => Promise<any>; // 请求表格数据的 api ---> 非必传
 	requestAuto?: boolean; // 是否自动执行请求 api ---> 非必传（默认为true）
@@ -216,11 +220,30 @@ const CompactHeadersRef = ref<InstanceType<typeof CompactHeaders> | null>(null);
 const openCompactHeaders = () => {
 	CompactHeadersRef.value?.acceptParams();
 };
+/* 自定义列缓存 */
+const storageConfig = {
+	key: "sortTable-" + props.tableKey,
+	type: StorageType.LOCAL,
+	hasEncrypt: false
+};
+const sortStorage = createCacheStorage(storageConfig);
 /* 初始化请求 */
 onMounted(() => {
 	props.requestAuto && getTableList();
 	scrollY.value = getTableScroll();
 	noDataHeight.value = getTableScroll({ extraHeight: 108 });
+	// 判断是否存在自定义列缓存
+	let _cache = sortStorage.get();
+	if (_cache && isArray(_cache)) {
+		let newColumns: TableColumnType[] = [];
+		const keySet = new Set(_cache.map(i => i));
+		tableColumns.value.forEach(item => {
+			if (keySet.has(item.key)) {
+				item.key && newColumns.push(item);
+			}
+		});
+		tableColumns.value = [...newColumns];
+	}
 });
 /* 监听搜索栏显隐 */
 watch(

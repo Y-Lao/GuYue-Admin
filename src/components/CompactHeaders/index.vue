@@ -1,5 +1,12 @@
 <template>
-	<a-modal class="table-head-modal" :visible="tableHeadPop" title="列表视图设置" :width="750" @cancel="handleCancel">
+	<a-modal
+		class="table-head-modal"
+		:visible="tableHeadPop"
+		:bodyStyle="{ padding: '8px' }"
+		title="列表视图设置"
+		:width="900"
+		@cancel="handleCancel"
+	>
 		<div class="Custom-list-container">
 			<!-- 可选字段 -->
 			<div class="left">
@@ -14,7 +21,7 @@
 						全选
 					</a-checkbox>
 				</div>
-				<a-checkbox-group v-model:value="checkedList" @change="onChange">
+				<a-checkbox-group v-model:value="checkedList" @change="onChange" style=" height: 265px;overflow-y: auto">
 					<ul class="check-ul">
 						<li v-for="(item, index) in columnsAll" :key="index" class="check-li">
 							<a-checkbox :value="item.key" @change="getCheckOne" :disabled="item?.disabled ?? false">
@@ -29,7 +36,7 @@
 				<div class="checkedField">
 					<p class="optionalField">
 						已选字段
-						<span class="amount">{{ sort.length }}</span>
+						<span class="amount">{{ sort.length + fixedColumns.fixedLeft.length + fixedColumns.fixedRight.length }}</span>
 					</p>
 					<a-button v-show="sort.length" type="link" @click="clearAll">清空</a-button>
 				</div>
@@ -71,9 +78,13 @@ import { message } from "ant-design-vue";
 import { getJsonArrEqual } from "@/utils/table";
 import Draggable from "vuedraggable";
 import SvgIcon from "@/components/SvgIcon/index.vue";
+import { createCacheStorage } from "@/utils/cache/storageCache";
+import { StorageType } from "@/enums/cache";
 
+/* ts */
 interface CompactHeadersProps {
 	columns: TableColumnType[]; // 必传
+	tableKey: string; // 缓存自定义列标识 --> 必传
 }
 interface ColumnProps<T = any> extends TableColumnType<T> {
 	checked?: boolean;
@@ -81,19 +92,23 @@ interface ColumnProps<T = any> extends TableColumnType<T> {
 }
 declare type Key = string | number;
 
+/* Props */
 const props = withDefaults(defineProps<CompactHeadersProps>(), {});
-
+/* 触发自定义事件定义 */
 const emits = defineEmits<{
 	(e: "update:columns", columns: any): void;
 }>();
-
+/* 选中key */
 const checkedList = ref<Key[]>([]);
+/* 全部列表项 */
 const columnsAll = ref<ColumnProps[]>([]);
 /* 固定列 */
 const fixedColumns = reactive<{
+	indexColumn: ColumnProps[];
 	fixedLeft: ColumnProps[];
 	fixedRight: ColumnProps[];
 }>({
+	indexColumn: [],
 	fixedLeft: [],
 	fixedRight: []
 });
@@ -115,6 +130,13 @@ const acceptParams = () => {
 const handleCancel = () => {
 	tableHeadPop.value = false;
 };
+/* 缓存自定义列表 */
+const storageConfig = {
+	key: "sortTable-" + props.tableKey,
+	type: StorageType.LOCAL,
+	hasEncrypt: false
+};
+const sortStorage = createCacheStorage(storageConfig);
 /* 初始化 */
 const setValues = () => {
 	checkedList.value = [];
@@ -134,10 +156,13 @@ const setValues = () => {
 		if (keySet.has(item.key)) {
 			item.checked = true;
 			item.key && checkedList.value.push(item.key);
-			// 排序数据(剔除固定列)
-			if (!item.disabled) {
-				sort.value.push(item);
-			}
+		}
+	});
+	// 初始化排序数据
+	props.columns.forEach(item => {
+		// 排序数据(剔除固定列)
+		if (item.fixed !== "left" && item.fixed !== "right") {
+			sort.value.push(item);
 		}
 	});
 };
@@ -175,12 +200,29 @@ const onCheckAllChange = (e: any) => {
 				return (i.checked = true);
 			});
 			// 排序数据为全部
-			sort.value = columnsAll.value;
+			columnsAll.value.forEach(item => {
+				if (!item.disabled) {
+					sort.value.push(item);
+				}
+			});
 		}
 	} else {
-		checkedList.value = [];
+		let newCheckedList: Key[] = [];
+		// 固定列
+		fixedColumns.fixedLeft.forEach(item => {
+			item.key && newCheckedList.push(item.key);
+		});
+		fixedColumns.fixedRight.forEach(item => {
+			item.key && newCheckedList.push(item.key);
+		});
+		checkedList.value = newCheckedList;
 		columnsAll.value.map(i => {
-			return (i.checked = false);
+			// 判断是否是固定列
+			if (i.fixed === "left" || i.fixed === "right") {
+				return (i.checked = true);
+			} else {
+				return (i.checked = false);
+			}
 		});
 	}
 };
@@ -213,8 +255,13 @@ const getValues = (): Promise<any[]> => {
 /* 确定 */
 const handleOk = async () => {
 	let newColumns = await getValues();
-	let _totalCols = [...fixedColumns.fixedLeft, ...newColumns, ...fixedColumns.fixedRight];
+	console.log("newColumns", newColumns);
+	let _totalCols = [...fixedColumns.indexColumn, ...fixedColumns.fixedLeft, ...newColumns, ...fixedColumns.fixedRight];
 	if (_totalCols.length) {
+		let keys: Key[] = [];
+		_totalCols.forEach(item => keys.push(item.key));
+		// 缓存自定义列表
+		sortStorage.set(keys);
 		tableHeadPop.value = false;
 		emits("update:columns", _totalCols);
 	}
@@ -231,6 +278,12 @@ watch(
 onMounted(() => {
 	// 初始化columns与checked属性
 	let newColumns = props.columns.map(item => ({ ...item, checked: false }));
+	// 判断是否存在序号列并缓存
+	newColumns.forEach(item => {
+		if (item.key === "index") {
+			fixedColumns.indexColumn.push(item);
+		}
+	});
 	// 过滤掉不需要设置的列
 	let filtrationKeys: (string | number)[] = ["index"];
 	newColumns = newColumns!.filter(item => !filtrationKeys.includes(item.key!));
