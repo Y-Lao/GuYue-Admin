@@ -21,7 +21,7 @@
 						全选
 					</a-checkbox>
 				</div>
-				<a-checkbox-group v-model:value="checkedList" @change="onChange" style=" height: 265px;overflow-y: auto">
+				<a-checkbox-group v-model:value="checkedList" @change="onChange" style="height: 265px; overflow-y: auto">
 					<ul class="check-ul">
 						<li v-for="(item, index) in columnsAll" :key="index" class="check-li">
 							<a-checkbox :value="item.key" @change="getCheckOne" :disabled="item?.disabled ?? false">
@@ -229,7 +229,15 @@ const onCheckAllChange = (e: any) => {
 /* 清空排序数据 */
 const clearAll = () => {
 	sort.value = [];
-	checkedList.value = [];
+	let newCheckedList: Key[] = [];
+	// 固定列
+	fixedColumns.fixedLeft.forEach(item => {
+		item.key && newCheckedList.push(item.key);
+	});
+	fixedColumns.fixedRight.forEach(item => {
+		item.key && newCheckedList.push(item.key);
+	});
+	checkedList.value = newCheckedList;
 };
 /* 单个排序数据删除 */
 const sortDeleteOne = (key: number | string) => {
@@ -255,7 +263,6 @@ const getValues = (): Promise<any[]> => {
 /* 确定 */
 const handleOk = async () => {
 	let newColumns = await getValues();
-	console.log("newColumns", newColumns);
 	let _totalCols = [...fixedColumns.indexColumn, ...fixedColumns.fixedLeft, ...newColumns, ...fixedColumns.fixedRight];
 	if (_totalCols.length) {
 		let keys: Key[] = [];
@@ -268,7 +275,7 @@ const handleOk = async () => {
 };
 /* 监听全选按钮 */
 watch(
-	() => checkedList.value,
+	() => [...checkedList.value],
 	newVal => {
 		state.indeterminate = !!newVal.length && newVal.length < columnsAll.value.length;
 		state.checkAll = newVal.length === columnsAll.value.length;

@@ -236,11 +236,12 @@ onMounted(() => {
 	let _cache = sortStorage.get();
 	if (_cache && isArray(_cache)) {
 		let newColumns: TableColumnType[] = [];
-		const keySet = new Set(_cache.map(i => i));
-		tableColumns.value.forEach(item => {
-			if (keySet.has(item.key)) {
-				item.key && newColumns.push(item);
-			}
+		_cache.forEach(item => {
+			tableColumns.value.forEach(column => {
+				if (item === column.key) {
+					newColumns.push(column);
+				}
+			});
 		});
 		tableColumns.value = [...newColumns];
 	}
