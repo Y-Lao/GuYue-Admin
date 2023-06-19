@@ -79,6 +79,19 @@
 					<TableFilter v-model:filter-value="rolenameValue" :options="options" :title="'角色类型'" />
 				</template>
 			</template>
+			<!-- 展开行 -->
+			<template #expandedRowRender="{ record }">
+				{{ record }}
+			</template>
+			<!-- 总结栏 -->
+			<template #summary>
+				<a-table-summary>
+					<a-table-summary-row>
+						<a-table-summary-cell :col-span="2">总结栏</a-table-summary-cell>
+						<a-table-summary-cell :col-span="12">总结栏暂不支持固定行</a-table-summary-cell>
+					</a-table-summary-row>
+				</a-table-summary>
+			</template>
 			<!-- 操作 -->
 			<template #bodyCell="{ column, record }">
 				<!-- 表格操作 -->

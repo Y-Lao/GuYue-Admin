@@ -28,11 +28,16 @@
 						</template>
 					</a-button>
 					<!-- 打印 -->
-					<a-button shape="circle" class="tool-btn">
-						<template #icon>
-							<printer-outlined />
+					<a-tooltip placement="top">
+						<template #title>
+							<span>暂不支持表格打印功能</span>
 						</template>
-					</a-button>
+						<a-button shape="circle" class="tool-btn">
+							<template #icon>
+								<printer-outlined />
+							</template>
+						</a-button>
+					</a-tooltip>
 					<!-- 表格配置 -->
 					<a-button shape="circle" class="tool-btn" @click="openCompactHeaders">
 						<template #icon>
@@ -62,9 +67,6 @@
 			:scroll="{ x: 1500, y: scrollY }"
 			@resizeColumn="handleResizeColumn"
 		>
-			<!-- <template v-for="slot in Object.keys($slots)" #[slot]="scope">
-				<slot :name="slot" v-bind="scope"></slot>
-			</template> -->
 			<!-- 个性化头部单元格 -->
 			<template #headerCell="{ title, column }">
 				<slot name="headerCell" :title="title" :column="column"></slot>
@@ -86,6 +88,14 @@
 					<span>{{ parseInt(index) + 1 }}</span>
 				</template>
 			</template>
+			<!-- 额外的展开行 -->
+			<template #expandedRowRender="scope">
+				<slot name="expandedRowRender" v-bind="scope"></slot>
+			</template>
+			<!-- 总结栏 -- 不支持fixed 待优化 -->
+			<template #summary>
+				<slot name="summary"></slot>
+			</template>
 			<!-- 无数据 -->
 			<template #emptyText>
 				<div class="table-empty" :style="{ height: noDataHeight }">
@@ -97,6 +107,10 @@
 					</slot>
 				</div>
 			</template>
+			<!-- antd vue table 插槽 -->
+			<!-- <template v-for="slot in Object.keys($slots)" #[slot]="scope">
+				<slot :name="slot" v-bind="scope"></slot>
+			</template> -->
 		</a-table>
 		<!-- 分页组件 -->
 		<Pagination :pageabale="pageable" :handle-page-and-page-size="handlePageAndPageSize" />
