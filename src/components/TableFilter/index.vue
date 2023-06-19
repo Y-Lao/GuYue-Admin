@@ -72,7 +72,6 @@ const filterOptions = computed(() => {
 });
 /* 点击选项 */
 const onClick: MenuProps["onClick"] = ({ key }) => {
-	console.log("onClick", key);
 	iconUpOrDowm.value = false;
 	let value: string | number = key;
 	if (isMultiple.value && value !== emptyValue.value) {

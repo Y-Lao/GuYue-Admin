@@ -154,6 +154,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
 import { getUserList, exportUserInfo, BatchAddUser, deleteUser, resetUserPassWord, changeUserStatus } from "@/api/modules/user";
 import TableFilter from "@/components/TableFilter/index.vue";
 import TablePreview from "@/components/TablePreview/index.vue";
+import CopyOptBtn from "@/components/CopyOptBtn/index.vue";
 
 /* 角色类型 */
 const options = [
@@ -217,6 +218,16 @@ const columns = ref<TableColumnsType>([
 		width: 160,
 		customRender: ({ text }) => {
 			return <TablePreview src={text} type="video" />;
+		}
+	},
+	{
+		title: "视频链接",
+		dataIndex: "introduction",
+		key: "introduction",
+		align: "center",
+		width: 120,
+		customRender: ({ text }) => {
+			return <CopyOptBtn value={text} label="复制按钮" />;
 		}
 	},
 	{
