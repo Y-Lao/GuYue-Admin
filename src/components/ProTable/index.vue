@@ -92,9 +92,9 @@
 			<template #expandedRowRender="scope">
 				<slot name="expandedRowRender" v-bind="scope"></slot>
 			</template>
-			<!-- 总结栏 -- 不支持fixed 待优化 -->
+			<!-- 总结栏 -->
 			<template #summary>
-				<slot name="summary"></slot>
+				<slot name="summary" v-if="props.isSummary && tableData.length"></slot>
 			</template>
 			<!-- 无数据 -->
 			<template #emptyText>
@@ -162,6 +162,7 @@ interface ProTableProps {
 	border?: boolean; // 是否带有纵向边框 ---> 非必传(默认值为true)
 	toolButton?: boolean; // 是否显示表格功能按钮 ---> 非必传(默认值为true)
 	rowKey?: string; // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id ---> 非必传(默认值为id)
+	isSummary?: boolean; // 表格总结栏，用来优化 Table 滚动条的渲染 ---> 非必传(默认值为false)
 }
 /* 接受父组件参数，配置默认值 */
 const props = withDefaults(defineProps<ProTableProps>(), {
@@ -171,7 +172,8 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	multiple: false,
 	border: true,
 	toolButton: true,
-	rowKey: "id"
+	rowKey: "id",
+	isSummary: false
 });
 /* 是否显示搜索模块 */
 const isShowSearch = ref(true);
@@ -218,7 +220,7 @@ const noDataHeight = ref("0");
 /* 获取table scrollY */
 const getScrollY = () => {
 	nextTick(() => {
-		let scrol_Y = getTableScroll();
+		let scrol_Y = getTableScroll({ isSummary: props.isSummary });
 		let height = getTableScroll({ extraHeight: 108 });
 		scrollY.value = scrol_Y;
 		noDataHeight.value = height;
@@ -244,7 +246,7 @@ const sortStorage = createCacheStorage(storageConfig);
 /* 初始化请求 */
 onMounted(() => {
 	props.requestAuto && getTableList();
-	scrollY.value = getTableScroll();
+	scrollY.value = getTableScroll({ isSummary: props.isSummary });
 	noDataHeight.value = getTableScroll({ extraHeight: 108 });
 	// 判断是否存在自定义列缓存
 	let _cache = sortStorage.get();
@@ -306,16 +308,19 @@ defineExpose({
 }
 .footer-slot-wrapper {
 	position: absolute;
-	bottom: 20px;
+	bottom: 15px;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	width: calc(100% - 40px);
+	width: calc(100% - 30px);
 	height: 32px;
 	background: #ffffff;
 	.footer-selected-count {
 		font-weight: 600;
 		color: @primary-color;
 	}
+}
+:deep(.ant-table-summary) {
+	height: 48px;
 }
 </style>

@@ -1,6 +1,13 @@
 <template>
 	<div class="table-box">
-		<ProTable ref="proTable" table-key="user-information" :request-api="getTableList" :columns="columns" multiple>
+		<ProTable
+			ref="proTable"
+			table-key="user-information"
+			:request-api="getTableList"
+			:columns="columns"
+			multiple
+			:is-summary="true"
+		>
 			<!-- 表单搜索项 -->
 			<template #searchForm="scope">
 				<a-col :span="6">
@@ -85,10 +92,10 @@
 			</template>
 			<!-- 总结栏 -->
 			<template #summary>
-				<a-table-summary>
+				<a-table-summary fixed="bottom">
 					<a-table-summary-row>
-						<a-table-summary-cell :col-span="2">总结栏</a-table-summary-cell>
-						<a-table-summary-cell :col-span="12">总结栏暂不支持固定行</a-table-summary-cell>
+						<a-table-summary-cell :index="0" :col-span="2">总结栏</a-table-summary-cell>
+						<a-table-summary-cell :index="1" :col-span="13">缺点：总结栏列不会随自定义列表改变而改变</a-table-summary-cell>
 					</a-table-summary-row>
 				</a-table-summary>
 			</template>
@@ -150,11 +157,14 @@ import TablePreview from "@/components/TablePreview/index.vue";
 
 /* 角色类型 */
 const options = [
-	{ label: "未生成", value: 0 },
-	{ label: "已生成", value: 1 }
+	{ label: "管理员", value: 0 },
+	{ label: "项目经理", value: 1 },
+	{ label: "部门经理", value: 2 },
+	{ label: "人事经理", value: 3 },
+	{ label: "销售经理", value: 4 }
 ];
 /* 角色类型值 */
-const rolenameValue = ref("");
+const rolenameValue = ref();
 /* 如果你想在请求之前对当前请求参数做一些操作，可以自定义如下函数：params 为当前所有的请求参数（包括分页），最后返回请求列表接口
    默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList" */
 const getTableList = (params: any) => {

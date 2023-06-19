@@ -49,12 +49,12 @@ interface TableFilterProps {
 const props = withDefaults(defineProps<TableFilterProps>(), {
 	title: "Table Filter",
 	trigger: "click",
-	isMultiple: true,
+	isMultiple: false,
 	titleChange: false,
 	emptyValue: null
 });
 const emits = defineEmits<{
-	(e: "update:filterValue", value: string | number | null): void;
+	(e: "update:filterValue", value: any): void;
 }>();
 const { options, isMultiple, emptyValue } = toRefs(props);
 const iconUpOrDowm = ref(false);
@@ -72,6 +72,7 @@ const filterOptions = computed(() => {
 });
 /* 点击选项 */
 const onClick: MenuProps["onClick"] = ({ key }) => {
+	console.log("onClick", key);
 	iconUpOrDowm.value = false;
 	let value: string | number = key;
 	if (isMultiple.value && value !== emptyValue.value) {
@@ -89,8 +90,12 @@ const onClick: MenuProps["onClick"] = ({ key }) => {
 	} else {
 		checkedValue.value = [value];
 	}
-
-	emits("update:filterValue", checkedValue.value[0]);
+	// 判断是否多选
+	if (isMultiple.value) {
+		emits("update:filterValue", [...checkedValue.value]);
+	} else {
+		emits("update:filterValue", checkedValue.value[0]);
+	}
 };
 /* 点击标题 */
 const PopoverShow = (value: boolean) => {

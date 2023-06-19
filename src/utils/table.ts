@@ -3,10 +3,14 @@
  * @param {number} extraHeight 额外的高度(表格底部的内容高度 Number类型,默认为54)
  * @param {reactRef} ref Table所在的组件的ref
  */
-export function getTableScroll({ extraHeight, ref }: any = {}) {
+export function getTableScroll({ extraHeight, ref, isSummary = false }: any = {}) {
 	if (typeof extraHeight == "undefined") {
-		//  默认底部分页32 + 边距20 + (52 会有滚动条，54 刚好，未清楚原因)
-		extraHeight = 54;
+		//  默认底部分页32 + 边距20 + (52 会有滚动条，54 刚好，未清楚原因) + 总结栏(默认48)
+		if (isSummary) {
+			extraHeight = 54 + 48;
+		} else {
+			extraHeight = 54;
+		}
 	}
 	let tHeader = null;
 	if (ref && ref.current) {
