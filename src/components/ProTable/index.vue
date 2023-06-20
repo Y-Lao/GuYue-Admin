@@ -64,7 +64,7 @@
 			:rowKey="rowKey"
 			:row-selection="multiple ? rowSelection : false"
 			:pagination="false"
-			:scroll="{ x: 1500, y: scrollY }"
+			:scroll="{ x: 2000, y: scrollY }"
 			@resizeColumn="handleResizeColumn"
 		>
 			<!-- 个性化头部单元格 -->
@@ -93,9 +93,9 @@
 				<slot name="expandedRowRender" v-bind="scope"></slot>
 			</template>
 			<!-- 总结栏 -->
-			<template #summary>
-				<slot name="summary" v-if="props.isSummary && tableData.length"></slot>
-			</template>
+			<!-- <template #summary>
+				<slot name="summary"></slot>
+			</template> -->
 			<!-- 无数据 -->
 			<template #emptyText>
 				<div class="table-empty" :style="{ height: noDataHeight }">

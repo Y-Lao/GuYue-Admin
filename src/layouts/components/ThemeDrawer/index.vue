@@ -24,7 +24,7 @@
 				</div>
 			</a-tooltip>
 			<a-tooltip :mouseEnterDelay="0.3">
-				<template #title> 暗黑模式 </template>
+				<template #title> 暗黑模式(暂不支持) </template>
 				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-realDark" @click="changeTheme('realDark')">
 					<div class="inner"></div>
 					<span class="anticon anticon-check select-icon" v-show="styleSetting == 'realDark'">
@@ -57,7 +57,7 @@
 				</div>
 			</a-tooltip>
 			<a-tooltip :mouseEnterDelay="0.3">
-				<template #title> 混合布局 </template>
+				<template #title> 混合布局(暂不支持) </template>
 				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-mix" @click="changeLayout('classic')">
 					<div class="inner"></div>
 					<span class="anticon anticon-check select-icon" v-show="layout == 'classic'">
@@ -66,7 +66,7 @@
 				</div>
 			</a-tooltip>
 			<a-tooltip :mouseEnterDelay="0.3">
-				<template #title> 左侧混合布局 </template>
+				<template #title> 左侧混合布局(暂不支持) </template>
 				<div class="ant-gw-checkbox-item ant-gw-checkbox-item-left" @click="changeLayout('columns')">
 					<div class="inner"></div>
 					<span class="anticon anticon-check select-icon" v-show="layout == 'columns'">
@@ -144,10 +144,13 @@ const colorNames = ref(["极客蓝(默认)", "薄暮", "火山", "日暮", "明�
 
 // 切换主题
 const changeTheme = (val: StyleType) => {
+	if (val === "realDark") return;
 	globalStore.setGlobalState("styleSetting", val);
 };
 // 切换布局方式
 const changeLayout = (val: LayoutType) => {
+	if (val === "classic") return;
+	if (val === "columns") return;
 	globalStore.setGlobalState("layout", val);
 };
 

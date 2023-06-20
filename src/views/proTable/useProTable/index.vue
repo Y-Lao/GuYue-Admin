@@ -1,13 +1,6 @@
 <template>
 	<div class="table-box">
-		<ProTable
-			ref="proTable"
-			table-key="user-information"
-			:request-api="getTableList"
-			:columns="columns"
-			multiple
-			:is-summary="true"
-		>
+		<ProTable ref="proTable" table-key="user-information" :request-api="getTableList" :columns="columns" multiple>
 			<!-- 表单搜索项 -->
 			<template #searchForm="scope">
 				<a-col :span="6">
@@ -91,14 +84,14 @@
 				{{ record }}
 			</template>
 			<!-- 总结栏 -->
-			<template #summary>
-				<a-table-summary fixed="bottom">
+			<!-- <template #summary>
+				<a-table-summary fixed>
 					<a-table-summary-row>
 						<a-table-summary-cell :index="0" :col-span="2">总结栏</a-table-summary-cell>
-						<a-table-summary-cell :index="1" :col-span="13">缺点：总结栏列不会随自定义列表改变而改变</a-table-summary-cell>
+						<a-table-summary-cell :index="1" :col-span="14">缺点：总结栏列不会随自定义列表改变而改变</a-table-summary-cell>
 					</a-table-summary-row>
 				</a-table-summary>
-			</template>
+			</template> -->
 			<!-- 操作 -->
 			<template #bodyCell="{ column, record }">
 				<!-- 表格操作 -->
@@ -280,6 +273,7 @@ const columns = ref<TableColumnsType>([
 	},
 	{
 		title: "用户状态",
+		ellipsis: true,
 		key: "status",
 		dataIndex: "status",
 		align: "center",
