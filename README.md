@@ -114,7 +114,7 @@ yarn commit
 
 - 表单：
 
-![form_light](https://i.imgtg.com/2023/06/20/OUWexC.png)
+![form_light](https://i.imgtg.com/2023/06/20/OUsB51.png)
 
 - 主题
 
@@ -193,4 +193,4 @@ GuYue-Admin
 
 |                                        微信                                         |                                       支付宝                                        |
 | :---------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: |
-| <img src="https://i.imgtg.com/2023/06/20/OUse0a.png" alt="Alipay QRcode" width=170> | <img src="https://i.imgtg.com/2023/06/20/OUsNKK.png" alt="Wechat QRcode" width=170> |
+| <img src="https://i.imgtg.com/2023/06/20/OUse0a.jpg" alt="Alipay QRcode" width=170> | <img src="https://i.imgtg.com/2023/06/20/OUsNKK.png" alt="Wechat QRcode" width=170> |
