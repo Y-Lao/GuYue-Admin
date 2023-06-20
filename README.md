@@ -1,4 +1,4 @@
-# GuYue-Admin
+# GuYue-Admin -- 一款模仿的管理后台
 
 ### 介绍 📖
 
@@ -94,23 +94,35 @@ yarn commit
 
 - 登录页：
 
-![login_light](https://i.imgtg.com/2023/06/06/O5xkjc.png)
+![login_light](https://i.imgtg.com/2023/06/20/OT8kGx.png)
 
-- 首页：
+- 工作台：
 
-![home_light](https://i.imgtg.com/2023/06/06/O5xno1.png)
+![home_light](https://i.imgtg.com/2023/06/20/OT8xIj.png)
+
+- 监控台：
+
+![monitoring_light](https://i.imgtg.com/2023/06/20/OUWAli.png)
 
 - 表格页：
 
-![table_light](https://i.imgtg.com/2023/06/06/O5xhsG.png)
+![table_light](https://i.imgtg.com/2023/06/20/OUWrJL.png)
 
-- 数据可视化
+- 表格自定义列表：
 
-![dashboard](https://i.imgtg.com/2023/06/06/O5xFgM.png)
+![table_list_light](https://i.imgtg.com/2023/06/20/OUWexC.png)
+
+- 表单：
+
+![form_light](https://i.imgtg.com/2023/06/20/OUWexC.png)
+
+- 主题
+
+![theme](https://i.imgtg.com/2023/06/20/OUsTAI.png)
 
 - 数据大屏：
 
-![dataScreen](https://i.imgtg.com/2023/01/16/QP8HF.png)
+![dataScreen](https://i.imgtg.com/2023/06/20/OT8Fhp.png)
 
 ### 文件资源目录 📚
 
@@ -176,3 +188,9 @@ GuYue-Admin
 
 - FastMock： https://www.fastmock.site
 - EasyMock：https://mock.mengxuegu.com
+
+### 模仿不易，捐赠 🧩
+
+|                                        微信                                         |                                       支付宝                                        |
+| :---------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: |
+| <img src="https://i.imgtg.com/2023/06/20/OUse0a.png" alt="Alipay QRcode" width=170> | <img src="https://i.imgtg.com/2023/06/20/OUsNKK.png" alt="Wechat QRcode" width=170> |
