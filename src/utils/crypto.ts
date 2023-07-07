@@ -8,7 +8,7 @@ import { isObject, isString } from "./is";
 /* 定义密钥 */
 const SECRET_KEY = "GuYue1314520";
 /* 加密函数 */
-const encryption = (word: string): string => {
+const encryption = (word: any): string => {
 	// 将密钥转换为Utf8格式
 	const key = CORE.enc.Utf8.parse(SECRET_KEY);
 	// 初始化向量
@@ -36,7 +36,7 @@ const encryption = (word: string): string => {
 	return encResult;
 };
 /* 解密函数 */
-const decryption = (word: string): string => {
+const decryption = (word: any): string => {
 	// 将密钥转换为Utf8格式
 	const key = CORE.enc.Utf8.parse(SECRET_KEY);
 	// 初始化向量
