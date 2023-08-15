@@ -7,6 +7,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 // 按需引入antdV
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
+import unocss from "@unocss/vite";
 
 /**
  * 创建 vite 插件
@@ -16,6 +17,7 @@ export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOptio
 	return [
 		vue(),
 		vueJsx(),
+		unocss(),
 		// 标题设置
 		createHtmlPlugin({
 			inject: {

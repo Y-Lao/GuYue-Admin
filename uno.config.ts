@@ -1,0 +1,92 @@
+import { defineConfig } from "@unocss/vite";
+import presetUno from "@unocss/preset-uno";
+import transformerDirectives from "@unocss/transformer-directives";
+
+export default defineConfig({
+	content: {
+		pipeline: {
+			exclude: ["node_modules", "dist", ".git", ".husky", ".vscode", "public", "build", "mock", "./stats.html"]
+		}
+	},
+	presets: [presetUno({ dark: "class" })],
+	transformers: [transformerDirectives()],
+	shortcuts: {
+		"wh-full": "w-full h-full",
+		"flex-center": "flex justify-center items-center",
+		"flex-col-center": "flex-center flex-col",
+		"flex-x-center": "flex justify-center",
+		"flex-y-center": "flex items-center",
+		"i-flex-center": "inline-flex justify-center items-center",
+		"i-flex-x-center": "inline-flex justify-center",
+		"i-flex-y-center": "inline-flex items-center",
+		"flex-col": "flex flex-col",
+		"flex-col-stretch": "flex-col items-stretch",
+		"i-flex-col": "inline-flex flex-col",
+		"i-flex-col-stretch": "i-flex-col items-stretch",
+		"flex-1-hidden": "flex-1 overflow-hidden",
+		"absolute-lt": "absolute left-0 top-0",
+		"absolute-lb": "absolute left-0 bottom-0",
+		"absolute-rt": "absolute right-0 top-0",
+		"absolute-rb": "absolute right-0 bottom-0",
+		"absolute-tl": "absolute-lt",
+		"absolute-tr": "absolute-rt",
+		"absolute-bl": "absolute-lb",
+		"absolute-br": "absolute-rb",
+		"absolute-center": "absolute-lt flex-center wh-full",
+		"fixed-lt": "fixed left-0 top-0",
+		"fixed-lb": "fixed left-0 bottom-0",
+		"fixed-rt": "fixed right-0 top-0",
+		"fixed-rb": "fixed right-0 bottom-0",
+		"fixed-tl": "fixed-lt",
+		"fixed-tr": "fixed-rt",
+		"fixed-bl": "fixed-lb",
+		"fixed-br": "fixed-rb",
+		"fixed-center": "fixed-lt flex-center wh-full",
+		"nowrap-hidden": "whitespace-nowrap overflow-hidden",
+		"ellipsis-text": "nowrap-hidden text-ellipsis",
+		"transition-base": "transition-all duration-300 ease-in-out"
+	},
+	theme: {
+		colors: {
+			primary: "var(--ant-primary-color)",
+			primary_hover: "var(--ant-primary-color-hover)",
+			primary_active: "var(--ant-primary-color-active)",
+			primary_disabled: "var(--ant-primary-color-disabled)",
+			primary_outline: "var(--ant-primary-color-outline)",
+			primary_deprecated_bg: "var(--ant-primary-color-deprecated-bg)",
+			primary_deprecated_border: "var(--ant-primary-color-deprecated-border)",
+			primary_1: "var(--ant-primary-1)",
+			primary_2: "var(--ant-primary-2)",
+			primary_3: "var(--ant-primary-3)",
+			primary_4: "var(--ant-primary-4)",
+			primary_5: "var(--ant-primary-5)",
+			primary_6: "var(--ant-primary-6)",
+			primary_7: "var(--ant-primary-7)",
+			primary_8: "var(--ant-primary-8)",
+			primary_9: "var(--ant-primary-9)",
+			primary_10: "var(--ant-primary-10)",
+			info: "var(--ant-info-color)",
+			info_deprecated_bg: "var(--ant-info-color-deprecated-bg)",
+			info_deprecated_border: "var(--ant-info-color-deprecated-border)",
+			success: "var(--ant-success-color)",
+			success_hover: "var(--ant-success-color-hover)",
+			success_active: "var(--ant-success-color-active)",
+			success_outline: "var(--ant-success-color-outline)",
+			success_deprecated_bg: "var(--ant-success-color-deprecated-bg)",
+			success_deprecated_border: "var(--ant-success-color-deprecated-border)",
+			warning: "var(--ant-warning-color)",
+			warning_hover: "var(--ant-warning-color-hover)",
+			warning_active: "var(--ant-warning-color-active)",
+			warning_outline: "var(--ant-warning-color-outline)",
+			warning_deprecated_bg: "var(--ant-warning-color-deprecated-bg)",
+			warning_deprecated_border: "var(--ant-warning-color-deprecated-bordr)",
+			error: "var(--ant-error-color)",
+			error_hover: "var(--ant-error-color-hover)",
+			error_active: "var(--ant-error-color-active)",
+			error_outline: "var(--ant-error-color-outline)",
+			error_deprecated_bg: "var(--ant-error-color-deprecated-bg)",
+			error_deprecated_border: "var(--ant-error-color-deprecated-border)",
+			dark: "#18181c"
+		}
+	}
+});

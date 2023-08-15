@@ -15,6 +15,8 @@ import "@/styles/antd.less";
 import "@/assets/iconfont/iconfont.less";
 // font css
 import "@/assets/fonts/font.less";
+// unocss
+import "uno.css";
 // antd icons
 import * as Icons from "@ant-design/icons-vue";
 // custom directives
