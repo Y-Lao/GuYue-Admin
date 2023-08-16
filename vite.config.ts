@@ -2,6 +2,7 @@ import { defineConfig, loadEnv, ConfigEnv, UserConfig } from "vite";
 import { createVitePlugins } from "./build/plugins";
 import { resolve } from "path";
 import { wrapperEnv } from "./src/utils/getEnv";
+// import { createProxy } from "./build/proxy";
 import pkg from "./package.json";
 import dayjs from "dayjs";
 
@@ -14,11 +15,13 @@ const __APP_INFO__ = {
 
 // @see: https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
-	const env = loadEnv(mode, process.cwd());
+	const root = process.cwd();
+	const env = loadEnv(mode, root);
 	const viteEnv = wrapperEnv(env);
 
 	return {
-		base: "./",
+		base: viteEnv.VITE_PUBLIC_PATH,
+		root,
 		resolve: {
 			alias: {
 				"@": resolve(__dirname, "./src"),
@@ -38,11 +41,8 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 				}
 			}
 		},
-		plugins: createVitePlugins(viteEnv),
 		server: {
-			// 服务器主机名，如果允许外部访问，可设置为 "0.0.0.0"
 			host: "0.0.0.0",
-			// 启动端口
 			port: viteEnv.VITE_PORT,
 			open: viteEnv.VITE_OPEN,
 			cors: true,
@@ -52,6 +52,34 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 					target: " https://mock.mengxuegu.com/mock/64112a1afe77f949bc0d6ec6/guyue",
 					changeOrigin: true,
 					rewrite: (path: string) => path.replace(/^\/api/, "")
+				}
+			}
+		},
+		plugins: createVitePlugins(viteEnv),
+		esbuild: {
+			pure: viteEnv.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : []
+		},
+		build: {
+			outDir: "dist",
+			minify: "esbuild",
+			// esbuild 打包更快，但是不能去除 console.log，terser打包慢，但能去除 console.log
+			// minify: "terser",
+			// terserOptions: {
+			// 	compress: {
+			// 		drop_console: viteEnv.VITE_DROP_CONSOLE,
+			// 		drop_debugger: true
+			// 	}
+			// },
+			// 禁用 gzip 压缩大小报告，可略微减少打包时间
+			reportCompressedSize: false,
+			// 规定触发警告的 chunk 大小
+			chunkSizeWarningLimit: 2000,
+			rollupOptions: {
+				output: {
+					// Static resource classification and packaging
+					chunkFileNames: "assets/js/[name]-[hash].js",
+					entryFileNames: "assets/js/[name]-[hash].js",
+					assetFileNames: "assets/[ext]/[name]-[hash].[ext]"
 				}
 			}
 		}
