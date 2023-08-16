@@ -5,7 +5,7 @@
 		<router-view v-slot="{ Component, route }">
 			<transition appear name="fade-transform" mode="out-in">
 				<keep-alive :include="keepAliveName">
-					<component :is="Component" :key="route.path" v-if="isRouterShow"></component>
+					<component :is="Component" :key="route.fullPath" v-if="isRouterShow"></component>
 				</keep-alive>
 			</transition>
 		</router-view>
