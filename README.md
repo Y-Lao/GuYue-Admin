@@ -1,13 +1,8 @@
-# GuYue-Admin -- 一款高仿技术大佬的管理后台，其实是照抄，0-.-0
+# GuYue-Admin -- 一款高仿的管理后台
 
 ### 介绍 📖
 
 GuYue-Admin 一款基于 Vue3.0、TypeScript、Vite3.2、Pinia、Ant Design Vue、Unocss 开源的后台管理框架，使用目前最新技术栈开发。提供简单基于 antd vue ProTable 组件(胡乱封装，技术不够，见谅)，在一定程度上节省您的开发效率。另外本项目还封装了一些常用组件(右键菜单等)、Hooks、指令、动态路由、按钮级别权限控制等功能。
-
-### 技术大佬项目地址（大佬）
-
-- Gitee：https://gitee.com/HalseySpicy/Geeker-Admin
-- GitHub：https://github.com/HalseySpicy/Geeker-Admin
 
 ### 在线预览 👀
 
@@ -38,6 +33,11 @@ GuYue-Admin 一款基于 Vue3.0、TypeScript、Vite3.2、Pinia、Ant Design Vue�
 - 使用 Prettier 统一格式化代码，集成 ESLint、Stylelint 代码校验规范
 - 使用 husky、lint-staged、commitlint、czg、cz-git 规范提交信息
 - 使用 Unocss, 具有高性能且极具灵活性的即时原子化 CSS 引擎
+
+### 模仿项目地址
+
+- Gitee：https://gitee.com/HalseySpicy/Geeker-Admin
+- GitHub：https://github.com/HalseySpicy/Geeker-Admin
 
 ### 安装使用步骤 📔
 
