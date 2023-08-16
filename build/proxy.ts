@@ -11,8 +11,6 @@ type ProxyTargetList = Record<string, ProxyOptions>;
  * @param list
  */
 export function createProxy(list: ProxyList = []) {
-	console.log(111);
-
 	const ret: ProxyTargetList = {};
 	for (const [prefix, target] of list) {
 		const httpsRE = /^https:\/\//;
