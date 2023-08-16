@@ -34,11 +34,6 @@ GuYue-Admin 一款基于 Vue3.0、TypeScript、Vite3.2、Pinia、Ant Design Vue�
 - 使用 husky、lint-staged、commitlint、czg、cz-git 规范提交信息
 - 使用 Unocss, 具有高性能且极具灵活性的即时原子化 CSS 引擎
 
-### 模仿项目地址
-
-- Gitee：https://gitee.com/HalseySpicy/Geeker-Admin
-- GitHub：https://github.com/HalseySpicy/Geeker-Admin
-
 ### 安装使用步骤 📔
 
 - **Clone：**
@@ -78,7 +73,7 @@ yarn build:pro
 
 - **打包启动 dist：**
 
-````build
+```build
 # 安装服务
 npm i -g serve
 # 目录
@@ -216,4 +211,7 @@ GuYue-Admin
 ### License
 
 本项目基于[MIT](./LICENSE) 协议，仅供前端初学者参考学习，谨慎商用，作者不对软件做担保和负责。
-````
+
+```
+
+```
