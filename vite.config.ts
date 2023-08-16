@@ -2,7 +2,7 @@ import { defineConfig, loadEnv, ConfigEnv, UserConfig } from "vite";
 import { createVitePlugins } from "./build/plugins";
 import { resolve } from "path";
 import { wrapperEnv } from "./src/utils/getEnv";
-// import { createProxy } from "./build/proxy";
+import { createProxy } from "./build/proxy";
 import pkg from "./package.json";
 import dayjs from "dayjs";
 
@@ -47,13 +47,14 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			open: viteEnv.VITE_OPEN,
 			cors: true,
 			// 设置https 代理
-			proxy: {
-				"/api": {
-					target: " https://mock.mengxuegu.com/mock/64112a1afe77f949bc0d6ec6/guyue",
-					changeOrigin: true,
-					rewrite: (path: string) => path.replace(/^\/api/, "")
-				}
-			}
+			proxy: createProxy(viteEnv.VITE_PROXY)
+			// proxy: {
+			// 	"/api": {
+			// 		target: "https://mock.mengxuegu.com/mock/64112a1afe77f949bc0d6ec6/guyue",
+			// 		changeOrigin: true,
+			// 		rewrite: (path: string) => path.replace(/^\/api/, "")
+			// 	}
+			// }
 		},
 		plugins: createVitePlugins(viteEnv),
 		esbuild: {
