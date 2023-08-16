@@ -37,7 +37,9 @@ declare module "@vue/runtime-core" {
 		AImage: typeof import("ant-design-vue/es")["Image"];
 		AImagePreviewGroup: typeof import("ant-design-vue/es")["ImagePreviewGroup"];
 		AInput: typeof import("ant-design-vue/es")["Input"];
+		AInputGroup: typeof import("ant-design-vue/es")["InputGroup"];
 		AInputPassword: typeof import("ant-design-vue/es")["InputPassword"];
+		AInputSearch: typeof import("ant-design-vue/es")["InputSearch"];
 		ALayout: typeof import("ant-design-vue/es")["Layout"];
 		ALayoutContent: typeof import("ant-design-vue/es")["LayoutContent"];
 		ALayoutFooter: typeof import("ant-design-vue/es")["LayoutFooter"];
@@ -55,11 +57,14 @@ declare module "@vue/runtime-core" {
 		ARadio: typeof import("ant-design-vue/es")["Radio"];
 		ARadioGroup: typeof import("ant-design-vue/es")["RadioGroup"];
 		ARangePicker: typeof import("ant-design-vue/es")["RangePicker"];
+		AResult: typeof import("ant-design-vue/es")["Result"];
 		ARow: typeof import("ant-design-vue/es")["Row"];
 		ASelect: typeof import("ant-design-vue/es")["Select"];
 		ASelectOption: typeof import("ant-design-vue/es")["SelectOption"];
 		ASkeleton: typeof import("ant-design-vue/es")["Skeleton"];
 		ASpace: typeof import("ant-design-vue/es")["Space"];
+		AStep: typeof import("ant-design-vue/es")["Step"];
+		ASteps: typeof import("ant-design-vue/es")["Steps"];
 		ASubMenu: typeof import("ant-design-vue/es")["SubMenu"];
 		ASwitch: typeof import("ant-design-vue/es")["Switch"];
 		ATable: typeof import("ant-design-vue/es")["Table"];
