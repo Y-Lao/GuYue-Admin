@@ -13,11 +13,6 @@ GuYue-Admin 一款基于 Vue3.0、TypeScript、Vite3.2、Pinia、Ant Design Vue�
 - Gitee：https://gitee.com/Y_lao/GuYue-Admin
 - GitHub：https://github.com/Y-Lao/GuYue-Admin.git
 
-### 参考项目地址代码仓库
-
-- Gitee：https://gitee.com/HalseySpicy/Geeker-Admin
-- GitHub：https://github.com/HalseySpicy/Geeker-Admin
-
 ### 项目文档 📚
 
 - 项目更新日志：暂未存在
