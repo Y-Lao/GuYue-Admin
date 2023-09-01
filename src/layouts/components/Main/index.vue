@@ -4,9 +4,11 @@
 	<a-layout-content>
 		<router-view v-slot="{ Component, route }">
 			<transition appear name="fade-transform" mode="out-in">
-				<keep-alive :include="keepAliveName">
-					<component :is="Component" :key="route.fullPath" v-if="isRouterShow"></component>
-				</keep-alive>
+				<div class="main-container">
+					<keep-alive :include="keepAliveName">
+						<component :is="Component" :key="route.fullPath" v-if="isRouterShow"></component>
+					</keep-alive>
+				</div>
 			</transition>
 		</router-view>
 	</a-layout-content>
@@ -26,6 +28,10 @@ import Maximize from "./components/Maximize.vue";
 import Tabs from "@/layouts/components/Tabs/index.vue";
 import Footer from "@/layouts/components/Footer/index.vue";
 import ThemeButton from "@/layouts/components/ThemeButton/index.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+console.log("", route.fullPath);
 
 const globalStore = useGlobalStore();
 const { maximize, tabs, footer } = storeToRefs(globalStore);
@@ -50,4 +56,8 @@ watch(
 
 <style scoped lang="less">
 @import url("./index.less");
+.main-container {
+	width: 100%;
+	height: 100%;
+}
 </style>
