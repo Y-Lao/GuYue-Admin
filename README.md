@@ -120,10 +120,6 @@ yarn commit
 
 ![table_light](https://i.imgtg.com/2023/06/20/OUWrJL.png)
 
-- 表格自定义列表：
-
-![table_list_light](https://i.imgtg.com/2023/06/20/OUWexC.png)
-
 - 表单：
 
 ![form_light](https://i.imgtg.com/2023/06/20/OUsB51.png)
