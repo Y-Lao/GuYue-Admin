@@ -202,6 +202,14 @@ GuYue-Admin
 - FastMock： https://www.fastmock.site
 - EasyMock：https://mock.mengxuegu.com
 
+### 技术交流群
+
+有从事 10+年的老师指导，知码社区致力于分享、帮扶、学习、种草等等，加入我们，薪资 20+没问题啊。
+
+|                                         个人微信                                         |                                          微信群                                          |
+| :--------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+| <img src="https://img1.imgtp.com/2023/09/01/YynuEdSw.png" alt="Alipay QRcode" width=170> | <img src="https://img1.imgtp.com/2023/09/01/cJxuuMu4.png" alt="Wechat QRcode" width=170> |
+
 ### 希望捐赠 0.01 🧩
 
 |                                        微信                                         |                                       支付宝                                        |
